@@ -1,0 +1,2002 @@
+[
+  {
+    "name": "Gianluigi Buffon",
+    "pos": "GK",
+    "era": "2000–04",
+    "nation": "Italy",
+    "club": "Turin",
+    "league": "Serie A",
+    "attrs": [
+      55,
+      28,
+      72,
+      58,
+      97,
+      91
+    ],
+    "activeYears": [
+      1995,
+      2023
+    ]
+  },
+  {
+    "name": "Manuel Neuer",
+    "pos": "GK",
+    "era": "2010–14",
+    "nation": "Germany",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      78,
+      32,
+      88,
+      72,
+      96,
+      88
+    ],
+    "activeYears": [
+      2005,
+      2026
+    ]
+  },
+  {
+    "name": "Peter Schmeichel",
+    "pos": "GK",
+    "era": "1995–99",
+    "nation": "Denmark",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      58,
+      25,
+      65,
+      48,
+      95,
+      94
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Iker Casillas",
+    "pos": "GK",
+    "era": "2005–09",
+    "nation": "Spain",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      68,
+      22,
+      70,
+      61,
+      96,
+      84
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Edwin van der Sar",
+    "pos": "GK",
+    "era": "2005–09",
+    "nation": "Netherlands",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      52,
+      24,
+      79,
+      59,
+      94,
+      87
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Oliver Kahn",
+    "pos": "GK",
+    "era": "2000–04",
+    "nation": "Germany",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      52,
+      20,
+      64,
+      46,
+      96,
+      96
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Paolo Maldini",
+    "pos": "DEF",
+    "era": "1990–94",
+    "nation": "Italy",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      86,
+      60,
+      84,
+      82,
+      98,
+      91
+    ],
+    "activeYears": [
+      1984,
+      2009
+    ]
+  },
+  {
+    "name": "Franz Beckenbauer",
+    "pos": "DEF",
+    "era": "Legacy",
+    "nation": "Germany",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      80,
+      72,
+      93,
+      88,
+      97,
+      84
+    ],
+    "activeYears": [
+      1964,
+      1983
+    ]
+  },
+  {
+    "name": "Virgil van Dijk",
+    "pos": "DEF",
+    "era": "2015–19",
+    "nation": "Netherlands",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      82,
+      58,
+      82,
+      74,
+      96,
+      96
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Sergio Ramos",
+    "pos": "DEF",
+    "era": "2010–14",
+    "nation": "Spain",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      82,
+      76,
+      84,
+      79,
+      94,
+      92
+    ],
+    "activeYears": [
+      2004,
+      2023
+    ]
+  },
+  {
+    "name": "Sergio Ramos",
+    "pos": "DEF",
+    "era": "2005–09",
+    "nation": "Spain",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      86,
+      68,
+      76,
+      75,
+      86,
+      88
+    ],
+    "activeYears": [
+      2004,
+      2023
+    ]
+  },
+  {
+    "name": "Cafu",
+    "pos": "DEF",
+    "era": "2000–04",
+    "nation": "Brazil",
+    "club": "Rome",
+    "league": "Serie A",
+    "attrs": [
+      94,
+      68,
+      86,
+      88,
+      89,
+      87
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Roberto Carlos",
+    "pos": "DEF",
+    "era": "1995–99",
+    "nation": "Brazil",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      97,
+      86,
+      82,
+      87,
+      86,
+      91
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Philipp Lahm",
+    "pos": "DEF",
+    "era": "2010–14",
+    "nation": "Germany",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      85,
+      63,
+      92,
+      90,
+      95,
+      78
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Rio Ferdinand",
+    "pos": "DEF",
+    "era": "2005–09",
+    "nation": "England",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      83,
+      50,
+      82,
+      74,
+      94,
+      90
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Carles Puyol",
+    "pos": "DEF",
+    "era": "2005–09",
+    "nation": "Spain",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      74,
+      58,
+      76,
+      67,
+      96,
+      95
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Zinedine Zidane",
+    "pos": "MID",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      80,
+      90,
+      98,
+      97,
+      61,
+      86
+    ],
+    "activeYears": [
+      1989,
+      2006
+    ]
+  },
+  {
+    "name": "Xavi",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Spain",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      70,
+      82,
+      99,
+      94,
+      74,
+      72
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Andrés Iniesta",
+    "pos": "MID",
+    "era": "2010–14",
+    "nation": "Spain",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      78,
+      84,
+      97,
+      98,
+      66,
+      70
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Luka Modrić",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "Croatia",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      78,
+      82,
+      97,
+      95,
+      79,
+      79
+    ],
+    "activeYears": [
+      2003,
+      2026
+    ]
+  },
+  {
+    "name": "Patrick Vieira",
+    "pos": "MID",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      84,
+      78,
+      88,
+      84,
+      94,
+      97
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Andrea Pirlo",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Italy",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      65,
+      81,
+      99,
+      91,
+      68,
+      72
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Kevin De Bruyne",
+    "pos": "MID",
+    "era": "2020–24",
+    "nation": "Belgium",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      77,
+      90,
+      98,
+      91,
+      67,
+      86
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Kaká",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Brazil",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      93,
+      91,
+      92,
+      95,
+      62,
+      84
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Claude Makélélé",
+    "pos": "MID",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      76,
+      59,
+      86,
+      82,
+      97,
+      89
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Jude Bellingham",
+    "pos": "MID",
+    "era": "2020–24",
+    "nation": "England",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      88,
+      88,
+      91,
+      92,
+      83,
+      93
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Lionel Messi",
+    "pos": "ATT",
+    "era": "2010–14",
+    "nation": "Argentina",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      94,
+      99,
+      98,
+      99,
+      42,
+      78
+    ],
+    "activeYears": [
+      2004,
+      2026
+    ]
+  },
+  {
+    "name": "Lionel Messi",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Argentina",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      97,
+      91,
+      88,
+      98,
+      38,
+      72
+    ],
+    "activeYears": [
+      2004,
+      2026
+    ]
+  },
+  {
+    "name": "Cristiano Ronaldo",
+    "pos": "ATT",
+    "era": "2010–14",
+    "nation": "Portugal",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      97,
+      99,
+      88,
+      96,
+      45,
+      97
+    ],
+    "activeYears": [
+      2002,
+      2026
+    ]
+  },
+  {
+    "name": "Cristiano Ronaldo",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Portugal",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      98,
+      91,
+      84,
+      97,
+      44,
+      91
+    ],
+    "activeYears": [
+      2002,
+      2026
+    ]
+  },
+  {
+    "name": "Thierry Henry",
+    "pos": "ATT",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      98,
+      97,
+      89,
+      96,
+      48,
+      86
+    ],
+    "activeYears": [
+      1994,
+      2014
+    ]
+  },
+  {
+    "name": "Ronaldo Nazário",
+    "pos": "ATT",
+    "era": "1995–99",
+    "nation": "Brazil",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      99,
+      98,
+      84,
+      99,
+      42,
+      92
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Ronaldinho",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Brazil",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      91,
+      93,
+      96,
+      99,
+      44,
+      80
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Robert Lewandowski",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Poland",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      84,
+      98,
+      87,
+      91,
+      48,
+      93
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Kylian Mbappé",
+    "pos": "ATT",
+    "era": "2020–24",
+    "nation": "France",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      99,
+      96,
+      86,
+      97,
+      43,
+      88
+    ],
+    "activeYears": [
+      2015,
+      2026
+    ]
+  },
+  {
+    "name": "Mohamed Salah",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Egypt",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      96,
+      95,
+      88,
+      94,
+      49,
+      84
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Dennis Bergkamp",
+    "pos": "ATT",
+    "era": "1995–99",
+    "nation": "Netherlands",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      81,
+      94,
+      96,
+      97,
+      46,
+      82
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Karim Benzema",
+    "pos": "ATT",
+    "era": "2020–24",
+    "nation": "France",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      82,
+      97,
+      93,
+      94,
+      48,
+      89
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Nick Pope",
+    "pos": "GK",
+    "era": "2020–24",
+    "nation": "England",
+    "club": "Newcastle",
+    "league": "Premier League",
+    "attrs": [
+      49,
+      20,
+      67,
+      45,
+      84,
+      86
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "David Raya",
+    "pos": "GK",
+    "era": "2020–24",
+    "nation": "Spain",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      62,
+      18,
+      82,
+      61,
+      86,
+      78
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Steve Mandanda",
+    "pos": "GK",
+    "era": "2010–14",
+    "nation": "France",
+    "club": "Marseille",
+    "league": "Ligue 1",
+    "attrs": [
+      58,
+      22,
+      70,
+      55,
+      82,
+      83
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Dan Burn",
+    "pos": "DEF",
+    "era": "2020–24",
+    "nation": "England",
+    "club": "Newcastle",
+    "league": "Premier League",
+    "attrs": [
+      54,
+      49,
+      70,
+      61,
+      84,
+      92
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Trent Alexander-Arnold",
+    "pos": "DEF",
+    "era": "2015–24",
+    "nation": "England",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      82,
+      73,
+      96,
+      86,
+      78,
+      76
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "James Tarkowski",
+    "pos": "DEF",
+    "era": "2020–24",
+    "nation": "England",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      58,
+      52,
+      68,
+      57,
+      86,
+      91
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Nacho Monreal",
+    "pos": "DEF",
+    "era": "2015–19",
+    "nation": "Spain",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      61,
+      77,
+      73,
+      82,
+      78
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Wes Morgan",
+    "pos": "DEF",
+    "era": "2015–19",
+    "nation": "Jamaica",
+    "club": "Leicester",
+    "league": "Premier League",
+    "attrs": [
+      55,
+      52,
+      61,
+      49,
+      84,
+      94
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Cristian Zaccardo",
+    "pos": "DEF",
+    "era": "2005–09",
+    "nation": "Italy",
+    "club": "Palermo",
+    "league": "Serie A",
+    "attrs": [
+      69,
+      55,
+      70,
+      64,
+      81,
+      83
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Pascal Groß",
+    "pos": "MID",
+    "era": "2020–24",
+    "nation": "Germany",
+    "club": "Brighton",
+    "league": "Premier League",
+    "attrs": [
+      59,
+      76,
+      88,
+      81,
+      72,
+      76
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "James Milner",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "England",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      73,
+      82,
+      77,
+      80,
+      91
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Mousa Dembélé",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "Belgium",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      78,
+      70,
+      84,
+      92,
+      81,
+      90
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Mark Noble",
+    "pos": "MID",
+    "era": "2010–14",
+    "nation": "England",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      62,
+      73,
+      82,
+      75,
+      78,
+      82
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Gennaro Gattuso",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Italy",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      70,
+      62,
+      76,
+      72,
+      91,
+      96
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Tim Cahill",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Australia",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      83,
+      76,
+      74,
+      75,
+      94
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Olivier Giroud",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "France",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      66,
+      88,
+      81,
+      79,
+      50,
+      93
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Peter Crouch",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "England",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      58,
+      82,
+      74,
+      70,
+      46,
+      88
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Michu",
+    "pos": "ATT",
+    "era": "2010–14",
+    "nation": "Spain",
+    "club": "Swansea",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      86,
+      75,
+      79,
+      48,
+      83
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Jamie Vardy",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "England",
+    "club": "Leicester",
+    "league": "Premier League",
+    "attrs": [
+      94,
+      88,
+      73,
+      82,
+      49,
+      86
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Aritz Aduriz",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Spain",
+    "club": "Bilbao",
+    "league": "La Liga",
+    "attrs": [
+      61,
+      87,
+      72,
+      74,
+      48,
+      92
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Demba Ba",
+    "pos": "ATT",
+    "era": "2010–14",
+    "nation": "Senegal",
+    "club": "Newcastle",
+    "league": "Premier League",
+    "attrs": [
+      79,
+      84,
+      71,
+      77,
+      47,
+      90
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Keylor Navas",
+    "pos": "GK",
+    "era": "2015–19",
+    "nation": "Costa Rica",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      64,
+      20,
+      72,
+      57,
+      88,
+      80
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Brad Friedel",
+    "pos": "GK",
+    "era": "2005–09",
+    "nation": "USA",
+    "club": "Blackburn",
+    "league": "Premier League",
+    "attrs": [
+      48,
+      18,
+      62,
+      43,
+      84,
+      89
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Yann Sommer",
+    "pos": "GK",
+    "era": "2015–19",
+    "nation": "Switzerland",
+    "club": "Gladbach",
+    "league": "Bundesliga",
+    "attrs": [
+      61,
+      19,
+      78,
+      59,
+      86,
+      76
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Fabien Barthez",
+    "pos": "GK",
+    "era": "1995–99",
+    "nation": "France",
+    "club": "Monaco",
+    "league": "Ligue 1",
+    "attrs": [
+      70,
+      23,
+      73,
+      64,
+      87,
+      75
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Branislav Ivanović",
+    "pos": "DEF",
+    "era": "2010–14",
+    "nation": "Serbia",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      70,
+      65,
+      72,
+      65,
+      87,
+      93
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Diego Godín",
+    "pos": "DEF",
+    "era": "2010–14",
+    "nation": "Uruguay",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      66,
+      61,
+      70,
+      58,
+      91,
+      92
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Javier Zanetti",
+    "pos": "DEF",
+    "era": "2000–04",
+    "nation": "Argentina",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      88,
+      66,
+      84,
+      85,
+      91,
+      94
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Gary Cahill",
+    "pos": "DEF",
+    "era": "2015–19",
+    "nation": "England",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      67,
+      58,
+      68,
+      60,
+      84,
+      89
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Willy Sagnol",
+    "pos": "DEF",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      80,
+      58,
+      82,
+      78,
+      84,
+      82
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Kieran Trippier",
+    "pos": "DEF",
+    "era": "2020–24",
+    "nation": "England",
+    "club": "Newcastle",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      65,
+      88,
+      79,
+      82,
+      78
+    ],
+    "activeYears": [
+      2017,
+      2025
+    ]
+  },
+  {
+    "name": "Michael Carrick",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "England",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      63,
+      71,
+      89,
+      79,
+      83,
+      81
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Ivan Rakitić",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "Croatia",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      70,
+      82,
+      89,
+      85,
+      76,
+      82
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Blaise Matuidi",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "France",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      83,
+      72,
+      80,
+      78,
+      86,
+      92
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Mikel Arteta",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Spain",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      68,
+      77,
+      88,
+      85,
+      72,
+      77
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Juninho Pernambucano",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Brazil",
+    "club": "Lyon",
+    "league": "Ligue 1",
+    "attrs": [
+      70,
+      88,
+      94,
+      88,
+      66,
+      74
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Tomáš Rosický",
+    "pos": "MID",
+    "era": "2005–09",
+    "nation": "Czechia",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      81,
+      78,
+      88,
+      90,
+      63,
+      70
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Neymar",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Brazil",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      94,
+      92,
+      91,
+      98,
+      40,
+      72
+    ],
+    "activeYears": [
+      2009,
+      2026
+    ]
+  },
+  {
+    "name": "Neymar",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Brazil",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      94,
+      93,
+      92,
+      99,
+      40,
+      74
+    ],
+    "activeYears": [
+      2009,
+      2026
+    ]
+  },
+  {
+    "name": "Kylian Mbappé",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "France",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      98,
+      91,
+      82,
+      94,
+      40,
+      82
+    ],
+    "activeYears": [
+      2015,
+      2026
+    ]
+  },
+  {
+    "name": "Bernardo Silva",
+    "pos": "MID",
+    "era": "2015–19",
+    "nation": "Portugal",
+    "club": "Monaco",
+    "league": "Ligue 1",
+    "attrs": [
+      82,
+      82,
+      91,
+      94,
+      62,
+      72
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Edinson Cavani",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Uruguay",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      84,
+      94,
+      78,
+      82,
+      58,
+      94
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Thiago Silva",
+    "pos": "DEF",
+    "era": "2015–19",
+    "nation": "Brazil",
+    "club": "Paris",
+    "league": "Ligue 1",
+    "attrs": [
+      72,
+      58,
+      84,
+      75,
+      93,
+      87
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Luis Suárez",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Uruguay",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      84,
+      97,
+      88,
+      93,
+      55,
+      91
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Mario Mandžukić",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "Croatia",
+    "club": "Turin",
+    "league": "Serie A",
+    "attrs": [
+      72,
+      87,
+      76,
+      75,
+      62,
+      96
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Dimitar Berbatov",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Bulgaria",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      72,
+      90,
+      86,
+      91,
+      42,
+      82
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Kevin Gameiro",
+    "pos": "ATT",
+    "era": "2015–19",
+    "nation": "France",
+    "club": "Madrid",
+    "league": "La Liga",
+    "attrs": [
+      86,
+      84,
+      75,
+      82,
+      43,
+      77
+    ],
+    "activeYears": [
+      2012,
+      2020
+    ]
+  },
+  {
+    "name": "Luca Toni",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Italy",
+    "club": "Munich",
+    "league": "Bundesliga",
+    "attrs": [
+      60,
+      91,
+      72,
+      69,
+      44,
+      95
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Pedro",
+    "pos": "ATT",
+    "era": "2010–14",
+    "nation": "Spain",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      88,
+      86,
+      84,
+      89,
+      55,
+      78
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Dirk Kuyt",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Netherlands",
+    "club": "Liverpool",
+    "league": "Premier League",
+    "attrs": [
+      78,
+      82,
+      78,
+      76,
+      68,
+      95
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "David Seaman",
+    "pos": "GK",
+    "era": "1995–99",
+    "nation": "England",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      47,
+      18,
+      61,
+      42,
+      88,
+      86
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Walter Zenga",
+    "pos": "GK",
+    "era": "1985–89",
+    "nation": "Italy",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      51,
+      17,
+      60,
+      45,
+      91,
+      88
+    ],
+    "activeYears": [
+      1982,
+      1990
+    ]
+  },
+  {
+    "name": "Marcel Desailly",
+    "pos": "DEF",
+    "era": "1995–99",
+    "nation": "France",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      79,
+      57,
+      76,
+      69,
+      94,
+      97
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Lilian Thuram",
+    "pos": "DEF",
+    "era": "2000–04",
+    "nation": "France",
+    "club": "Turin",
+    "league": "Serie A",
+    "attrs": [
+      88,
+      54,
+      78,
+      76,
+      94,
+      92
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "Nemanja Vidić",
+    "pos": "DEF",
+    "era": "2005–09",
+    "nation": "Serbia",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      67,
+      52,
+      65,
+      55,
+      95,
+      97
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Yaya Touré",
+    "pos": "MID",
+    "era": "2010–14",
+    "nation": "Ivory Coast",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      83,
+      88,
+      91,
+      89,
+      84,
+      98
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "David Silva",
+    "pos": "MID",
+    "era": "2010–14",
+    "nation": "Spain",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      76,
+      83,
+      96,
+      95,
+      61,
+      69
+    ],
+    "activeYears": [
+      2007,
+      2015
+    ]
+  },
+  {
+    "name": "Juan Román Riquelme",
+    "pos": "MID",
+    "era": "2000–04",
+    "nation": "Argentina",
+    "club": "Villarreal",
+    "league": "La Liga",
+    "attrs": [
+      67,
+      84,
+      96,
+      94,
+      55,
+      72
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  },
+  {
+    "name": "George Weah",
+    "pos": "ATT",
+    "era": "1995–99",
+    "nation": "Liberia",
+    "club": "Milan",
+    "league": "Serie A",
+    "attrs": [
+      96,
+      94,
+      82,
+      93,
+      45,
+      94
+    ],
+    "activeYears": [
+      1992,
+      2000
+    ]
+  },
+  {
+    "name": "Samuel Eto'o",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Cameroon",
+    "club": "Barcelona",
+    "league": "La Liga",
+    "attrs": [
+      96,
+      96,
+      82,
+      91,
+      48,
+      88
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Didier Drogba",
+    "pos": "ATT",
+    "era": "2005–09",
+    "nation": "Ivory Coast",
+    "club": "London",
+    "league": "Premier League",
+    "attrs": [
+      84,
+      94,
+      79,
+      84,
+      55,
+      99
+    ],
+    "activeYears": [
+      2002,
+      2010
+    ]
+  },
+  {
+    "name": "Ruud van Nistelrooy",
+    "pos": "ATT",
+    "era": "2000–04",
+    "nation": "Netherlands",
+    "club": "Manchester",
+    "league": "Premier League",
+    "attrs": [
+      76,
+      98,
+      75,
+      82,
+      42,
+      89
+    ],
+    "activeYears": [
+      1997,
+      2005
+    ]
+  }
+]
