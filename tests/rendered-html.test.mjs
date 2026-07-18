@@ -40,6 +40,10 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /CLICK AGAIN TO LOCK/);
   assert.match(source, /5-PLAYER ROSTER/);
   assert.match(source, /type Tier/);
+  assert.match(source, /function tagTier/);
+  assert.match(source, /TACTICAL LINK ACTIVATED/);
+  assert.match(source, /natural\|\|open\[0\]/);
+  assert.match(source, /setDrawReady\(true\)/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
