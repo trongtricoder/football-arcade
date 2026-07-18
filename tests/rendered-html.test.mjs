@@ -23,9 +23,11 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /matches,table,awards/);
   assert.match(source, /const COACHES/);
   assert.match(source, /const SEASONS/);
-  assert.match(source, /function MatchTimeline/);
+  assert.match(source, /function SeasonReplay/);
   assert.match(source, /function TeamReview/);
   assert.match(source, /Golden Glove/);
+  assert.match(source, /picks\[from\]\.pos!==toRole/);
+  assert.match(source, /season\?\.league==="Bundesliga"\?34:38/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
