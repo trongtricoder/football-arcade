@@ -14,7 +14,7 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /navigator\.share/);
   assert.match(source, /const FORMATIONS/);
   assert.match(source, /4-2-3-1/);
-  assert.match(source, /Lionel Messi":101/);
+  assert.match(source, /Lionel Messi\|2010–14":101/);
   assert.match(source, /function Pitch/);
   assert.match(source, /const ERAS/);
   assert.match(source, /function eraFit/);
@@ -28,6 +28,9 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /Golden Glove/);
   assert.match(source, /picks\[from\]\.pos!==toRole/);
   assert.match(source, /season\?\.league==="Bundesliga"\?34:38/);
+  assert.match(source, /DRAWING THE LEAGUE/);
+  assert.match(source, /DRAWING THE YEAR/);
+  assert.match(source, /result\.table&&revealFinal/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
