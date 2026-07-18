@@ -31,6 +31,11 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /DRAWING THE LEAGUE/);
   assert.match(source, /DRAWING THE YEAR/);
   assert.match(source, /result\.table&&revealFinal/);
+  assert.match(source, /function squadTagBonus/);
+  assert.match(source, /MSN TRIO/);
+  assert.match(source, /if\(p\.timeless\)return 100/);
+  assert.match(source, /rating>=95\?\.12/);
+  assert.match(source, /SEASON RESULTS/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
