@@ -16,6 +16,11 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /4-2-3-1/);
   assert.match(source, /Lionel Messi":101/);
   assert.match(source, /function Pitch/);
+  assert.match(source, /const ERAS/);
+  assert.match(source, /function eraFit/);
+  assert.match(source, /ONE REROLL/);
+  assert.match(source, /function swapPlayers/);
+  assert.match(source, /matches,table,awards/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
