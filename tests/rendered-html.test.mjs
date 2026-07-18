@@ -27,7 +27,7 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /function TeamReview/);
   assert.match(source, /Golden Glove/);
   assert.match(source, /function positionFit/);
-  assert.match(source, /return 80/);
+  assert.match(source, /\?60:80/);
   assert.match(source, /season\?\.league==="Bundesliga"\?34:38/);
   assert.match(source, /DRAWING THE LEAGUE/);
   assert.match(source, /DRAWING THE YEAR/);
@@ -37,13 +37,16 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /if\(p\.timeless\)return 100/);
   assert.match(source, /rating>=95\?\.12/);
   assert.match(source, /SEASON RESULTS/);
-  assert.match(source, /CLICK AGAIN TO LOCK/);
+  assert.match(source, /CHOOSE A POSITION ON THE PITCH/);
   assert.match(source, /5-PLAYER ROSTER/);
   assert.match(source, /type Tier/);
   assert.match(source, /function tagTier/);
   assert.match(source, /TACTICAL LINK ACTIVATED/);
   assert.match(source, /natural\|\|open\[0\]/);
-  assert.match(source, /setDrawReady\(true\)/);
+  assert.match(source, /setDrawPhase\("players"\)/);
+  assert.match(source, /function slotSuitability/);
+  assert.match(source, /function HelpModal/);
+  assert.match(source, /ROLLING LEAGUE/);
 });
 
 test("removes starter preview metadata and presents the finished brand", async () => {
