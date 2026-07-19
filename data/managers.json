@@ -142,5 +142,32 @@
     "defenceMod": 0.02,
     "cleanSheetMod": 0.03,
     "quote": "Change the shape before the opponent changes the question."
+  },
+  {
+    "name": "Arrigo Sacchi", "era": "1985-1996", "attack": "A", "defence": "S", "pressing": "S", "tag": "PRESSING PIONEER", "attackMod": 0.05, "defenceMod": 0.08, "cleanSheetMod": 0.13, "quote": "The team moves as one compact unit."
+  },
+  {
+    "name": "Fabio Capello", "era": "1987-2018", "attack": "B", "defence": "S", "pressing": "A", "tag": "CONTROL SPECIALIST", "attackMod": 0.01, "defenceMod": 0.1, "cleanSheetMod": 0.17, "quote": "Structure makes decisive talent repeatable."
+  },
+  {
+    "name": "Vicente del Bosque", "era": "1994-2016", "attack": "A", "defence": "A", "pressing": "B", "tag": "HARMONY BUILDER", "attackMod": 0.06, "defenceMod": 0.04, "cleanSheetMod": 0.06, "quote": "Calm gives great players their clearest decisions."
+  },
+  {
+    "name": "Louis van Gaal", "era": "1986-2022", "attack": "A", "defence": "A", "pressing": "S", "tag": "SYSTEM TEACHER", "attackMod": 0.06, "defenceMod": 0.04, "cleanSheetMod": 0.06, "quote": "Every position belongs to the whole idea."
+  },
+  {
+    "name": "Ottmar Hitzfeld", "era": "1983-2014", "attack": "A", "defence": "A", "pressing": "A", "tag": "EUROPEAN OPERATOR", "attackMod": 0.05, "defenceMod": 0.06, "cleanSheetMod": 0.09, "quote": "Balance survives the biggest nights."
+  },
+  {
+    "name": "Rafael Benitez", "era": "1993-NOW", "attack": "B", "defence": "S", "pressing": "A", "tag": "MATCH-PLAN ENGINEER", "attackMod": 0.01, "defenceMod": 0.09, "cleanSheetMod": 0.14, "quote": "Control the detail and the match follows."
+  },
+  {
+    "name": "Thomas Tuchel", "era": "2007-NOW", "attack": "A", "defence": "A", "pressing": "S", "tag": "SHAPE SHIFTER", "attackMod": 0.07, "defenceMod": 0.04, "cleanSheetMod": 0.06, "quote": "Change the structure without losing the principles."
+  },
+  {
+    "name": "Unai Emery", "era": "2004-NOW", "attack": "A", "defence": "A", "pressing": "A", "tag": "KNOCKOUT SPECIALIST", "attackMod": 0.05, "defenceMod": 0.05, "cleanSheetMod": 0.07, "quote": "Prepare every phase and attack the weak moment."
+  },
+  {
+    "name": "Xabi Alonso", "era": "2018-NOW", "attack": "S", "defence": "A", "pressing": "A", "tag": "FLUID ARCHITECT", "attackMod": 0.09, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "Create superiority, then accelerate through it."
   }
 ]
