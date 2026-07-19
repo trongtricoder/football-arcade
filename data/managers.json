@@ -169,5 +169,20 @@
   },
   {
     "name": "Xabi Alonso", "era": "2018-NOW", "attack": "S", "defence": "A", "pressing": "A", "tag": "FLUID ARCHITECT", "attackMod": 0.09, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "Create superiority, then accelerate through it."
+  },
+  {
+    "name": "Brian Clough", "era": "1965-1993", "attack": "A", "defence": "A", "pressing": "B", "tag": "BELIEF BUILDER", "attackMod": 0.05, "defenceMod": 0.05, "cleanSheetMod": 0.07, "quote": "Make the simple pass, then make it again."
+  },
+  {
+    "name": "Jupp Heynckes", "era": "1979-2018", "attack": "S", "defence": "A", "pressing": "S", "tag": "TREBLE ENGINEER", "attackMod": 0.09, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "Intensity and clarity make talent repeatable."
+  },
+  {
+    "name": "Didier Deschamps", "era": "2001-NOW", "attack": "B", "defence": "S", "pressing": "A", "tag": "TOURNAMENT CONTROLLER", "attackMod": 0.01, "defenceMod": 0.09, "cleanSheetMod": 0.14, "quote": "Balance gives the decisive players their moment."
+  },
+  {
+    "name": "Roberto Mancini", "era": "2001-NOW", "attack": "A", "defence": "A", "pressing": "B", "tag": "CONTROLLED CREATOR", "attackMod": 0.06, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "Control the match, then let quality decide it."
+  },
+  {
+    "name": "Luis Enrique", "era": "2008-NOW", "attack": "S", "defence": "B", "pressing": "S", "tag": "VERTICAL POSSESSION", "attackMod": 0.1, "defenceMod": 0.01, "cleanSheetMod": 0.04, "quote": "Possession must always threaten the goal."
   }
 ]

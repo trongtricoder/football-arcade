@@ -28,9 +28,10 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /Golden Glove/);
   assert.match(source, /function positionFit/);
   assert.match(source, /\?60:80/);
-  assert.match(source, /season\?\.league==="Bundesliga"\?34:38/);
-  assert.match(source, /DRAWING THE LEAGUE/);
-  assert.match(source, /DRAWING THE YEAR/);
+  assert.match(source, /setPhaseSpin\("league"\)/);
+  assert.match(source, /setPhaseSpin\("year"\)/);
+  assert.match(source, /leagueRolling/);
+  assert.match(source, /yearRolling/);
   assert.match(source, /result\.table&&revealFinal/);
   assert.match(source, /function squadTagBonus/);
   assert.match(source, /MSN TRIO/);

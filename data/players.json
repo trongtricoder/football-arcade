@@ -1998,5 +1998,85 @@
       1997,
       2005
     ]
+  },
+  {
+    "name": "Franco Baresi", "pos": "DEF", "era": "1985–89", "nation": "Italy", "club": "Milan", "league": "Serie A",
+    "attrs": [78,55,94,88,99,91], "activeYears": [1977,1997]
+  },
+  {
+    "name": "Lothar Matthaus", "pos": "MID", "era": "1985–89", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "attrs": [91,89,94,91,94,98], "activeYears": [1979,2000]
+  },
+  {
+    "name": "Marco van Basten", "pos": "ATT", "era": "1985–89", "nation": "Netherlands", "club": "Milan", "league": "Serie A",
+    "attrs": [91,99,88,95,41,91], "activeYears": [1981,1995]
+  },
+  {
+    "name": "Michel Platini", "pos": "MID", "era": "1980–84", "nation": "France", "club": "Turin", "league": "Serie A",
+    "attrs": [82,96,99,96,61,80], "activeYears": [1972,1987]
+  },
+  {
+    "name": "Diego Maradona", "pos": "ATT", "era": "1985–89", "nation": "Argentina", "club": "Naples", "league": "Serie A",
+    "attrs": [94,96,98,101,48,88], "activeYears": [1976,1997]
+  },
+  {
+    "name": "Rudi Voller", "pos": "ATT", "era": "1985–89", "nation": "Germany", "club": "Bremen", "league": "Bundesliga",
+    "attrs": [88,95,82,87,46,91], "activeYears": [1977,1996]
+  },
+  {
+    "name": "Eric Cantona", "pos": "ATT", "era": "1990–94", "nation": "France", "club": "Manchester", "league": "Premier League",
+    "attrs": [84,94,93,95,55,94], "activeYears": [1983,1997]
+  },
+  {
+    "name": "Alan Shearer", "pos": "ATT", "era": "1995–99", "nation": "England", "club": "Newcastle", "league": "Premier League",
+    "attrs": [86,99,80,85,50,98], "activeYears": [1988,2006]
+  },
+  {
+    "name": "Roy Keane", "pos": "MID", "era": "1995–99", "nation": "Ireland", "club": "Manchester", "league": "Premier League",
+    "attrs": [84,78,91,86,96,99], "activeYears": [1989,2006]
+  },
+  {
+    "name": "David Beckham", "pos": "MID", "era": "1995–99", "nation": "England", "club": "Manchester", "league": "Premier League",
+    "attrs": [78,88,99,89,72,86], "activeYears": [1992,2013]
+  },
+  {
+    "name": "Pavel Nedved", "pos": "MID", "era": "2000–04", "nation": "Czech Republic", "club": "Turin", "league": "Serie A",
+    "attrs": [89,91,94,93,82,97], "activeYears": [1991,2009]
+  },
+  {
+    "name": "N'Golo Kante", "pos": "MID", "era": "2015–19", "nation": "France", "club": "London", "league": "Premier League",
+    "attrs": [91,72,89,91,98,96], "activeYears": [2012,2026]
+  },
+  {
+    "name": "Eden Hazard", "pos": "ATT", "era": "2015–19", "nation": "Belgium", "club": "London", "league": "Premier League",
+    "attrs": [94,91,92,98,43,84], "activeYears": [2007,2023]
+  },
+  {
+    "name": "Sadio Mane", "pos": "ATT", "era": "2015–19", "nation": "Senegal", "club": "Liverpool", "league": "Premier League",
+    "attrs": [97,94,86,93,55,91], "activeYears": [2011,2026]
+  },
+  {
+    "name": "Joshua Kimmich", "pos": "MID", "era": "2015–19", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "attrs": [82,80,96,90,92,88], "activeYears": [2013,2026]
+  },
+  {
+    "name": "Thomas Muller", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "attrs": [84,94,92,88,61,91], "activeYears": [2008,2025]
+  },
+  {
+    "name": "Marco Reus", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Dortmund", "league": "Bundesliga",
+    "attrs": [94,93,91,94,48,81], "activeYears": [2009,2026]
+  },
+  {
+    "name": "Franck Ribery", "pos": "ATT", "era": "2005–09", "nation": "France", "club": "Munich", "league": "Bundesliga",
+    "attrs": [96,89,93,98,52,83], "activeYears": [2000,2022]
+  },
+  {
+    "name": "Arjen Robben", "pos": "ATT", "era": "2010–14", "nation": "Netherlands", "club": "Munich", "league": "Bundesliga",
+    "attrs": [97,95,88,96,44,82], "activeYears": [2000,2021]
+  },
+  {
+    "name": "Zlatan Ibrahimovic", "pos": "ATT", "era": "2010–14", "nation": "Sweden", "club": "Paris", "league": "Ligue 1",
+    "attrs": [82,98,91,94,45,99], "activeYears": [1999,2023]
   }
 ]
