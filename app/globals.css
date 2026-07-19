@@ -99,3 +99,32 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
     width: 59px !important;
   }
 }
+
+/* Make every completed world roll unmistakable before the next card locks. */
+.three-rolls .roll-card:not(.rolling):has(.coach-name),
+.three-rolls .roll-card:not(.rolling):has(.season-tag) {
+  border-color: #c8ff3d;
+  box-shadow: 0 0 0 2px #c8ff3d, 0 0 52px rgba(200, 255, 61, .28);
+  animation: worldPickLocked .9s cubic-bezier(.18, .9, .25, 1) both;
+}
+
+.three-rolls .roll-card:not(.rolling):has(.coach-name)::before,
+.three-rolls .roll-card:not(.rolling):has(.season-tag)::before {
+  content: "PICK LOCKED";
+  position: absolute;
+  z-index: 12;
+  top: 14px;
+  right: 14px;
+  padding: 7px 9px;
+  background: #c8ff3d;
+  color: #0b100d;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+@keyframes worldPickLocked {
+  0% { opacity: .35; transform: scale(.94); filter: blur(3px); }
+  55% { transform: scale(1.025); filter: none; }
+  100% { opacity: 1; transform: scale(1); filter: none; }
+}
