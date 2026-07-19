@@ -37,7 +37,7 @@ const FORMATIONS = [
   {name:"4-2-3-1",slots:["GK","LB","CB1","CB2","RB","DM1","DM2","LW","AM","RW","ST"]},
   {name:"3-4-3",slots:["GK","CB1","CB2","CB3","LM","CM1","CM2","RM","LW","ST","RW"]},
   {name:"4-4-2",slots:["GK","LB","CB1","CB2","RB","LM","CM1","CM2","RM","ST1","ST2"]},
-  {name:"3-5-2",slots:["GK","CB1","CB2","CB3","LM","DM","CM1","CM2","RM","ST1","ST2"]},
+  {name:"3-5-2",slots:["GK","CB1","CB2","CB3","LM","CM1","DM","CM2","RM","ST1","ST2"]},
   {name:"4-1-4-1",slots:["GK","LB","CB1","CB2","RB","LM","CM1","DM","CM2","RM","ST"]},
   {name:"3-4-2-1",slots:["GK","CB1","CB2","CB3","LM","CM1","CM2","RM","AM1","AM2","ST"]},
   {name:"5-3-2",slots:["GK","LB","CB1","CB2","CB3","RB","CM1","CM2","CM3","ST1","ST2"]},
@@ -192,14 +192,20 @@ function GameView({game,go}:{game:Game;go:(m:Mode)=>void}){
     setPendingCoach(coachPick);setPendingSeason(seasonPick);setCoachDisplay(coachSeq[0].name);setLeagueDisplay("");setYearDisplay("");setPhaseSpin("coach");
     const coachTimer=setInterval(()=>{ci=(ci+1)%coachSeq.length;setCoachDisplay(coachSeq[ci].name)},180);
     setTimeout(()=>{
-      clearInterval(coachTimer);setCoachDisplay(coachPick.name);setCoach(coachPick);setPhaseSpin("league");setLeagueDisplay(leagueSeq[0]);
-      const leagueTimer=setInterval(()=>{li=(li+1)%leagueSeq.length;setLeagueDisplay(leagueSeq[li])},210);
+      clearInterval(coachTimer);setCoachDisplay(coachPick.name);
       setTimeout(()=>{
-        clearInterval(leagueTimer);setLeagueDisplay(`LOCKED:${seasonPick.league}`);setLeague(seasonPick.league);setPhaseSpin("year");setYearDisplay(yearSeq[0]||String(seasonPick.year));
-        const yearTimer=setInterval(()=>{yi=(yi+1)%yearSeq.length;setYearDisplay(yearSeq[yi])},240);
-        setTimeout(()=>{clearInterval(yearTimer);setYearDisplay(String(seasonPick.year));setTimeout(()=>{setSeason(seasonPick);setPendingCoach(null);setPhaseSpin(null)},650)},2800);
-      },2800);
-    },2800);
+        setCoach(coachPick);setPhaseSpin("league");setLeagueDisplay(leagueSeq[0]);
+        const leagueTimer=setInterval(()=>{li=(li+1)%leagueSeq.length;setLeagueDisplay(leagueSeq[li])},210);
+        setTimeout(()=>{
+          clearInterval(leagueTimer);setLeagueDisplay(seasonPick.league);
+          setTimeout(()=>{
+            setLeagueDisplay(`LOCKED:${seasonPick.league}`);setLeague(seasonPick.league);setPhaseSpin("year");setYearDisplay(yearSeq[0]||String(seasonPick.year));
+            const yearTimer=setInterval(()=>{yi=(yi+1)%yearSeq.length;setYearDisplay(yearSeq[yi])},240);
+            setTimeout(()=>{clearInterval(yearTimer);setYearDisplay(String(seasonPick.year));setTimeout(()=>{setSeason(seasonPick);setPendingCoach(null);setPhaseSpin(null)},650)},2800);
+          },850);
+        },2400);
+      },850);
+    },2400);
   }
 
   async function share(){const url=new URL(location.href);url.searchParams.set("result",btoa(unescape(encodeURIComponent(JSON.stringify({game,result,picks:picks.map(p=>p.name)})))));history.replaceState({},"",url);const data={title:result?.title,text:`I scored ${result?.score} in ${game==="era"?"Era XI":game==="perfect"?"Perfect Season":"Build a Player"}. Beat that.`,url:url.href};if(navigator.share)await navigator.share(data);else await navigator.clipboard.writeText(url.href)}
