@@ -128,3 +128,59 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
   55% { transform: scale(1.025); filter: none; }
   100% { opacity: 1; transform: scale(1); filter: none; }
 }
+
+/* Canonical formation engine: every role is laid out by football line, not by formation-specific offsets. */
+.pitch-team {
+  grid-template-rows: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.pitch-line {
+  display: flex !important;
+  position: relative !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.pitch-line.empty {
+  display: none !important;
+}
+
+.pitch-line .pitch-slot {
+  position: static !important;
+  inset: auto !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.formation-options .pitch-slot {
+  width: 58px !important;
+  min-height: 50px;
+  padding-inline: 2px;
+}
+
+.choice-panel .player-tags {
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.choice-panel .player-tags i {
+  min-height: 25px;
+  padding: 7px 8px !important;
+  font-size: 7px !important;
+  letter-spacing: .075em;
+  border-width: 2px;
+}
+
+.choice-panel .player-tags i b {
+  font-size: 6px;
+}
+
+@media (max-width: 620px) {
+  .pitch-line .pitch-slot { width: 59px !important; }
+  .formation-options .pitch-slot { width: 48px !important; }
+}
