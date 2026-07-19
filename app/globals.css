@@ -72,3 +72,30 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 
 /* Three-stage world draw and fixed 4-3-3 coordinates */
 .three-rolls{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px}.three-rolls .roll-card,.three-rolls .roll-placeholder{min-height:320px}.three-rolls .roll-card.rolling:before,.three-rolls .roll-card.rolling:after,.three-rolls .roll-card.rolling .roll-placeholder:before,.three-rolls .roll-card.rolling .roll-placeholder:after{display:none!important}.three-rolls .slot-machine-value b{font-size:clamp(28px,2.6vw,43px)}.three-rolls .year-value b{font-size:62px}.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .line-mid{display:contents!important}.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-lcm,.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-dm,.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-rcm{position:absolute!important;top:43%!important;width:78px!important;transform:translate(-50%,-50%)!important;margin:0!important}.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-lcm{left:25%!important}.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-dm{left:50%!important}.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-rcm{left:75%!important}@media(max-width:1050px){.three-rolls{grid-template-columns:1fr!important}.three-rolls .roll-card,.three-rolls .roll-placeholder{min-height:230px}}@media(max-width:620px){.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-lcm,.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-dm,.formation-gk-rb-rcb-lcb-lb-dm-rcm-lcm-rw-st-lw .slot-rcm{width:59px!important}}
+/* Keep the 4-3-3 midfield as one simple, evenly spaced line. */
+.formation-gk-rb-rcb-lcb-lb-lcm-dm-rcm-rw-st-lw .line-mid {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.formation-gk-rb-rcb-lcb-lb-lcm-dm-rcm-rw-st-lw .line-mid .pitch-slot {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  width: 78px !important;
+}
+
+@media (max-width: 640px) {
+  .formation-gk-rb-rcb-lcb-lb-lcm-dm-rcm-rw-st-lw .line-mid .pitch-slot {
+    width: 59px !important;
+  }
+}

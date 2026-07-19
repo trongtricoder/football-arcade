@@ -27,7 +27,7 @@ function tagPoints(p:Player,tag:string){return tagTier(p,tag)===1?5:tagTier(p,ta
 function tierProfile(pos:Pos,attrs:number[]):{tier:Tier;color:string}{const score=pos==="GK"?attrs[4]*.65+attrs[5]*.2+attrs[2]*.15:Math.max(...attrs)*.45+(attrs.reduce((a,b)=>a+b,0)/6)*.55;return score>=94?{tier:"LEGEND",color:"#f2c94c"}:score>=90?{tier:"SUPERSTAR",color:"#a970ff"}:score>=85?{tier:"STAR",color:"#4cc9f0"}:score>=79?{tier:"PRO",color:"#42d392"}:{tier:"CULT",color:"#ff7a45"}}
 const PLAYERS:Player[] = raw.map(({name,pos,era,nation,club,league,attrs,activeYears},i)=>{const profile=tierProfile(pos,attrs);return {id:`p${i}`,name,pos,era,nation,club,league,attrs,activeYears,color:profile.color,tags:inferTags(name,pos,attrs),timeless:TIMELESS.has(name),tier:profile.tier}});
 const FORMATIONS = [
-  {name:"4-3-3",slots:["GK","RB","RCB","LCB","LB","DM","RCM","LCM","RW","ST","LW"]},
+  {name:"4-3-3",slots:["GK","RB","RCB","LCB","LB","LCM","DM","RCM","RW","ST","LW"]},
   {name:"4-2-3-1",slots:["GK","RB","RCB","LCB","LB","RDM","LDM","RAM","CAM","LAM","ST"]},
   {name:"3-4-3",slots:["GK","RCB","CB","LCB","RM","RCM","LCM","LM","RW","ST","LW"]},
   {name:"4-4-2",slots:["GK","RB","RCB","LCB","LB","RM","RCM","LCM","LM","RST","LST"]},
