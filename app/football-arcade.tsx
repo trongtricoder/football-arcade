@@ -38,7 +38,7 @@ const FORMATIONS = [
   {name:"3-4-3",slots:["GK","CB1","CB2","CB3","LM","CM1","CM2","RM","LW","ST","RW"]},
   {name:"4-4-2",slots:["GK","LB","CB1","CB2","RB","LM","CM1","CM2","RM","ST1","ST2"]},
   {name:"3-5-2",slots:["GK","CB1","CB2","CB3","LM","DM","CM1","CM2","RM","ST1","ST2"]},
-  {name:"4-1-4-1",slots:["GK","LB","CB1","CB2","RB","DM","LM","CM1","CM2","RM","ST"]},
+  {name:"4-1-4-1",slots:["GK","LB","CB1","CB2","RB","LM","CM1","DM","CM2","RM","ST"]},
   {name:"3-4-2-1",slots:["GK","CB1","CB2","CB3","LM","CM1","CM2","RM","AM1","AM2","ST"]},
   {name:"5-3-2",slots:["GK","LB","CB1","CB2","CB3","RB","CM1","CM2","CM3","ST1","ST2"]},
   {name:"4-3-2-1",slots:["GK","LB","CB1","CB2","RB","CM1","CM2","CM3","AM1","AM2","ST"]},

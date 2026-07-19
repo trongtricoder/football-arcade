@@ -131,7 +131,9 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 
 /* Canonical formation engine: every role is laid out by football line, not by formation-specific offsets. */
 .pitch-team {
-  grid-template-rows: repeat(5, minmax(0, 1fr)) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
 .pitch-line {
@@ -141,6 +143,7 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
   justify-content: space-around !important;
   align-items: center !important;
   width: 100% !important;
+  flex: 1 1 0 !important;
   margin: 0 !important;
 }
 
