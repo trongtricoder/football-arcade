@@ -45,7 +45,11 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /THE 3Rs/);
   assert.match(source, /SONS OF SPEED/);
   assert.match(source, /boostedAttributes/);
-  assert.match(source, /MAESTRO \+ ANCHOR/);
+  assert.doesNotMatch(source, /MAESTRO \+ ANCHOR/);
+  assert.doesNotMatch(source, /SUPPLIER \+ RUNNER/);
+  assert.match(source, /CLUTCH FINISHER/);
+  assert.match(source, /COMMANDING KEEPER/);
+  assert.match(source, /OVERLAPPING FULLBACK/);
   assert.match(source, /ATTRIBUTE BOOSTS ONLY/);
   assert.doesNotMatch(source, /function effectiveRating[^\n]+tagPoints/);
   assert.match(source, /HOW INDIVIDUAL TAGS WORK/);
