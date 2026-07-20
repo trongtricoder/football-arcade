@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import playerData from "@/data/players.json";
+import playerExpansion from "@/data/player-expansion.json";
 import managerData from "@/data/managers.json";
 import seasonData from "@/data/league-seasons.json";
 import playerOverrides from "@/data/player-overrides.json";
@@ -21,7 +22,7 @@ type PlayerSeasonStat = {name:string;slot:string;base:number;eraFit:number;posit
 type Result = { title:string; score:number; grade:string; story:string; stats:{label:string;value:string}[]; badges:string[]; detail:string[]; matches?:MatchResult[]; table?:TableRow[]; awards?:string[]; review?:{label:string;value:string;copy:string}[]; playerStats?:PlayerSeasonStat[] };
 
 const A = ["PAC","FIN","PAS","DRI","DEF","PHY"];
-const raw = playerData as Array<{name:string;pos:Pos;era:string;nation:string;club:string;league:string;attrs:number[];activeYears:number[]}>;
+const raw = [...playerData,...playerExpansion] as Array<{name:string;pos:Pos;era:string;nation:string;club:string;league:string;attrs:number[];activeYears:number[]}>;
 const TIMELESS=new Set<string>(playerOverrides.timeless);
 const SPECIAL_TAGS=playerOverrides.tags as Record<string,string[]>;
 const PEAK_RATINGS=playerOverrides.ratings as Record<string,number>;
@@ -60,7 +61,7 @@ const SEASONS = SEASON_LIST.reduce<Record<string,LeagueSeason[]>>((all,season)=>
 function hash(s:string){let h=2166136261; for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)} return h>>>0}
 function rng(seed:string){let x=hash(seed)||1; return ()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return (x>>>0)/4294967296}}
 function sample<T>(items:T[], n:number, seed:string){const pool=[...items],r=rng(seed),out:T[]=[];while(pool.length&&out.length<n)out.push(pool.splice(Math.floor(r()*pool.length),1)[0]);return out}
-function balancedPlayers(items:Player[],seed:string,count=3){const r=rng(seed),pool=[...items],chosen:Player[]=[];while(chosen.length<count&&pool.length){const weights=pool.map(p=>{const rating=overall(p);return rating>=95?.12:rating>=90?.32:rating>=84?.8:1.45}),total=weights.reduce((a,b)=>a+b,0);let roll=r()*total,index=0;for(;index<weights.length-1;index++){roll-=weights[index];if(roll<=0)break}chosen.push(pool.splice(index,1)[0])}return chosen}
+function balancedPlayers(items:Player[],seed:string,count=3){const r=rng(seed),pool=[...items],chosen:Player[]=[];while(chosen.length<count&&pool.length){const weights=pool.map(p=>{const rating=overall(p),w=balanceConfig.samplingWeights;return rating>=95?w.elite95:rating>=90?w.star90:rating>=84?w.quality84:w.standard}),total=weights.reduce((a,b)=>a+b,0);let roll=r()*total,index=0;for(;index<weights.length-1;index++){roll-=weights[index];if(roll<=0)break}chosen.push(pool.splice(index,1)[0])}return chosen}
 function overall(p:Player){
   if(PEAK_RATINGS[`${p.name}|${p.era}`]) return PEAK_RATINGS[`${p.name}|${p.era}`];
   const weights=balanceConfig.overallWeights[p.pos];

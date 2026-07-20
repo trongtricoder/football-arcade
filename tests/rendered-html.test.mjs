@@ -42,7 +42,7 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /REROLL ERA/);
   assert.match(source, /REROLL EVERYTHING/);
   assert.match(source, /if\(p\.timeless\)return 100/);
-  assert.match(source, /rating>=95\?\.12/);
+  assert.match(source, /rating>=95\?w\.elite95/);
   assert.match(source, /SEASON RESULTS/);
   assert.match(source, /CHOOSE A POSITION ON THE PITCH/);
   assert.match(source, /5-PLAYER ROSTER/);

@@ -1,10 +1,11 @@
 import { readFile } from "node:fs/promises";
 
 const load = async (name) => JSON.parse(await readFile(new URL(`../data/${name}`, import.meta.url), "utf8"));
-const [players, managers, seasons, overrides, balance] = await Promise.all([
-  load("players.json"), load("managers.json"), load("league-seasons.json"),
+const [basePlayers, expansionPlayers, managers, seasons, overrides, balance] = await Promise.all([
+  load("players.json"), load("player-expansion.json"), load("managers.json"), load("league-seasons.json"),
   load("player-overrides.json"), load("balance-config.json"),
 ]);
+const players = [...basePlayers, ...expansionPlayers];
 
 const errors = [];
 const warnings = [];
@@ -66,6 +67,10 @@ for (const era of eras) for (const league of leagues) {
   const decade = Number(era.slice(0, 2));
   const eligible = players.filter(player => player.league === league && Math.floor(Number(player.era.slice(0, 4)) / 10) * 10 % 100 === decade).length;
   warn(eligible >= 5, `Thin draft pool: ${era} ${league} has ${eligible}/5 eligible versions`);
+}
+assert(seasons.length === 230, `Expected 230 league seasons, found ${seasons.length}`);
+for (let start = 1980; start <= 2025; start++) for (const league of leagues) {
+  assert(seasons.some(season => season.year === start + 1 && season.league === league), `Missing ${start}-${String(start + 1).slice(-2)} ${league}`);
 }
 
 console.log(`Validated ${players.length} player versions, ${managers.length} managers and ${seasons.length} seasons.`);

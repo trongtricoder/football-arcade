@@ -5,12 +5,14 @@ import test from "node:test";
 const load = async name => JSON.parse(await readFile(new URL(`../data/${name}`, import.meta.url), "utf8"));
 
 test("football data remains versioned and covers every league-era combination", async () => {
-  const [players, managers, seasons, overrides, balance] = await Promise.all([
-    load("players.json"), load("managers.json"), load("league-seasons.json"),
+  const [basePlayers, expansionPlayers, managers, seasons, overrides, balance] = await Promise.all([
+    load("players.json"), load("player-expansion.json"), load("managers.json"), load("league-seasons.json"),
     load("player-overrides.json"), load("balance-config.json"),
   ]);
-  assert.ok(players.length >= 125);
+  const players = [...basePlayers, ...expansionPlayers];
+  assert.ok(players.length >= 200);
   assert.ok(managers.length >= 30);
+  assert.equal(seasons.length, 230);
   assert.ok(overrides.version);
   assert.ok(balance.version);
   assert.equal(Object.keys(balance.overallWeights).length, 4);
@@ -23,7 +25,8 @@ test("football data remains versioned and covers every league-era combination", 
 });
 
 test("rating overrides reference real versions and tier thresholds are ordered", async () => {
-  const [players, overrides, balance] = await Promise.all([load("players.json"), load("player-overrides.json"), load("balance-config.json")]);
+  const [basePlayers, expansionPlayers, overrides, balance] = await Promise.all([load("players.json"), load("player-expansion.json"), load("player-overrides.json"), load("balance-config.json")]);
+  const players = [...basePlayers, ...expansionPlayers];
   for (const key of Object.keys(overrides.ratings)) {
     const separator = key.lastIndexOf("|");
     const name = key.slice(0, separator), era = key.slice(separator + 1);

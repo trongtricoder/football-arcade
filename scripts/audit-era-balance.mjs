@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 
 const load = async (name) => JSON.parse(await readFile(new URL(`../data/${name}`, import.meta.url), "utf8"));
-const [players, overrides, config] = await Promise.all([load("players.json"), load("player-overrides.json"), load("balance-config.json")]);
+const [basePlayers, expansionPlayers, overrides, config] = await Promise.all([load("players.json"), load("player-expansion.json"), load("player-overrides.json"), load("balance-config.json")]);
+const players = [...basePlayers, ...expansionPlayers];
 const rating = player => overrides.ratings[`${player.name}|${player.era}`] ?? Math.round(player.attrs.reduce((total, value, index) => total + value * config.overallWeights[player.pos][index], 0));
 const tier = value => value >= config.tierThresholds.legend ? "LEGEND" : value >= config.tierThresholds.superstar ? "SUPERSTAR" : value >= config.tierThresholds.star ? "STAR" : value >= config.tierThresholds.pro ? "PRO" : "CULT";
 const groups = new Map();
