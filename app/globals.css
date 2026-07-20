@@ -282,6 +282,7 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 .partnerships-guide article { border-left-color:var(--accent,#a970ff)!important; }
 .partnerships article strong { font-size:9px; line-height:1.4; }
 @media(max-width:700px){.tag-guide > .handbook-content{padding:12px}.handbook-grid{grid-template-columns:1fr}.tag-guide .handbook-grid article{min-height:0}}
+.profile-attributes small em{margin-left:7px;color:#c8ff3d;font-size:8px;font-style:normal;letter-spacing:.04em}
 
 /* Isolate the player dossier from the site's main navigation header rules. */
 .player-profile > header {

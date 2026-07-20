@@ -44,7 +44,10 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /ARGENTINA NUMBER 10s/);
   assert.match(source, /THE 3Rs/);
   assert.match(source, /SONS OF SPEED/);
-  assert.match(source, /individualTagBonus/);
+  assert.match(source, /boostedAttributes/);
+  assert.match(source, /MAESTRO \+ ANCHOR/);
+  assert.match(source, /ATTRIBUTE BOOSTS ONLY/);
+  assert.doesNotMatch(source, /function effectiveRating[^\n]+tagPoints/);
   assert.match(source, /HOW INDIVIDUAL TAGS WORK/);
   assert.match(source, /function clubChemistry/);
   assert.match(source, /REROLL LEAGUE/);
