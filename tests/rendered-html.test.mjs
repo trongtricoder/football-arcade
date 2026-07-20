@@ -40,6 +40,12 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /const PARTNERSHIPS/);
   assert.match(source, /DYNAMIC DUO/);
   assert.match(source, /DYNAMIC TRIO/);
+  assert.match(source, /FLYING DUTCHMEN/);
+  assert.match(source, /ARGENTINA NUMBER 10s/);
+  assert.match(source, /THE 3Rs/);
+  assert.match(source, /SONS OF SPEED/);
+  assert.match(source, /individualTagBonus/);
+  assert.match(source, /HOW INDIVIDUAL TAGS WORK/);
   assert.match(source, /function clubChemistry/);
   assert.match(source, /REROLL LEAGUE/);
   assert.match(source, /REROLL ERA/);

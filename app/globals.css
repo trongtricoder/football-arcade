@@ -267,6 +267,22 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 .player-profile header > strong { width: 105px; font-size: 58px; }
 @media(max-width:620px){.player-profile{padding-top:64px}.profile-actions{flex-wrap:wrap}.player-profile > header{grid-template-columns:64px minmax(0,1fr)}.player-profile header h2{font-size:34px}.player-profile header > strong{width:auto;grid-column:1/-1}.pitch.swap-mode .pitch-slot.swap-target:after{display:none}}
 
+/* Clear, rules-first tag handbook */
+.tag-guide > .handbook-content { display:block; padding:18px; border-top:1px solid #405046; background:#0b100d; }
+.handbook-content > aside { padding:16px 18px; border:1px solid #c8ff3d; background:rgba(200,255,61,.07); }
+.handbook-content > aside b { color:#c8ff3d; font-size:11px; letter-spacing:.1em; }
+.handbook-content > aside p { margin:8px 0 0; color:#e0e8e2; font-size:12px; line-height:1.55; }
+.handbook-content > h3 { margin:24px 0 10px; color:#eef2e8; font:25px var(--display); letter-spacing:.03em; }
+.handbook-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.tag-guide .handbook-grid article { min-height:120px; padding:16px; border:1px solid #405046!important; border-left:4px solid #f2c94c!important; background:linear-gradient(135deg,#152019,#101612); }
+.handbook-grid article > strong { display:block; color:#f2c94c; font-size:12px; letter-spacing:.06em; }
+.handbook-grid article > b { display:block; margin-top:9px; color:#c8ff3d; font-size:10px; line-height:1.35; letter-spacing:.04em; }
+.handbook-grid article > p { margin:9px 0 0; color:#c5d0c8; font-size:11px; line-height:1.5; }
+.handbook-grid article > small { display:block; margin-top:10px; padding-top:9px; border-top:1px solid #34463a; color:#fff; font-size:10px; font-weight:900; text-transform:uppercase; }
+.partnerships-guide article { border-left-color:var(--accent,#a970ff)!important; }
+.partnerships article strong { font-size:9px; line-height:1.4; }
+@media(max-width:700px){.tag-guide > .handbook-content{padding:12px}.handbook-grid{grid-template-columns:1fr}.tag-guide .handbook-grid article{min-height:0}}
+
 /* Isolate the player dossier from the site's main navigation header rules. */
 .player-profile > header {
   height: auto !important;
