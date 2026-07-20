@@ -249,3 +249,19 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 .partnerships { margin-top: 20px; }.partnerships > div { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }.partnerships article { display: grid; gap: 5px; padding: 11px; border: 1px solid #f2c94c; background: rgba(242,201,76,.06); }.partnerships article b { color: #f2c94c; font: 20px var(--display); }.partnerships article small { color: #b8c4bc; font-size: 8px; }.partnerships article strong { font-size: 7px; letter-spacing: .09em; }.partnerships p { color: #91a097; font-size: 9px; }
 @media(max-width:1000px){.locked-profiles > div:last-child{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:620px){.locked-profiles{margin-inline:10px}.locked-profiles > div:first-child{display:block}.locked-profiles > div:first-child small{display:block;margin-top:7px}.locked-profiles > div:last-child{grid-template-columns:1fr}.player-profile{padding:18px}.player-profile > header{grid-template-columns:64px 1fr}.profile-silhouette{width:64px;height:76px}.player-profile header > strong{grid-column:1/-1;text-align:left}.profile-attributes{grid-template-columns:repeat(2,1fr)}.partnerships > div{grid-template-columns:1fr}}
+
+/* Pitch-first player profiles and touch-friendly swapping */
+.pitch-slot.filled { cursor: pointer; }
+.pitch.swap-mode .pitch-slot { cursor: pointer; }
+.pitch.swap-mode .pitch-slot.swap-source { box-shadow: 0 0 0 4px #f2c94c,0 0 32px rgba(242,201,76,.55) !important; transform: scale(1.08) !important; }
+.pitch.swap-mode .pitch-slot.swap-target { border-color: #c8ff3d !important; animation: swapTargetPulse .75s alternate infinite; }
+.pitch.swap-mode .pitch-slot.swap-target:after { content: "SWAP HERE"; position: absolute; left: 50%; bottom: -17px; transform: translateX(-50%); color: #c8ff3d; font-size: 5px; font-weight: 900; white-space: nowrap; }
+@keyframes swapTargetPulse { to { box-shadow: 0 0 0 4px rgba(200,255,61,.25),0 0 20px rgba(200,255,61,.4); } }
+.player-profile { width: min(760px,100%); padding-top: 58px; }
+.profile-actions { position: absolute; top: 14px; right: 14px; left: 14px; display: flex; justify-content: flex-end; gap: 8px; }
+.profile-actions button { min-height: 32px; padding: 8px 11px; border: 1px solid #718078; background: #0b100d; color: #eef2e8; font-size: 7px; font-weight: 900; letter-spacing: .08em; cursor: pointer; }
+.profile-actions button:first-child { margin-right: auto; border-color: #c8ff3d; background: #c8ff3d; color: #0b100d; }
+.player-profile > header { grid-template-columns: 82px minmax(0,1fr) 105px; align-items: center; }
+.player-profile header h2 { max-width: 100%; font-size: clamp(34px,5vw,52px); overflow-wrap: anywhere; }
+.player-profile header > strong { width: 105px; font-size: 58px; }
+@media(max-width:620px){.player-profile{padding-top:64px}.profile-actions{flex-wrap:wrap}.player-profile > header{grid-template-columns:64px minmax(0,1fr)}.player-profile header h2{font-size:34px}.player-profile header > strong{width:auto;grid-column:1/-1}.pitch.swap-mode .pitch-slot.swap-target:after{display:none}}
