@@ -34,7 +34,13 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /yearRolling/);
   assert.match(source, /result\.table&&revealFinal/);
   assert.match(source, /function squadTagBonus/);
-  assert.match(source, /MSN TRIO/);
+  assert.match(source, /const PARTNERSHIPS/);
+  assert.match(source, /DYNAMIC DUO/);
+  assert.match(source, /DYNAMIC TRIO/);
+  assert.match(source, /function clubChemistry/);
+  assert.match(source, /REROLL LEAGUE/);
+  assert.match(source, /REROLL ERA/);
+  assert.match(source, /REROLL EVERYTHING/);
   assert.match(source, /if\(p\.timeless\)return 100/);
   assert.match(source, /rating>=95\?\.12/);
   assert.match(source, /SEASON RESULTS/);

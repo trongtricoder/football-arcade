@@ -2078,5 +2078,17 @@
   {
     "name": "Zlatan Ibrahimovic", "pos": "ATT", "era": "2010–14", "nation": "Sweden", "club": "Paris", "league": "Ligue 1",
     "attrs": [82,98,91,94,45,99], "activeYears": [1999,2023]
+  },
+  {
+    "name": "Gianluigi Buffon", "pos": "GK", "era": "1995–99", "nation": "Italy", "club": "Parma", "league": "Serie A",
+    "attrs": [78,35,82,70,93,94], "activeYears": [1995,2000]
+  },
+  {
+    "name": "Gianluigi Buffon", "pos": "GK", "era": "2010–14", "nation": "Italy", "club": "Turin", "league": "Serie A",
+    "attrs": [69,30,89,67,97,94], "activeYears": [2010,2019]
+  },
+  {
+    "name": "Gianluigi Buffon", "pos": "GK", "era": "2020–24", "nation": "Italy", "club": "Parma", "league": "Serie A",
+    "attrs": [48,25,82,55,87,82], "activeYears": [2020,2023]
   }
 ]

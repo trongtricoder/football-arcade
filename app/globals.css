@@ -187,3 +187,38 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
   .pitch-line .pitch-slot { width: 59px !important; }
   .formation-options .pitch-slot { width: 48px !important; }
 }
+
+.choice-panel .choice-heading > .reroll { display: none; }
+
+.reroll-dock,
+.world-reroll-bar {
+  margin: 0 4vw;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #53635a;
+  background: #111913;
+}
+
+.reroll-dock > div,
+.world-reroll-bar > div { margin-right: auto; }
+.reroll-dock span,
+.world-reroll-bar span { display: block; color: #c8ff3d; font-size: 7px; font-weight: 900; letter-spacing: .15em; }
+.reroll-dock b,
+.world-reroll-bar b { display: block; margin-top: 4px; font-size: 10px; letter-spacing: .08em; }
+.reroll-dock button,
+.world-reroll-bar button { min-height: 38px; padding: 9px 12px; border: 1px solid #c8ff3d; background: transparent; color: #c8ff3d; font-size: 7px; font-weight: 900; letter-spacing: .08em; cursor: pointer; }
+.reroll-dock button:hover:not(:disabled),
+.world-reroll-bar button:hover:not(:disabled) { background: #c8ff3d; color: #0b100d; }
+.reroll-dock button:disabled,
+.world-reroll-bar button:disabled { opacity: .35; cursor: not-allowed; border-color: #718078; color: #9eaea4; }
+.world-reroll-bar { margin-top: 18px; border-color: #c8ff3d; }
+
+@media (max-width: 760px) {
+  .reroll-dock,
+  .world-reroll-bar { flex-wrap: wrap; margin-inline: 10px; }
+  .reroll-dock > div,
+  .world-reroll-bar > div { width: 100%; }
+  .reroll-dock button { flex: 1 1 30%; }
+}

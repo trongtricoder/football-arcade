@@ -184,5 +184,14 @@
   },
   {
     "name": "Luis Enrique", "era": "2008-NOW", "attack": "S", "defence": "B", "pressing": "S", "tag": "VERTICAL POSSESSION", "attackMod": 0.1, "defenceMod": 0.01, "cleanSheetMod": 0.04, "quote": "Possession must always threaten the goal."
+  },
+  {
+    "name": "Marcelo Bielsa", "era": "1990-NOW", "attack": "S", "defence": "B", "pressing": "S", "tag": "PRESSING IDEOLOGUE", "attackMod": 0.1, "defenceMod": 0.0, "cleanSheetMod": 0.02, "quote": "Intensity turns an idea into an identity."
+  },
+  {
+    "name": "Guus Hiddink", "era": "1987-2021", "attack": "A", "defence": "A", "pressing": "A", "tag": "ADAPTIVE BUILDER", "attackMod": 0.05, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "Adapt the structure without limiting the players."
+  },
+  {
+    "name": "Bobby Robson", "era": "1968-2004", "attack": "A", "defence": "B", "pressing": "A", "tag": "PLAYER WHISPERER", "attackMod": 0.07, "defenceMod": 0.02, "cleanSheetMod": 0.05, "quote": "Give great players courage and a clear job."
   }
 ]
