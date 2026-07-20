@@ -102,7 +102,7 @@ function clubChemistry(picks:Pick[]){const counts=new Map<string,number>();picks
 function squadTagBonus(picks:Pick[],coach?:Coach){const tagged=(name:string)=>picks.filter(p=>p.tags.includes(name)),names=new Set(picks.map(p=>p.name)),clubLinks=clubChemistry(picks);let bonus=clubLinks.teamBonus;const activated=[...clubLinks.activated];for(const link of PARTNERSHIPS){if(link.players.every(name=>names.has(name))){bonus+=link.bonus;activated.push(`${link.name} · ${link.players.length===2?"DYNAMIC DUO":"DYNAMIC TRIO"} +${link.bonus}`)}}const creators=tagged("CREATIVE PASSER");if(coach?.attack==="S"&&creators.length>=2){const value=Math.min(5,Math.round(creators.reduce((s,p)=>s+tagPoints(p,"CREATIVE PASSER"),0)/2));bonus+=value;activated.push(`CREATOR'S SYSTEM +${value}`)}const press=picks.filter(p=>p.tags.includes("PRESS RESISTANT")||p.tags.includes("PHYSICAL FORCE"));if(coach?.pressing==="S"&&press.length>=3){bonus+=3;activated.push("PRESS-PROOF XI +3")}const walls=picks.filter(p=>p.tags.includes("DEFENSIVE WALL")||p.tags.includes("SHOT STOPPER"));if(coach?.defence==="S"&&walls.length>=2){bonus+=3;activated.push("FORTRESS UNIT +3")}return {bonus:Math.min(12,bonus),activated}}
 function dailySeed(){return new Date().toISOString().slice(0,10)}
 function grade(score:number){return score>=95?"IMMORTAL":score>=88?"WORLD CLASS":score>=80?"CONTENDER":score>=70?"DANGEROUS":"CULT HEROES"}
-function distributeTotal(weights:number[],total:number){if(total<=0)return weights.map(()=>0);const sum=weights.reduce((a,b)=>a+b,0)||1,exact=weights.map(w=>w/sum*total),whole=exact.map(Math.floor);let left=total-whole.reduce((a,b)=>a+b,0);exact.map((value,index)=>({index,remainder:value-whole[index]})).sort((a,b)=>b.remainder-a.remainder).slice(0,left).forEach(x=>whole[x.index]++);return whole}
+function distributeTotal(weights:number[],total:number){if(total<=0)return weights.map(()=>0);const sum=weights.reduce((a,b)=>a+b,0)||1,exact=weights.map(w=>w/sum*total),whole=exact.map(Math.floor),left=total-whole.reduce((a,b)=>a+b,0);exact.map((value,index)=>({index,remainder:value-whole[index]})).sort((a,b)=>b.remainder-a.remainder).slice(0,left).forEach(x=>whole[x.index]++);return whole}
 
 function simulate(game:Game,picks:Pick[],seed:string,league:string,position:Pos,eraId="",coach?:Coach,season?:LeagueSeason):Result{
   const r=rng(seed+picks.map(p=>p.id+(p.value||"")).join(""));
@@ -199,8 +199,9 @@ function GameView({game,go}:{game:Game;go:(m:Mode)=>void}){
   function rerollEra(){if(eraRerollUsed)return;setSpinning(true);setEraRerollUsed(true);setDrawPhase("era");setTimeout(()=>{setEraRerollNonce(n=>n+1);setPendingPickId(null);setSpinning(false)},700)}
   function rerollWorld(){if(worldRerollUsed||phaseSpin)return;setWorldRerollUsed(true);setWorldRerollNonce(n=>n+1);setCoach(null);setSeason(null);setLeagueDisplay("");setYearDisplay("");rollWorld(1)}
   function swapPlayers(from:number,to:number){if(!picks[from]||!slots[to])return;setPicks(current=>{const next=current.map(p=>({...p})),source=next[from],targetIndex=next.findIndex(p=>p.slot===slots[to]),sourceSlot=source.slot;source.slot=slots[to];if(targetIndex>=0)next[targetIndex].slot=sourceSlot;return next})}
-  function rollWorld(offset=0){
-    const worldSeed=String(worldRerollNonce+offset),coachPick=sample(COACHES,1,seed+"coach"+worldSeed)[0],seasonPick=sample(SEASONS[selectedEra],1,seed+"season"+worldSeed)[0];
+  function rollWorld(offset:unknown=0){
+    const normalizedOffset=typeof offset==="number"?offset:0;
+    const worldSeed=String(worldRerollNonce+normalizedOffset),coachPick=sample(COACHES,1,seed+"coach"+worldSeed)[0],seasonPick=sample(SEASONS[selectedEra],1,seed+"season"+worldSeed)[0];
     const eraStart=Number(selectedEra.slice(0,2))+(selectedEra==="00s"?2000:selectedEra==="10s"?2000:selectedEra==="20s"?2000:1900);
     const coachSeq=sample(COACHES,COACHES.length,seed+"coach-seq"+worldSeed),leagueSeq=Array.from(new Set(SEASONS[selectedEra].map(s=>s.league))),yearSeq=sample(Array.from({length:10},(_,i)=>String(eraStart+i)),10,seed+"year-seq"+worldSeed);
     let ci=0,li=0,yi=0;
