@@ -193,5 +193,23 @@
   },
   {
     "name": "Bobby Robson", "era": "1968-2004", "attack": "A", "defence": "B", "pressing": "A", "tag": "PLAYER WHISPERER", "attackMod": 0.07, "defenceMod": 0.02, "cleanSheetMod": 0.05, "quote": "Give great players courage and a clear job."
+  },
+  {
+    "name": "Rinus Michels", "era": "1965-1992", "attack": "S", "defence": "A", "pressing": "S", "tag": "TOTAL FOOTBALL ARCHITECT", "attackMod": 0.09, "defenceMod": 0.05, "cleanSheetMod": 0.07, "quote": "Space is created by the movement of the whole team."
+  },
+  {
+    "name": "Helenio Herrera", "era": "1945-1981", "attack": "B", "defence": "S", "pressing": "A", "tag": "COUNTERATTACK GENERAL", "attackMod": 0.02, "defenceMod": 0.11, "cleanSheetMod": 0.18, "quote": "Organisation turns every recovery into an attack."
+  },
+  {
+    "name": "Valeriy Lobanovskyi", "era": "1969-2001", "attack": "A", "defence": "A", "pressing": "S", "tag": "SYSTEM SCIENTIST", "attackMod": 0.06, "defenceMod": 0.06, "cleanSheetMod": 0.09, "quote": "The system multiplies the quality of every player."
+  },
+  {
+    "name": "Giovanni Trapattoni", "era": "1974-2013", "attack": "B", "defence": "S", "pressing": "A", "tag": "ITALIAN PRAGMATIST", "attackMod": 0.01, "defenceMod": 0.1, "cleanSheetMod": 0.16, "quote": "Protect the balance, then punish the opening."
+  },
+  {
+    "name": "Bill Shankly", "era": "1949-1974", "attack": "A", "defence": "A", "pressing": "A", "tag": "BOOT ROOM BUILDER", "attackMod": 0.06, "defenceMod": 0.05, "cleanSheetMod": 0.08, "quote": "A clear collective idea makes the club stronger than eleven names."
+  },
+  {
+    "name": "Kenny Dalglish", "era": "1985-2000", "attack": "A", "defence": "A", "pressing": "B", "tag": "PLAYER-MANAGER", "attackMod": 0.06, "defenceMod": 0.04, "cleanSheetMod": 0.06, "quote": "Trust the players, keep the structure simple and attack together."
   }
 ]

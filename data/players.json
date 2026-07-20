@@ -2090,5 +2090,45 @@
   {
     "name": "Gianluigi Buffon", "pos": "GK", "era": "2020–24", "nation": "Italy", "club": "Parma", "league": "Serie A",
     "attrs": [48,25,82,55,87,82], "activeYears": [2020,2023]
+  },
+  {
+    "name": "Arjen Robben", "pos": "ATT", "era": "2005–09", "nation": "Netherlands", "club": "London", "league": "Premier League",
+    "attrs": [95,89,86,94,43,78], "activeYears": [2004,2007]
+  },
+  {
+    "name": "Franck Ribery", "pos": "ATT", "era": "2010–14", "nation": "France", "club": "Munich", "league": "Bundesliga",
+    "attrs": [95,91,95,98,53,84], "activeYears": [2010,2014]
+  },
+  {
+    "name": "Luka Modrić", "pos": "MID", "era": "2005–09", "nation": "Croatia", "club": "London", "league": "Premier League",
+    "attrs": [82,78,91,92,72,74], "activeYears": [2008,2012]
+  },
+  {
+    "name": "Luka Modrić", "pos": "MID", "era": "2015–19", "nation": "Croatia", "club": "Madrid", "league": "La Liga",
+    "attrs": [84,88,98,97,84,82], "activeYears": [2015,2019]
+  },
+  {
+    "name": "Zinedine Zidane", "pos": "MID", "era": "1995–99", "nation": "France", "club": "Turin", "league": "Serie A",
+    "attrs": [82,91,97,98,67,86], "activeYears": [1996,2001]
+  },
+  {
+    "name": "Ronaldo Nazário", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Madrid", "league": "La Liga",
+    "attrs": [95,98,84,96,38,88], "activeYears": [2002,2007]
+  },
+  {
+    "name": "Ronaldinho", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Paris", "league": "Ligue 1",
+    "attrs": [90,88,92,97,42,78], "activeYears": [2001,2003]
+  },
+  {
+    "name": "Thierry Henry", "pos": "ATT", "era": "1995–99", "nation": "France", "club": "Monaco", "league": "Ligue 1",
+    "attrs": [96,86,82,91,45,82], "activeYears": [1994,1999]
+  },
+  {
+    "name": "Karim Benzema", "pos": "ATT", "era": "2005–09", "nation": "France", "club": "Lyon", "league": "Ligue 1",
+    "attrs": [88,93,87,91,42,86], "activeYears": [2005,2009]
+  },
+  {
+    "name": "Sergio Ramos", "pos": "DEF", "era": "2015–19", "nation": "Spain", "club": "Madrid", "league": "La Liga",
+    "attrs": [84,82,88,82,98,97], "activeYears": [2015,2019]
   }
 ]
