@@ -9,7 +9,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "npm run data:validate && npm run balance:audit && npm run build && node --test tests/rendered-html.test.mjs tests/football-data.test.mjs",
+    "test": "npm run data:validate && npm run balance:audit && npm run build && node --experimental-strip-types --test tests/rendered-html.test.mjs tests/football-data.test.mjs tests/simulation-balance.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern outputs",
     "data:validate": "node scripts/validate-football-data.mjs",
     "balance:audit": "node scripts/audit-era-balance.mjs",

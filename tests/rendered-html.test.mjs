@@ -10,6 +10,9 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /FIVE-A-SIDE/);
   assert.match(source, /BUILD A PLAYER/);
   assert.match(source, /function simulate/);
+  assert.match(source, /simulateCampaign/);
+  assert.match(source, /POSITION FIT/);
+  assert.match(source, /SQUAD POWER/);
   assert.match(source, /dailySeed/);
   assert.match(source, /navigator\.share/);
   assert.match(source, /const FORMATIONS/);
