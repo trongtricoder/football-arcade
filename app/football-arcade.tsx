@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import playerData from "@/data/players.json";
 import managerData from "@/data/managers.json";
 import seasonData from "@/data/league-seasons.json";
+import playerOverrides from "@/data/player-overrides.json";
+import balanceConfig from "@/data/balance-config.json";
 
 type Mode = "home" | "era" | "perfect" | "player" | "about";
 type Game = Exclude<Mode, "home" | "about">;
@@ -20,20 +22,13 @@ type Result = { title:string; score:number; grade:string; story:string; stats:{l
 
 const A = ["PAC","FIN","PAS","DRI","DEF","PHY"];
 const raw = playerData as Array<{name:string;pos:Pos;era:string;nation:string;club:string;league:string;attrs:number[];activeYears:number[]}>;
-const TIMELESS=new Set(["Lionel Messi","Cristiano Ronaldo","Paolo Maldini","Franz Beckenbauer","Lothar Matthaus","Ruud Gullit","Thierry Henry","Manuel Neuer","Diego Maradona","Zinedine Zidane","Ronaldo Nazário","Gianluigi Buffon","Franco Baresi","Cafu","Roberto Carlos","Sergio Ramos"]);
-const SPECIAL_TAGS:Record<string,string[]>={
-  "Manuel Neuer":["SWEEPER KEEPER"],"Franz Beckenbauer":["LIBERO"],"Andrea Pirlo":["SET PIECE MASTER"],"Juninho Pernambucano":["SET PIECE MASTER"],
-  "Virgil van Dijk":["AERIAL DOMINANCE"],"Sergio Ramos":["AERIAL DOMINANCE","DEFENSIVE WALL"],"Nemanja Vidić":["AERIAL DOMINANCE"],"N'Golo Kante":["MIDFIELD ENGINE"],
-  "David Beckham":["SET PIECE MASTER"],"Lothar Matthaus":["MIDFIELD ENGINE"],"Franco Baresi":["LIBERO"],"Ruud Gullit":["TOTAL FOOTBALLER"],
-  "Diego Maradona":["TOTAL FOOTBALLER"],"Zinedine Zidane":["PRESS RESISTANT"],"Ronaldo Nazário":["POACHER"],"Gianluigi Buffon":["SHOT STOPPER"],
-  "Cafu":["MIDFIELD ENGINE"],"Roberto Carlos":["SET PIECE MASTER"],"Arjen Robben":["CUT INSIDE"],"Franck Ribery":["WIDE CREATOR"],
-  "Ronaldinho":["SHOWMAN"],"Thierry Henry":["CHANNEL RUNNER"],"Luka Modrić":["TEMPO CONTROLLER"],"Xavi":["TEMPO CONTROLLER"],
-  "Andrés Iniesta":["PRESS RESISTANT"],"Robert Lewandowski":["BOX MASTER"],"Karim Benzema":["FALSE NINE"],"Neymar":["SHOWMAN"]
-};
+const TIMELESS=new Set<string>(playerOverrides.timeless);
+const SPECIAL_TAGS=playerOverrides.tags as Record<string,string[]>;
+const PEAK_RATINGS=playerOverrides.ratings as Record<string,number>;
 function inferTags(name:string,pos:Pos,attrs:number[]){const tags:string[]=[];if(attrs[0]>=90)tags.push("PACE ABUSER");if(attrs[1]>=90)tags.push(pos==="ATT"?"POACHER":"GOAL THREAT");if(attrs[2]>=90)tags.push("CREATIVE PASSER");if(attrs[3]>=94)tags.push("PRESS RESISTANT");if(attrs[4]>=90)tags.push(pos==="GK"?"SHOT STOPPER":"DEFENSIVE WALL");if(attrs[5]>=92)tags.push("PHYSICAL FORCE");if(TIMELESS.has(name))tags.unshift("ERA PROOF");return [...(SPECIAL_TAGS[name]||[]),...tags].filter((tag,index,all)=>all.indexOf(tag)===index)}
 function tagTier(p:Player,tag:string){if(tag==="ERA PROOF"||tag==="TOTAL FOOTBALLER")return 1;const index=tag==="PACE ABUSER"||tag==="SWEEPER KEEPER"||tag==="CHANNEL RUNNER"?0:tag==="POACHER"||tag==="GOAL THREAT"||tag==="BOX MASTER"?1:tag==="CREATIVE PASSER"||tag==="SET PIECE MASTER"||tag==="LIBERO"||tag==="WIDE CREATOR"||tag==="TEMPO CONTROLLER"||tag==="FALSE NINE"?2:tag==="PRESS RESISTANT"||tag==="CUT INSIDE"||tag==="SHOWMAN"?3:tag==="SHOT STOPPER"||tag==="DEFENSIVE WALL"||tag==="AERIAL DOMINANCE"?4:5,value=p.attrs[index];return value>=97?1:value>=92?2:3}
 function tagPoints(p:Player,tag:string){return tagTier(p,tag)===1?5:tagTier(p,tag)===2?3:1}
-function tierProfile(pos:Pos,attrs:number[],rating?:number):{tier:Tier;color:string}{const score=rating??(pos==="GK"?attrs[4]*.65+attrs[5]*.2+attrs[2]*.15:Math.max(...attrs)*.45+(attrs.reduce((a,b)=>a+b,0)/6)*.55);return score>=96?{tier:"LEGEND",color:"#f2c94c"}:score>=91?{tier:"SUPERSTAR",color:"#a970ff"}:score>=84?{tier:"STAR",color:"#4cc9f0"}:score>=78?{tier:"PRO",color:"#42d392"}:{tier:"CULT",color:"#ff7a45"}}
+function tierProfile(pos:Pos,attrs:number[],rating?:number):{tier:Tier;color:string}{const score=rating??(pos==="GK"?attrs[4]*.65+attrs[5]*.2+attrs[2]*.15:Math.max(...attrs)*.45+(attrs.reduce((a,b)=>a+b,0)/6)*.55),thresholds=balanceConfig.tierThresholds;return score>=thresholds.legend?{tier:"LEGEND",color:"#f2c94c"}:score>=thresholds.superstar?{tier:"SUPERSTAR",color:"#a970ff"}:score>=thresholds.star?{tier:"STAR",color:"#4cc9f0"}:score>=thresholds.pro?{tier:"PRO",color:"#42d392"}:{tier:"CULT",color:"#ff7a45"}}
 const FORMATIONS = [
   {name:"4-3-3 · HOLDING",slots:["GK","LB","CB1","CB2","RB","DM","CM1","CM2","LW","ST","RW"]},
   {name:"4-3-3 · FLAT",slots:["GK","LB","CB1","CB2","RB","CM1","CM2","CM3","LW","ST","RW"]},
@@ -66,12 +61,9 @@ function hash(s:string){let h=2166136261; for(const c of s){h^=c.charCodeAt(0);h
 function rng(seed:string){let x=hash(seed)||1; return ()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return (x>>>0)/4294967296}}
 function sample<T>(items:T[], n:number, seed:string){const pool=[...items],r=rng(seed),out:T[]=[];while(pool.length&&out.length<n)out.push(pool.splice(Math.floor(r()*pool.length),1)[0]);return out}
 function balancedPlayers(items:Player[],seed:string,count=3){const r=rng(seed),pool=[...items],chosen:Player[]=[];while(chosen.length<count&&pool.length){const weights=pool.map(p=>{const rating=overall(p);return rating>=95?.12:rating>=90?.32:rating>=84?.8:1.45}),total=weights.reduce((a,b)=>a+b,0);let roll=r()*total,index=0;for(;index<weights.length-1;index++){roll-=weights[index];if(roll<=0)break}chosen.push(pool.splice(index,1)[0])}return chosen}
-const PEAK_RATINGS:Record<string,number>={"Lionel Messi|2010–14":101,"Lionel Messi|2005–09":94,"Cristiano Ronaldo|2010–14":99,"Cristiano Ronaldo|2005–09":95,"Sergio Ramos|2010–14":96,"Sergio Ramos|2005–09":88,"Ronaldo Nazário|1995–99":99,"Zinedine Zidane|2000–04":98,"Thierry Henry|2000–04":98,"Ronaldinho|2005–09":98,"Paolo Maldini|1990–94":98,"Xavi|2005–09":97,"Andrés Iniesta|2010–14":97,"Manuel Neuer|2010–14":97,"Diego Maradona|1985–89":99,"Marco van Basten|1985–89":98,"Michel Platini|1980–84":98,"Franco Baresi|1985–89":98,"Lothar Matthaus|1985–89":97,"Eric Cantona|1990–94":95,"Alan Shearer|1995–99":96,"David Beckham|1995–99":94,"Roy Keane|1995–99":94,"Pavel Nedved|2000–04":96,"N'Golo Kante|2015–19":95,"Eden Hazard|2015–19":96,"Sadio Mane|2015–19":95,"Franck Ribery|2005–09":96,"Arjen Robben|2010–14":96,"Zlatan Ibrahimovic|2010–14":96};
-Object.assign(PEAK_RATINGS,{"Gianluigi Buffon|1995–99":91,"Gianluigi Buffon|2000–04":97,"Gianluigi Buffon|2010–14":95,"Gianluigi Buffon|2020–24":82});
-Object.assign(PEAK_RATINGS,{"Arjen Robben|2005–09":91,"Franck Ribery|2010–14":97,"Luka Modrić|2005–09":88,"Luka Modrić|2015–19":98,"Zinedine Zidane|1995–99":96,"Ronaldo Nazário|2000–04":95,"Ronaldinho|2000–04":91,"Thierry Henry|1995–99":88,"Karim Benzema|2005–09":91,"Sergio Ramos|2015–19":97});
 function overall(p:Player){
   if(PEAK_RATINGS[`${p.name}|${p.era}`]) return PEAK_RATINGS[`${p.name}|${p.era}`];
-  const weights=p.pos==="ATT"?[.18,.25,.18,.24,.01,.14]:p.pos==="MID"?[.12,.12,.25,.21,.15,.15]:p.pos==="DEF"?[.13,.04,.14,.1,.34,.25]:[.06,.01,.2,.08,.4,.25];
+  const weights=balanceConfig.overallWeights[p.pos];
   return Math.round(p.attrs.reduce((sum,value,index)=>sum+value*weights[index],0));
 }
 const PLAYERS:Player[] = raw.map(({name,pos,era,nation,club,league,attrs,activeYears},i)=>{const draft={id:`p${i}`,name,pos,era,nation,club,league,attrs,activeYears,color:"",tags:inferTags(name,pos,attrs),timeless:TIMELESS.has(name),tier:"CULT" as Tier},profile=tierProfile(pos,attrs,overall(draft));return {...draft,color:profile.color,tier:profile.tier}});
@@ -93,7 +85,7 @@ function eraFit(p:Player,eraId:string){
 function slotCode(slot:string){if(slot==="FLEX")return "FLEX";if(slot==="GK")return "GK";if(slot==="DEF")return "DEF";if(slot==="MID")return "MID";if(slot==="ATT")return "ATT";if(/ST|CF/.test(slot))return "ST";if(/RW|LW|RF|LF/.test(slot))return "WING";if(/AM/.test(slot))return "AM";if(/CM|RM|LM/.test(slot))return "CM";if(/DM/.test(slot))return "DM";if(/WB/.test(slot))return "WB";return "BACK"}
 function slotLabel(slot:string){return slot.replace(/\d+$/,"")}
 function slotSuitability(p:Player,slot:string):"natural"|"secondary"|"penalty"{const code=slotCode(slot);if(code==="FLEX")return "natural";if(p.name==="Lionel Messi"){if(["ST","WING","AM"].includes(code))return "natural";if(code==="CM")return "secondary";return "penalty"}if(p.pos==="GK")return code==="GK"?"natural":"penalty";if(p.pos==="ATT"){if(["ST","WING","AM","ATT"].includes(code))return "natural";if(["CM","MID"].includes(code))return "secondary";return "penalty"}if(p.pos==="MID"){if(["AM","CM","DM","MID"].includes(code))return "natural";if(["WING","WB","ATT"].includes(code))return "secondary";return "penalty"}if(p.pos==="DEF"){if(["BACK","WB","DEF"].includes(code))return "natural";if(["DM","MID"].includes(code))return "secondary";return "penalty"}return "penalty"}
-function positionFit(p:Player,slot:string){const suitability=slotSuitability(p,slot);if(suitability!=="penalty")return 100;return p.pos==="GK"||slotCode(slot)==="GK"?60:80}
+function positionFit(p:Player,slot:string){const suitability=slotSuitability(p,slot),fit=balanceConfig.positionFit;if(suitability!=="penalty")return fit.natural;return p.pos==="GK"||slotCode(slot)==="GK"?fit.goalkeeperPenalty:fit.outfieldPenalty}
 function effectiveRating(p:Player,slot:string,eraId:string){return Math.round(overall(p)*(eraFit(p,eraId)/100)*(positionFit(p,slot)/100))}
 const PARTNERSHIPS=[
   {name:"MSN",players:["Lionel Messi","Neymar","Luis Suárez"],bonus:5},

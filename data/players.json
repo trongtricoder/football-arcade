@@ -2104,10 +2104,6 @@
     "attrs": [82,78,91,92,72,74], "activeYears": [2008,2012]
   },
   {
-    "name": "Luka Modrić", "pos": "MID", "era": "2015–19", "nation": "Croatia", "club": "Madrid", "league": "La Liga",
-    "attrs": [84,88,98,97,84,82], "activeYears": [2015,2019]
-  },
-  {
     "name": "Zinedine Zidane", "pos": "MID", "era": "1995–99", "nation": "France", "club": "Turin", "league": "Serie A",
     "attrs": [82,91,97,98,67,86], "activeYears": [1996,2001]
   },
@@ -2130,5 +2126,9 @@
   {
     "name": "Sergio Ramos", "pos": "DEF", "era": "2015–19", "nation": "Spain", "club": "Madrid", "league": "La Liga",
     "attrs": [84,82,88,82,98,97], "activeYears": [2015,2019]
+  },
+  {
+    "name": "Ruud Gullit", "pos": "MID", "era": "1985–89", "nation": "Netherlands", "club": "Milan", "league": "Serie A",
+    "attrs": [94,93,94,95,88,99], "activeYears": [1979,1998]
   }
 ]

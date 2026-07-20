@@ -1,0 +1,14 @@
+{
+  "version": "2026.07.1",
+  "ratingRange": { "minimum": 45, "maximum": 101 },
+  "tierThresholds": { "legend": 96, "superstar": 91, "star": 84, "pro": 78 },
+  "tagPoints": { "T1": 5, "T2": 3, "T3": 1 },
+  "positionFit": { "natural": 100, "secondary": 100, "outfieldPenalty": 80, "goalkeeperPenalty": 60 },
+  "samplingWeights": { "elite95": 0.12, "star90": 0.32, "quality84": 0.8, "standard": 1.45 },
+  "overallWeights": {
+    "ATT": [0.18, 0.25, 0.18, 0.24, 0.01, 0.14],
+    "MID": [0.12, 0.12, 0.25, 0.21, 0.15, 0.15],
+    "DEF": [0.13, 0.04, 0.14, 0.1, 0.34, 0.25],
+    "GK": [0.06, 0.01, 0.2, 0.08, 0.4, 0.25]
+  }
+}

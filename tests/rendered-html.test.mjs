@@ -14,7 +14,7 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /navigator\.share/);
   assert.match(source, /const FORMATIONS/);
   assert.match(source, /4-2-1-3/);
-  assert.match(source, /Lionel Messi\|2010–14":101/);
+  assert.match(source, /playerOverrides/);
   assert.match(source, /function Pitch/);
   assert.match(source, /const ERAS/);
   assert.match(source, /function eraFit/);
@@ -27,7 +27,7 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /function TeamReview/);
   assert.match(source, /Golden Glove/);
   assert.match(source, /function positionFit/);
-  assert.match(source, /\?60:80/);
+  assert.match(source, /goalkeeperPenalty/);
   assert.match(source, /setPhaseSpin\("league"\)/);
   assert.match(source, /setPhaseSpin\("year"\)/);
   assert.match(source, /leagueRolling/);
