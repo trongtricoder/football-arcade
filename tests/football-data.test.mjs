@@ -36,7 +36,7 @@ test("football data remains versioned and covers every league-era combination", 
 test("position utility tags do not inflate attributes", async () => {
   const overrides = await load("player-overrides.json");
   assert.ok(Object.values(overrides.tags).flat().includes("MULTI POSITION"));
-  assert.ok(Object.values(overrides.tags).flat().includes("5 STAR WEAK FOOT"));
+  assert.ok(!Object.values(overrides.tags).flat().includes("5 STAR WEAK FOOT"));
 });
 
 test("rating overrides reference real versions and tier thresholds are ordered", async () => {

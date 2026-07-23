@@ -33,10 +33,12 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /function TeamReview/);
   assert.match(source, /Golden Glove/);
   assert.match(source, /function positionFit/);
-  assert.match(source, /return p\.roles\.includes\("GK"\)\?100:50/);
+  assert.match(source, /return p\.pos==="GK"\?100:50/);
+  assert.match(source, /pos==="DEF"\?\["LB","CB","RB","DM"\]/);
+  assert.match(source, /pos==="MID"\?\["LM","CM","RM","AM","DM"\]/);
+  assert.match(source, /\["LW","ST","RW","AM"\]/);
   assert.match(source, /MULTI POSITION/);
-  assert.match(source, /5 STAR WEAK FOOT/);
-  assert.match(source, /function footFit/);
+  assert.doesNotMatch(source, /5 STAR WEAK FOOT/);
   assert.match(source, /playerRoles/);
   assert.match(source, /setPhaseSpin\("league"\)/);
   assert.match(source, /setPhaseSpin\("year"\)/);
