@@ -225,7 +225,6 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 
 /* Compact draft traits and full locked-player dossiers */
 .player-tags .tag-more { border-style: dashed !important; color: #b8c4bc !important; }
-.role-foot{color:#c8ff3d!important;font-size:7px!important;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .locked-profiles { margin: 18px 4vw 34px; padding: 16px; border: 1px solid #53635a; background: #0e1510; }
 .locked-profiles > div:first-child { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
 .locked-profiles > div:first-child span { color: #c8ff3d; font-size: 8px; font-weight: 900; letter-spacing: .15em; }
