@@ -75,8 +75,10 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /SEASON RESULTS/);
   assert.match(source, /CHOOSE A POSITION ON THE PITCH/);
   assert.doesNotMatch(source, /className="role-foot"/);
-  assert.match(source, /NO PENALTY/);
-  assert.match(source, /MAJOR PENALTY/);
+  assert.match(source, /BEST POSITION/);
+  assert.match(source, /HEAVY PENALTY/);
+  assert.match(source, /ONE USE FOR THE ENTIRE XI/);
+  assert.doesNotMatch(source, /refreshedRound/);
   assert.match(source, /5-PLAYER ROSTER/);
   assert.match(source, /type Tier/);
   assert.match(source, /function tagTier/);

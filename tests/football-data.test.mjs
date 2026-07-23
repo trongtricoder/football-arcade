@@ -25,6 +25,7 @@ test("football data remains versioned and covers every league-era combination", 
   assert.ok(Object.keys(roles.feet).every(key => playerNames.has(key.split("|")[0])), "a preferred-foot profile references an unknown player");
   assert.equal(players.filter(player => ["Juninho", "Juninho Pernambucano"].includes(player.name)).length, 1, "Juninho Pernambucano is duplicated under an alias");
   assert.ok(players.every(player => player.club !== "Milan" && player.club !== "Inter"), "Milan clubs must be explicitly named AC Milan or Inter Milan");
+  assert.ok(players.some(player => player.name === "Mikel Arteta" && player.club === "Everton"), "Mikel Arteta must be assigned to Everton in his 2005-09 version");
   for (const era of ["80s", "90s", "00s", "10s", "20s"]) {
     for (const league of ["Premier League", "La Liga", "Serie A", "Bundesliga", "Ligue 1"]) {
       const present = seasons.some(season => season.era === era && season.league === league) || (era === "80s" && league === "Premier League" && seasons.some(season => season.era === era && season.league === "English First Division"));
