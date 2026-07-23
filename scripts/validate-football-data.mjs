@@ -14,6 +14,14 @@ const warn = (condition, message) => { if (!condition) warnings.push(message); }
 const leagues = ["Premier League", "La Liga", "Serie A", "Bundesliga", "Ligue 1"];
 const eras = ["80s", "90s", "00s", "10s", "20s"];
 const validPositions = new Set(["GK", "DEF", "MID", "ATT"]);
+const identityAliases = new Map([
+  ["juninho", "juninho pernambucano"],
+]);
+const normalizeIdentity = (name) => {
+  const normalized = name.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+  return identityAliases.get(normalized) ?? normalized;
+};
+const normalizeEra = (era) => String(era).match(/\d+/g)?.join("-") ?? String(era);
 
 const versionKeys = new Set();
 for (const [index, player] of players.entries()) {
@@ -24,9 +32,10 @@ for (const [index, player] of players.entries()) {
   assert(Array.isArray(player.attrs) && player.attrs.length === 6, `${label}: requires six attributes`);
   player.attrs?.forEach((value, attr) => assert(Number.isFinite(value) && value >= 10 && value <= 101, `${label}: attribute ${attr} is ${value}`));
   assert(Array.isArray(player.activeYears) && player.activeYears.length === 2 && player.activeYears[0] <= player.activeYears[1], `${label}: invalid activeYears`);
-  const key = `${player.name}|${player.era}|${player.league}|${player.club}`;
+  const key = `${normalizeIdentity(player.name)}|${normalizeEra(player.era)}|${player.league}|${player.club}`;
   assert(!versionKeys.has(key), `${label}: duplicate player version ${key}`);
   versionKeys.add(key);
+  assert(player.club !== "Milan" && player.club !== "Inter", `${label}: ambiguous Milan club name ${player.club}`);
 }
 
 const playerNames = new Set(players.map(player => player.name));
@@ -43,11 +52,11 @@ const managerNames = new Set();
 for (const manager of managers) {
   assert(!managerNames.has(manager.name), `Duplicate manager: ${manager.name}`);
   managerNames.add(manager.name);
-  assert(["A", "B", "C", "S"].includes(manager.attack), `${manager.name}: invalid attack grade`);
-  assert(["A", "B", "C", "S"].includes(manager.defence), `${manager.name}: invalid defence grade`);
-  assert(["A", "B", "C", "S"].includes(manager.pressing), `${manager.name}: invalid pressing grade`);
-  assert(manager.attackMod >= -0.1 && manager.attackMod <= 0.15, `${manager.name}: attack modifier outside safe range`);
-  assert(manager.defenceMod >= 0 && manager.defenceMod <= 0.15, `${manager.name}: defence modifier outside safe range`);
+  assert(["F", "D", "C", "B", "A", "S"].includes(manager.attack), `${manager.name}: invalid attack grade`);
+  assert(["F", "D", "C", "B", "A", "S"].includes(manager.defence), `${manager.name}: invalid defence grade`);
+  assert(["F", "D", "C", "B", "A", "S"].includes(manager.pressing), `${manager.name}: invalid pressing grade`);
+  assert(manager.attackMod >= -0.05 && manager.attackMod <= 0.1, `${manager.name}: attack modifier outside safe range`);
+  assert(manager.defenceMod >= -0.05 && manager.defenceMod <= 0.11, `${manager.name}: defence modifier outside safe range`);
 }
 
 const seasonKeys = new Set();

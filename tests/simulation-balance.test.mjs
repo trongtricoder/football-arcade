@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { simulateCampaign } from "../simulation/engine.ts";
+import { createLeagueSchedule, simulateFullLeague } from "../simulation/league.ts";
 
 const opponents = Array.from({ length: 19 }, (_, index) => `Historical rival ${index + 1}`);
 const ordinary = { attack:77, defence:77, control:77, eraFit:88, positionFit:92, chemistry:0, managerAttack:0, managerDefence:0, cleanSheetBoost:0 };
@@ -46,4 +47,20 @@ test("100,000 seasons separate squad quality and preserve meaningful modifiers",
   assert.ok(defensiveCoach.cleanSheets > baseline.cleanSheets + 1, { baseline, defensiveCoach });
   assert.ok(strongRun.gf > 65 && strongRun.gf < 90);
   assert.ok(strongRun.cleanSheets > 13 && strongRun.cleanSheets < 22);
+});
+
+test("full league simulation conserves every fixture, goal and point", () => {
+  const teams=["Era XI",...Array.from({length:19},(_,index)=>`Club ${index+1}`)],schedule=createLeagueSchedule(teams);
+  const strengths=Object.fromEntries(teams.slice(1).map((club,index)=>[club,88-index*.8]));
+  const userScores=schedule.map((_,index)=>({goalsFor:index%4===0?2:1,goalsAgainst:index%5===0?2:index%3===0?1:0}));
+  const result=simulateFullLeague({schedule,userTeam:"Era XI",userScores,strengths,seed:"consistent-league"});
+  assert.equal(schedule.length,38);
+  assert.equal(result.timeline.length,38);
+  assert.equal(result.table.length,20);
+  assert.ok(result.table.every(row=>row.played===38&&row.wins+row.draws+row.losses===38));
+  assert.equal(result.table.reduce((sum,row)=>sum+row.wins,0),result.table.reduce((sum,row)=>sum+row.losses,0));
+  assert.equal(result.table.reduce((sum,row)=>sum+row.gf,0),result.table.reduce((sum,row)=>sum+row.ga,0));
+  const draws=result.table.reduce((sum,row)=>sum+row.draws,0)/2,decided=380-draws;
+  assert.equal(result.table.reduce((sum,row)=>sum+row.points,0),decided*3+draws*2);
+  assert.ok(result.table[0].points<100&&result.table.at(-1).points<50,result.table);
 });

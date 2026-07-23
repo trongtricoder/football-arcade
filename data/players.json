@@ -124,7 +124,7 @@
     "pos": "DEF",
     "era": "1990–94",
     "nation": "Italy",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       86,
@@ -424,7 +424,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "Italy",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       65,
@@ -464,7 +464,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "Brazil",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       93,
@@ -624,7 +624,7 @@
     "pos": "ATT",
     "era": "1995–99",
     "nation": "Brazil",
-    "club": "Milan",
+    "club": "Inter Milan",
     "league": "Serie A",
     "attrs": [
       99,
@@ -1024,7 +1024,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "Italy",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       70,
@@ -1304,7 +1304,7 @@
     "pos": "DEF",
     "era": "2000–04",
     "nation": "Argentina",
-    "club": "Milan",
+    "club": "Inter Milan",
     "league": "Serie A",
     "attrs": [
       88,
@@ -1784,7 +1784,7 @@
     "pos": "GK",
     "era": "1985–89",
     "nation": "Italy",
-    "club": "Milan",
+    "club": "Inter Milan",
     "league": "Serie A",
     "attrs": [
       51,
@@ -1804,7 +1804,7 @@
     "pos": "DEF",
     "era": "1995–99",
     "nation": "France",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       79,
@@ -1924,7 +1924,7 @@
     "pos": "ATT",
     "era": "1995–99",
     "nation": "Liberia",
-    "club": "Milan",
+    "club": "AC Milan",
     "league": "Serie A",
     "attrs": [
       96,
@@ -2000,7 +2000,7 @@
     ]
   },
   {
-    "name": "Franco Baresi", "pos": "DEF", "era": "1985–89", "nation": "Italy", "club": "Milan", "league": "Serie A",
+    "name": "Franco Baresi", "pos": "DEF", "era": "1985–89", "nation": "Italy", "club": "AC Milan", "league": "Serie A",
     "attrs": [78,55,94,88,99,91], "activeYears": [1977,1997]
   },
   {
@@ -2008,7 +2008,7 @@
     "attrs": [91,89,94,91,94,98], "activeYears": [1979,2000]
   },
   {
-    "name": "Marco van Basten", "pos": "ATT", "era": "1985–89", "nation": "Netherlands", "club": "Milan", "league": "Serie A",
+    "name": "Marco van Basten", "pos": "ATT", "era": "1985–89", "nation": "Netherlands", "club": "AC Milan", "league": "Serie A",
     "attrs": [91,99,88,95,41,91], "activeYears": [1981,1995]
   },
   {
@@ -2128,7 +2128,7 @@
     "attrs": [84,82,88,82,98,97], "activeYears": [2015,2019]
   },
   {
-    "name": "Ruud Gullit", "pos": "MID", "era": "1985–89", "nation": "Netherlands", "club": "Milan", "league": "Serie A",
+    "name": "Ruud Gullit", "pos": "MID", "era": "1985–89", "nation": "Netherlands", "club": "AC Milan", "league": "Serie A",
     "attrs": [94,93,94,95,88,99], "activeYears": [1979,1998]
   }
 ]

@@ -225,6 +225,7 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 
 /* Compact draft traits and full locked-player dossiers */
 .player-tags .tag-more { border-style: dashed !important; color: #b8c4bc !important; }
+.role-foot{color:#c8ff3d!important;font-size:7px!important;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .locked-profiles { margin: 18px 4vw 34px; padding: 16px; border: 1px solid #53635a; background: #0e1510; }
 .locked-profiles > div:first-child { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
 .locked-profiles > div:first-child span { color: #c8ff3d; font-size: 8px; font-weight: 900; letter-spacing: .15em; }
@@ -247,7 +248,13 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 .profile-attributes { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 16px 0 8px; }.profile-attributes span { position: relative; min-height: 58px; overflow: hidden; padding: 13px 14px; border: 1px solid #26382d; background: #142019; }.profile-attributes small { color: #d4ddd6; font-size: 11px; font-weight: 900; letter-spacing: .1em; }.profile-attributes b { float: right; color: #fff; font: 27px var(--display); }.profile-attributes i { position: absolute; left: 0; bottom: 0; height: 4px; background: var(--accent); }
 .profile-section { margin-top: 10px; }.profile-section > span { display: block; margin-bottom: 9px; color: #bdc9c0; font-size: 9px; font-weight: 900; letter-spacing: .15em; }.profile-tags { display: flex; flex-wrap: wrap; gap: 8px; }.profile-tags i { min-width: 152px; display: flex; justify-content: space-between; align-items:center; gap: 12px; padding: 11px 12px; border: 1px solid #53635a; background:#111a14; font-style: normal; }.profile-tags i b { font-size: 10px; }.profile-tags i small { color: #c8ff3d; font-size: 9px; font-weight:900; }
 .identity-tags { margin: 14px 0 0; padding: 13px 0 2px; }
-.partnerships { margin-top: 20px; }.partnerships > div { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }.partnerships article { display: grid; gap: 5px; padding: 11px; border: 1px solid #f2c94c; background: rgba(242,201,76,.06); }.partnerships article b { color: #f2c94c; font: 20px var(--display); }.partnerships article small { color: #b8c4bc; font-size: 8px; }.partnerships article strong { font-size: 7px; letter-spacing: .09em; }.partnerships p { color: #91a097; font-size: 9px; }
+.partnerships { margin-top: 20px; }
+.partnerships > div { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch }
+.partnerships article { min-width:0;min-height:124px;display:grid;grid-template-rows:auto 1fr auto;align-content:start;gap:10px;padding:15px 16px;border:1px solid #f2c94c;background:linear-gradient(135deg,rgba(242,201,76,.1),rgba(242,201,76,.025)); }
+.partnerships article b { color:#f2c94c;font:24px/1 var(--display);letter-spacing:.02em }
+.partnerships article small { display:block;color:#f2f5ed;font-size:13px;font-weight:800;line-height:1.35;overflow-wrap:anywhere }
+.partnerships article strong { align-self:end;color:#c8d2ca;font-size:9px;line-height:1.45;letter-spacing:.08em;text-transform:uppercase }
+.partnerships p { color:#91a097;font-size:10px }
 @media(max-width:1000px){.locked-profiles > div:last-child{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:620px){.locked-profiles{margin-inline:10px}.locked-profiles > div:first-child{display:block}.locked-profiles > div:first-child small{display:block;margin-top:7px}.locked-profiles > div:last-child{grid-template-columns:1fr}.player-profile{padding:18px}.player-profile > header{grid-template-columns:64px 1fr}.profile-silhouette{width:64px;height:76px}.player-profile header > strong{grid-column:1/-1;text-align:left}.profile-attributes{grid-template-columns:repeat(2,1fr)}.partnerships > div{grid-template-columns:1fr}}
 
@@ -301,3 +308,7 @@ html,body{background:#0b100d;color:#eef2e8}.home,.game-page,.about{background:#0
 .player-profile > header h2 { line-height: .92; margin-right: 8px; }
 .profile-ratings { position: relative; z-index: 1; background: #0d140f; }
 @media(max-width:620px){.player-profile > header{min-height:0!important;padding-top:8px!important}}
+.active-links strong{display:flex;flex-direction:column;gap:5px}.active-links strong span{color:#f2c94c}.active-links strong small{color:#c8ff3d;font-size:8px}.review-links{display:grid;gap:7px;margin:0 0 12px}.review-links strong{display:flex;flex-direction:column;gap:3px;padding:9px;border-left:3px solid #f2c94c;background:#0d140f}.review-links strong>span{color:#f2c94c;font-size:9px;letter-spacing:.04em}.review-links strong>small{color:#c8ff3d;font-size:9px}.rarity-key{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:12px}.rarity-key i{font-style:normal;padding:9px 6px;color:#0b100d;font-size:8px;font-weight:900}.rarity-key i small{display:block;font-size:7px;margin-top:4px}.rarity-key .legend{background:#f2c94c}.rarity-key .superstar{background:#a970ff}.rarity-key .star{background:#4cc9f0}.rarity-key .pro{background:#42d392}.rarity-key .cult{background:#ff7a45}@media(max-width:700px){.rarity-key{grid-template-columns:1fr 1fr}}
+.coach-stats span small{display:block;color:#c8ff3d;font-size:8px;font-weight:900;margin-top:3px}
+.badges span{display:flex;flex-direction:column;gap:4px}.badges span strong{font-size:9px}.badges span small{font-size:8px;color:#0b100d}
+.roster-refresh{width:100%;margin:12px 0 0;padding:13px 16px;border:1px solid #c8ff3d;background:#121a14;color:#c8ff3d;font-size:10px;font-weight:900;letter-spacing:.08em;cursor:pointer}.roster-refresh small{display:block;margin-top:5px;color:#91a097;font-size:7px;letter-spacing:.12em}.roster-refresh:hover:not(:disabled){background:#c8ff3d;color:#0b100d}.roster-refresh:hover:not(:disabled) small{color:#0b100d}.roster-refresh:disabled{opacity:.42;cursor:not-allowed}

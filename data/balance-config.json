@@ -1,5 +1,5 @@
 {
-  "version": "2026.07.2",
+  "version": "2026.07.4",
   "ratingRange": { "minimum": 45, "maximum": 101 },
   "tierThresholds": { "legend": 96, "superstar": 91, "star": 84, "pro": 78 },
   "tagPoints": { "T1": 5, "T2": 3, "T3": 1 },

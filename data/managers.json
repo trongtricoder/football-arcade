@@ -211,5 +211,47 @@
   },
   {
     "name": "Kenny Dalglish", "era": "1985-2000", "attack": "A", "defence": "A", "pressing": "B", "tag": "PLAYER-MANAGER", "attackMod": 0.06, "defenceMod": 0.04, "cleanSheetMod": 0.06, "quote": "Trust the players, keep the structure simple and attack together."
+  },
+  {
+    "name": "Roy Hodgson", "era": "1976-2024", "attack": "C", "defence": "B", "pressing": "C", "tag": "COMPACT ORGANISER", "attackMod": 0, "defenceMod": 0.03, "cleanSheetMod": 0.045, "quote": "Keep the distances short and make every match difficult."
+  },
+  {
+    "name": "David Moyes", "era": "1998-NOW", "attack": "B", "defence": "B", "pressing": "C", "tag": "STRUCTURE BUILDER", "attackMod": 0.03, "defenceMod": 0.03, "cleanSheetMod": 0.045, "quote": "Earn control before taking the risk."
+  },
+  {
+    "name": "Sam Allardyce", "era": "1991-2023", "attack": "C", "defence": "A", "pressing": "D", "tag": "SURVIVAL SPECIALIST", "attackMod": 0, "defenceMod": 0.05, "cleanSheetMod": 0.075, "quote": "Win the boxes, win the second ball, win the match."
+  },
+  {
+    "name": "Mauricio Pochettino", "era": "2009-NOW", "attack": "A", "defence": "C", "pressing": "A", "tag": "HIGH-LINE BUILDER", "attackMod": 0.05, "defenceMod": 0, "cleanSheetMod": 0, "quote": "Courage begins with the first press."
+  },
+  {
+    "name": "Graham Potter", "era": "2011-NOW", "attack": "B", "defence": "D", "pressing": "B", "tag": "FLEXIBLE EXPERIMENTER", "attackMod": 0.03, "defenceMod": -0.03, "cleanSheetMod": 0, "quote": "Change the picture until the spare player appears."
+  },
+  {
+    "name": "Frank Lampard", "era": "2018-NOW", "attack": "B", "defence": "F", "pressing": "C", "tag": "FRONT-FOOT GAMBLE", "attackMod": 0.03, "defenceMod": -0.05, "cleanSheetMod": 0, "quote": "Commit numbers forward and trust the final action."
+  },
+  {
+    "name": "Ole Gunnar Solskjaer", "era": "2011-2021", "attack": "B", "defence": "D", "pressing": "C", "tag": "TRANSITION MOTIVATOR", "attackMod": 0.03, "defenceMod": -0.03, "cleanSheetMod": 0, "quote": "Attack the open grass and let confidence carry the move."
+  },
+  {
+    "name": "Ronald Koeman", "era": "1997-NOW", "attack": "A", "defence": "D", "pressing": "B", "tag": "DIRECT POSSESSION", "attackMod": 0.05, "defenceMod": -0.03, "cleanSheetMod": 0, "quote": "Move the ball forward before the defence can settle."
+  },
+  {
+    "name": "Claudio Ranieri", "era": "1986-NOW", "attack": "B", "defence": "B", "pressing": "C", "tag": "UNDERDOG BUILDER", "attackMod": 0.03, "defenceMod": 0.03, "cleanSheetMod": 0.045, "quote": "Give every player a clear task and let belief grow."
+  },
+  {
+    "name": "Sean Dyche", "era": "2011-NOW", "attack": "D", "defence": "A", "pressing": "C", "tag": "LOW-BLOCK FOREMAN", "attackMod": -0.03, "defenceMod": 0.05, "cleanSheetMod": 0.075, "quote": "Protect the box and compete for every second ball."
+  },
+  {
+    "name": "Eddie Howe", "era": "2008-NOW", "attack": "A", "defence": "C", "pressing": "A", "tag": "INTENSITY COACH", "attackMod": 0.05, "defenceMod": 0, "cleanSheetMod": 0, "quote": "Play forward, run forward and recover together."
+  },
+  {
+    "name": "Thomas Frank", "era": "2013-NOW", "attack": "B", "defence": "B", "pressing": "A", "tag": "MARGINAL GAINS", "attackMod": 0.03, "defenceMod": 0.03, "cleanSheetMod": 0.045, "quote": "Win enough small details and the match changes shape."
+  },
+  {
+    "name": "Roberto De Zerbi", "era": "2013-NOW", "attack": "A", "defence": "D", "pressing": "B", "tag": "BUILD-UP PROVOCATEUR", "attackMod": 0.05, "defenceMod": -0.03, "cleanSheetMod": 0, "quote": "Invite the pressure, then play through the space it leaves."
+  },
+  {
+    "name": "Nuno Espirito Santo", "era": "2012-NOW", "attack": "C", "defence": "A", "pressing": "B", "tag": "COMPACT TRANSITIONS", "attackMod": 0, "defenceMod": 0.05, "cleanSheetMod": 0.075, "quote": "Stay compact, then attack the open channel."
   }
 ]
