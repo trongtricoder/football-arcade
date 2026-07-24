@@ -10,7 +10,7 @@ test("football data remains versioned and covers every league-era combination", 
     load("player-overrides.json"), load("balance-config.json"), load("player-roles.json"),
   ]);
   const players = [...basePlayers, ...expansionPlayers];
-  assert.ok(players.length >= 200);
+  assert.ok(players.length >= 267);
   assert.ok(managers.length >= 30);
   assert.equal(seasons.length, 230);
   assert.ok(overrides.version);
@@ -26,10 +26,15 @@ test("football data remains versioned and covers every league-era combination", 
   assert.equal(players.filter(player => ["Juninho", "Juninho Pernambucano"].includes(player.name)).length, 1, "Juninho Pernambucano is duplicated under an alias");
   assert.ok(players.every(player => player.club !== "Milan" && player.club !== "Inter"), "Milan clubs must be explicitly named AC Milan or Inter Milan");
   assert.ok(players.some(player => player.name === "Mikel Arteta" && player.club === "Everton"), "Mikel Arteta must be assigned to Everton in his 2005-09 version");
+  assert.ok(roles.roles["Arjen Robben"].includes("RM"), "Robben must be available at RM");
+  assert.ok(roles.roles["Javier Zanetti"].includes("RM"), "Zanetti must be available at RM");
   for (const era of ["80s", "90s", "00s", "10s", "20s"]) {
     for (const league of ["Premier League", "La Liga", "Serie A", "Bundesliga", "Ligue 1"]) {
       const present = seasons.some(season => season.era === era && season.league === league) || (era === "80s" && league === "Premier League" && seasons.some(season => season.era === era && season.league === "English First Division"));
       assert.ok(present, `${era} ${league} is missing`);
+      const decade = Number(era.slice(0, 2));
+      const pool = players.filter(player => player.league === league && Math.floor(Number(player.era.slice(0, 4)) / 10) * 10 % 100 === decade);
+      assert.ok(pool.length >= 7, `${era} ${league} has only ${pool.length} player versions`);
     }
   }
 });

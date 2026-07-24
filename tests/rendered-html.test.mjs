@@ -33,6 +33,9 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /function TeamReview/);
   assert.match(source, /Golden Glove/);
   assert.match(source, /function positionFit/);
+  assert.match(source, /function playableRoles/);
+  assert.match(source, /playableRoles\(p\)\.includes\(target\)/);
+  assert.match(source, /NATURAL ALTERNATIVE/);
   assert.match(source, /return p\.pos==="GK"\?100:50/);
   assert.match(source, /pos==="DEF"\?\["LB","CB","RB","DM"\]/);
   assert.match(source, /pos==="MID"\?\["LM","CM","RM","AM","DM"\]/);
