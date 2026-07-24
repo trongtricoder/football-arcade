@@ -6,6 +6,7 @@ const root = new URL("../", import.meta.url);
 
 test("ships all three playable game modes", async () => {
   const source = await readFile(new URL("app/football-arcade.tsx", root), "utf8");
+  const careerSource = await readFile(new URL("features/build-player/build-player-career.tsx", root), "utf8");
   assert.match(source, /ERA XI/);
   assert.match(source, /FIVE-A-SIDE/);
   assert.match(source, /const FIVE_FORMATIONS/);
@@ -19,6 +20,12 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /ignoreEra=\{game==="perfect"\}/);
   assert.match(source, /slots:\["GK","CB","CM1","CM2","ST"\]/);
   assert.match(source, /BUILD A PLAYER/);
+  assert.match(careerSource, /THE GOLDEN BALL/);
+  assert.match(careerSource, /THE NEXT JOGA BONITO/);
+  assert.match(careerSource, /REFRESH THESE FIVE/);
+  assert.match(careerSource, /THREE CONTRACTS/);
+  assert.match(careerSource, /MEDIA MOMENT/);
+  assert.match(careerSource, /FIRST CHAPTER COMPLETE/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
