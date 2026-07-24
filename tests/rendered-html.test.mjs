@@ -15,6 +15,9 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /HOME ERA/);
   assert.match(source, /game==="perfect"\?league/);
   assert.match(source, /five-league-select/);
+  assert.match(source, /FIVE-A-SIDE.*MODE PAUSED/s);
+  assert.match(source, /ignoreEra=\{game==="perfect"\}/);
+  assert.match(source, /slots:\["GK","CB","CM1","CM2","ST"\]/);
   assert.match(source, /BUILD A PLAYER/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
