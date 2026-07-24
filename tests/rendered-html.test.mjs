@@ -8,6 +8,11 @@ test("ships all three playable game modes", async () => {
   const source = await readFile(new URL("app/football-arcade.tsx", root), "utf8");
   assert.match(source, /ERA XI/);
   assert.match(source, /FIVE-A-SIDE/);
+  assert.match(source, /const FIVE_FORMATIONS/);
+  assert.match(source, /DIAMOND/);
+  assert.match(source, /TWIN ATTACK/);
+  assert.match(source, /20-match small-sided world tour/);
+  assert.match(source, /HOME ERA/);
   assert.match(source, /BUILD A PLAYER/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);

@@ -64,3 +64,20 @@ test("full league simulation conserves every fixture, goal and point", () => {
   assert.equal(result.table.reduce((sum,row)=>sum+row.points,0),decided*3+draws*2);
   assert.ok(result.table[0].points<100&&result.table.at(-1).points<50,result.table);
 });
+
+test("five-a-side tour rewards quality, chemistry and positional discipline", () => {
+  const fiveOpponents = Array.from({ length: 20 }, (_, index) => `Five rival ${index + 1}`);
+  const run = (profile, prefix) => {
+    const total = { points:0, gf:0, ga:0 };
+    for (let index = 0; index < 5_000; index++) {
+      const result = simulateCampaign(profile, { seed:`${prefix}-${index}`, opponents:fiveOpponents, format:"five" });
+      total.points += result.points; total.gf += result.goalsFor; total.ga += result.goalsAgainst;
+    }
+    return Object.fromEntries(Object.entries(total).map(([key,value])=>[key,value/5_000]));
+  };
+  const loose = run({ attack:79, defence:76, control:77, eraFit:90, positionFit:82, chemistry:0, managerAttack:0, managerDefence:0, cleanSheetBoost:0 }, "five-loose");
+  const balanced = run({ attack:87, defence:85, control:87, eraFit:96, positionFit:100, chemistry:5, managerAttack:0, managerDefence:0, cleanSheetBoost:0 }, "five-balanced");
+  assert.ok(balanced.points > loose.points + 12, { loose, balanced });
+  assert.ok(balanced.gf > loose.gf + 15, { loose, balanced });
+  assert.ok(balanced.ga < loose.ga - 8, { loose, balanced });
+});
