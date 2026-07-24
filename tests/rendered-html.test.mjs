@@ -26,6 +26,11 @@ test("ships all three playable game modes", async () => {
   assert.match(careerSource, /THREE CONTRACTS/);
   assert.match(careerSource, /MEDIA MOMENT/);
   assert.match(careerSource, /FIRST CHAPTER COMPLETE/);
+  assert.match(careerSource, /JANUARY TRANSFER WINDOW/);
+  assert.match(careerSource, /contractYears/);
+  assert.match(careerSource, /importance/);
+  assert.match(careerSource, /HEIGHT/);
+  assert.match(careerSource, /<small>FOOT<\/small>/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
