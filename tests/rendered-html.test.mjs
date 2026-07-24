@@ -31,6 +31,18 @@ test("ships all three playable game modes", async () => {
   assert.match(careerSource, /importance/);
   assert.match(careerSource, /HEIGHT/);
   assert.match(careerSource, /<small>FOOT<\/small>/);
+  assert.match(careerSource, /setHeight/);
+  assert.match(careerSource, /setWeight/);
+  assert.match(careerSource, /AERIAL FRAME/);
+  assert.match(careerSource, /function bodyAdjusted/);
+  assert.match(careerSource, /bodyAdjusted\(draftedValues,height,weight\)/);
+  assert.match(careerSource, /DEVELOPMENT PLAN/);
+  assert.match(careerSource, /EXPLOSIVE/);
+  assert.match(careerSource, /TECHNICAL/);
+  assert.match(careerSource, /SEASON CALENDAR/);
+  assert.match(careerSource, /SQUAD COMPETITION/);
+  assert.match(careerSource, /INTERNATIONAL PATH/);
+  assert.match(careerSource, /nationalStatus/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
