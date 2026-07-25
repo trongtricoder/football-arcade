@@ -68,6 +68,12 @@ test("ships all three playable game modes", async () => {
   assert.match(careerSource, /CHOSE YOUR RUN-IN|CHOOSE YOUR RUN-IN/);
   assert.match(careerSource, /SPOTLIGHT/);
   assert.match(careerSource, /NO COMMENT/);
+  assert.match(careerSource, /DOMESTIC CUP/);
+  assert.match(careerSource, /CHAMPIONS CUP/);
+  assert.match(careerSource, /INTERNATIONAL CUP/);
+  assert.match(careerSource, /BALLON D'OR/);
+  assert.match(careerSource, /GOLDEN GLOVE/);
+  assert.match(careerSource, /career-awards-showcase/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
