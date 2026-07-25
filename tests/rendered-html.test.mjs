@@ -16,7 +16,9 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /HOME ERA/);
   assert.match(source, /game==="perfect"\?league/);
   assert.match(source, /five-league-select/);
-  assert.match(source, /FIVE-A-SIDE.*MODE PAUSED/s);
+  assert.match(source, /FIVE-A-SIDE.*IN DEVELOPMENT/s);
+  assert.match(source, /const locked=id!==["']era["']/);
+  assert.match(source, /BUILD A PLAYER.*IN DEVELOPMENT/s);
   assert.match(source, /ignoreEra=\{game==="perfect"\}/);
   assert.match(source, /slots:\["GK","CB","CM1","CM2","ST"\]/);
   assert.match(source, /BUILD A PLAYER/);
@@ -86,6 +88,8 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /4-3-3 · HOLDING",slots:\["GK","LB","CB1","CB2","RB","CM1","DM","CM2","LW","ST","RW"\]/);
   assert.match(source, /4-2-1-3/);
   assert.match(source, /playerOverrides/);
+  assert.match(source, /function canonicalClub/);
+  assert.match(source, /canonicalClub\(p\.club\)/);
   assert.match(source, /function Pitch/);
   assert.match(source, /const ERAS/);
   assert.match(source, /function eraFit/);
