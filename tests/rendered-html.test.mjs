@@ -55,6 +55,11 @@ test("ships all three playable game modes", async () => {
   assert.match(careerSource, /JANUARY LEAGUE TABLE/);
   assert.match(careerSource, /CHAMPIONS LEAGUE/);
   assert.match(careerSource, /BALLON D'OR CONTENDER/);
+  assert.match(careerSource, /function rolePool/);
+  assert.match(careerSource, /function ageAdjusted/);
+  assert.match(careerSource, /player\.pos===rolePool\(position\)/);
+  assert.match(careerSource, /potentialRating/);
+  assert.match(careerSource, /MATCHDAY RUN/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
