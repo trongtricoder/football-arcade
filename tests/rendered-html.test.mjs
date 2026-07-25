@@ -64,6 +64,10 @@ test("ships all three playable game modes", async () => {
   assert.match(careerSource, /TRANSFER DESK/);
   assert.match(careerSource, /leagueChampion/);
   assert.match(careerSource, /acceptSummerMove/);
+  assert.match(careerSource, /career-command-grid/);
+  assert.match(careerSource, /CHOSE YOUR RUN-IN|CHOOSE YOUR RUN-IN/);
+  assert.match(careerSource, /SPOTLIGHT/);
+  assert.match(careerSource, /NO COMMENT/);
   assert.match(source, /function simulate/);
   assert.match(source, /simulateCampaign/);
   assert.match(source, /simulateFullLeague/);
