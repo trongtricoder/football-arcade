@@ -1,6 +1,4 @@
-const requireEnvironmentVariable = (name: string) => {
-  const value = process.env[name];
-
+const requireEnvironmentVariable = (value: string | undefined, name: string) => {
   if (!value) {
     throw new Error(`Missing required environment variable: ${name}`);
   }
@@ -9,12 +7,20 @@ const requireEnvironmentVariable = (name: string) => {
 };
 
 export const getSupabasePublicConfig = () => ({
-  url: requireEnvironmentVariable("NEXT_PUBLIC_SUPABASE_URL"),
+  // Public variables must use direct property access so Next/Vinext can
+  // replace them in the browser bundle during the production build.
+  url: requireEnvironmentVariable(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    "NEXT_PUBLIC_SUPABASE_URL",
+  ),
   publishableKey: requireEnvironmentVariable(
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
   ),
 });
 
 export const getSupabaseSecretKey = () =>
-  requireEnvironmentVariable("SUPABASE_SECRET_KEY");
-
+  requireEnvironmentVariable(
+    process.env.SUPABASE_SECRET_KEY,
+    "SUPABASE_SECRET_KEY",
+  );
