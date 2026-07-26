@@ -35,7 +35,6 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
   const [securityStatus,setSecurityStatus]=useState("");
   const [editing,setEditing]=useState(false);
   const [nameDraft,setNameDraft]=useState("");
-  const [usernameDraft,setUsernameDraft]=useState("");
   const [nameStatus,setNameStatus]=useState("");
 
   const loadRecord=useCallback(async(userId:string)=>{
@@ -53,7 +52,6 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     if(firstError)throw firstError;
     setProfile(p.data);
     setNameDraft(p.data?.display_name||"");
-    setUsernameDraft(p.data?.username||"");
     setStats(s.data as Stats|null);
     setRuns((r.data||[]) as Run[]);
     setAchievementCount(a.count||0);
@@ -89,7 +87,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
       const username=`player_${data.user.id.slice(0,8).replaceAll("-","")}`;
       setUser(data.user);
       setProfile({display_name:"Anonymous Player",username});
-      setNameDraft("Anonymous Player");setUsernameDraft(username);
+      setNameDraft("Anonymous Player");
       setStatus("");setAccountState("ready");
       await loadRecord(data.user.id);
     }catch(error){
@@ -122,15 +120,14 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     finally{setAuthBusy(false);}
   }
 
-  async function saveIdentity(){
-    const displayName=nameDraft.trim(),username=usernameDraft.trim();
+  async function saveDisplayName(){
+    const displayName=nameDraft.trim();
     if(displayName.length<1||displayName.length>40){setNameStatus("NAME MUST USE 1–40 CHARACTERS");return;}
-    if(!/^[A-Za-z0-9_]{3,24}$/.test(username)){setNameStatus("USERNAME: 3–24 LETTERS, NUMBERS OR _");return;}
     const supabase=createSupabaseBrowserClient(),{data:{user:currentUser}}=await supabase.auth.getUser();
     if(!currentUser)return;
-    const {error}=await supabase.from("profiles").update({display_name:displayName,username}).eq("id",currentUser.id);
-    if(error){setNameStatus(error.code==="23505"?"THAT USERNAME IS ALREADY TAKEN":error.message);return;}
-    setProfile({display_name:displayName,username});setEditing(false);setNameStatus("IDENTITY UPDATED");
+    const {error}=await supabase.from("profiles").update({display_name:displayName}).eq("id",currentUser.id);
+    if(error){setNameStatus(error.message);return;}
+    setProfile(current=>current?{...current,display_name:displayName}:current);setEditing(false);setNameStatus("DISPLAY NAME UPDATED");
   }
 
   const totals=useMemo(()=>runs.reduce((sum,run)=>({wins:sum.wins+(run.wins||0),draws:sum.draws+(run.draws||0),losses:sum.losses+(run.losses||0)}),{wins:0,draws:0,losses:0}),[runs]);
@@ -146,9 +143,9 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
         <span>LIFETIME STATS</span><div className="account-avatar">{(profile?.display_name||"P").slice(0,1).toUpperCase()}</div>
         {editing?<div className="account-name-editor">
           <label>DISPLAY NAME<input maxLength={40} value={nameDraft} onChange={event=>setNameDraft(event.target.value)} autoFocus/></label>
-          <label>USERNAME<input maxLength={24} value={usernameDraft} onChange={event=>setUsernameDraft(event.target.value.replace(/[^A-Za-z0-9_]/g,""))}/></label>
-          <button onClick={saveIdentity}>SAVE IDENTITY</button><button onClick={()=>setEditing(false)}>CANCEL</button>
-        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT NAME & USERNAME</button>}</>}
+          <div className="locked-username"><small>PLAYER ID</small><strong>@{profile?.username||"anonymous"}</strong></div>
+          <button onClick={saveDisplayName}>SAVE NAME</button><button onClick={()=>setEditing(false)}>CANCEL</button>
+        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button>}</>}
         <p>@{profile?.username||"anonymous"}{nameStatus&&` · ${nameStatus}`}</p>
       </header>
 
