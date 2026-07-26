@@ -1,0 +1,40 @@
+.ranking-form {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 360px) max-content !important;
+  align-items: end !important;
+  gap: 12px !important;
+  max-width: 820px !important;
+}
+
+.ranking-form label {
+  min-width: 0 !important;
+}
+
+.ranking-form input {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.ranking-form > button {
+  width: auto !important;
+  min-width: 215px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.ranking-form > small {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  margin-top: 2px !important;
+  line-height: 1.5 !important;
+}
+
+@media (max-width: 650px) {
+  .ranking-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ranking-form > button {
+    width: 100% !important;
+  }
+}

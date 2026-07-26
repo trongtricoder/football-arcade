@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./achievements/achievements.css";
+import "./leaderboard/leaderboard.css";
+import "./leaderboard/roster-inspector.css";
+import "./modal-fixes.css";
+import "./ranking-form-fixes.css";
+import "./account/account-card.css";
+import "./achievement-reveal.css";
+import "./account/account-grid-fix.css";
 
 export const metadata: Metadata = {
   title: { default: "Football Arcade", template: "%s — Football Arcade" },
