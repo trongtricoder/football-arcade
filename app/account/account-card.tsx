@@ -130,6 +130,17 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     setProfile(current=>current?{...current,display_name:displayName}:current);setEditing(false);setNameStatus("DISPLAY NAME UPDATED");
   }
 
+  async function signOut(){
+    setAuthBusy(true);setSecurityStatus("SIGNING OUT...");
+    try{
+      const {error}=await createSupabaseBrowserClient().auth.signOut();
+      if(error)throw error;
+      setUser(null);setProfile(null);setStats(null);setRuns([]);setAchievementCount(0);setLeaderboardCount(0);
+      setEditing(false);setNameDraft("");setNameStatus("");setEmail("");setSecurityStatus("");setStatus("SIGNED OUT SAFELY.");setAccountState("signed-out");
+    }catch(error){setSecurityStatus(error instanceof Error?error.message:"SIGN OUT FAILED.");}
+    finally{setAuthBusy(false);}
+  }
+
   const totals=useMemo(()=>runs.reduce((sum,run)=>({wins:sum.wins+(run.wins||0),draws:sum.draws+(run.draws||0),losses:sum.losses+(run.losses||0)}),{wins:0,draws:0,losses:0}),[runs]);
   const matches=totals.wins+totals.draws+totals.losses,winRate=matches?Math.round(totals.wins/matches*100):0,bestRun=[...runs].sort((a,b)=>b.score-a.score)[0];
   const [favoriteEra,favoriteEraCount]=favorite(runs.map(run=>run.era)),[favoriteLeague,favoriteLeagueCount]=favorite(runs.map(run=>run.league_id)),[favoriteCoach,favoriteCoachCount]=favorite(runs.map(run=>run.manager_id)),[favoritePlayerId,favoritePlayerCount]=favorite(runs.flatMap(run=>(run.selections||[]).map(selection=>selection.playerId||""))),favoritePlayer=favoritePlayerId.startsWith("p")?playerNames[Number(favoritePlayerId.slice(1))]||favoritePlayerId:favoritePlayerId;
@@ -145,7 +156,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
           <label>DISPLAY NAME<input maxLength={40} value={nameDraft} onChange={event=>setNameDraft(event.target.value)} autoFocus/></label>
           <div className="locked-username"><small>PLAYER ID</small><strong>@{profile?.username||"anonymous"}</strong></div>
           <button onClick={saveDisplayName}>SAVE NAME</button><button onClick={()=>setEditing(false)}>CANCEL</button>
-        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button>}</>}
+        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<div className="account-identity-actions"><button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button><button className="account-sign-out" disabled={authBusy} onClick={signOut}>LOG OUT</button></div>}</>}
         <p>@{profile?.username||"anonymous"}{nameStatus&&` · ${nameStatus}`}</p>
       </header>
 
