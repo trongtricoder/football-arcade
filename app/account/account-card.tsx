@@ -98,7 +98,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
   async function googleAccess(){
     setAuthBusy(true);setSecurityStatus("OPENING GOOGLE...");
     try{
-      const supabase=createSupabaseBrowserClient(),redirectTo=`${window.location.origin}/auth/callback?next=/`;
+      const supabase=createSupabaseBrowserClient(),redirectTo=`${window.location.origin}/auth/callback?next=/&flow=google`;
       const {error}=user?.is_anonymous
         ?await supabase.auth.linkIdentity({provider:"google",options:{redirectTo}})
         :await supabase.auth.signInWithOAuth({provider:"google",options:{redirectTo}});
@@ -110,7 +110,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     event.preventDefault();if(!email.trim())return;
     setAuthBusy(true);setSecurityStatus("SENDING YOUR SECURE LINK...");
     try{
-      const supabase=createSupabaseBrowserClient(),redirectTo=`${window.location.origin}/auth/callback?next=/`;
+      const supabase=createSupabaseBrowserClient(),redirectTo=`${window.location.origin}/auth/callback?next=/&flow=email`;
       const {error}=user?.is_anonymous
         ?await supabase.auth.updateUser({email:email.trim()},{emailRedirectTo:redirectTo})
         :await supabase.auth.signInWithOtp({email:email.trim(),options:{emailRedirectTo:redirectTo}});

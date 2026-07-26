@@ -37,7 +37,7 @@ export function AccountCenter() {
   async function google() {
     const supabase = createSupabaseBrowserClient();
     setMessage("Opening Google...");
-    const redirectTo = `${window.location.origin}/auth/callback?next=/profile`;
+    const redirectTo = `${window.location.origin}/auth/callback?next=/profile&flow=google`;
     const { error } = state === "signed-out"
       ? await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo } })
       : await supabase.auth.linkIdentity({ provider: "google", options: { redirectTo } });
@@ -49,7 +49,7 @@ export function AccountCenter() {
     if (!email.trim()) return;
     const supabase = createSupabaseBrowserClient();
     setMessage("Sending your secure email link...");
-    const redirectTo = `${window.location.origin}/auth/callback?next=/profile`;
+    const redirectTo = `${window.location.origin}/auth/callback?next=/profile&flow=email`;
     const { error } = state === "anonymous"
       ? await supabase.auth.updateUser({ email: email.trim() }, { emailRedirectTo: redirectTo })
       : await supabase.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: redirectTo } });
