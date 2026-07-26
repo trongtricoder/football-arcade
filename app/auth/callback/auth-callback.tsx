@@ -11,7 +11,7 @@ export function AuthCallback() {
     const code = parameters.get("code");
     const next = parameters.get("next")?.startsWith("/") ? parameters.get("next")! : "/profile";
     if (!code) return;
-    createSupabaseBrowserClient().auth.exchangeCodeForSession(code).then(({ error }) => {
+    createSupabaseBrowserClient().auth.exchangeCodeForSession(code).then(({ error }: { error: { message: string } | null }) => {
       if (error) setMessage(error.message.toUpperCase());
       else window.location.replace(next);
     });

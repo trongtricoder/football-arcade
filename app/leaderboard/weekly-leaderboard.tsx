@@ -91,12 +91,13 @@ export function WeeklyLeaderboard({ onClose, initialEra = "20s" }: { onClose?: (
       setEntries([]);
       return;
     }
-    const rows = data || [];
+    const rows = (data || []) as Array<Omit<Entry, "profile">>;
     const ids = [...new Set(rows.map((row) => row.user_id))];
     const { data: people } = ids.length
       ? await supabase.from("profiles").select("id,username,display_name").in("id", ids)
       : { data: [] as Person[] };
-    const names = new Map((people || []).map((person) => [person.id, person]));
+    const peopleRows = (people || []) as Person[];
+    const names = new Map(peopleRows.map((person) => [person.id, person]));
     setEntries(rows.map((row) => ({ ...row, profile: names.get(row.user_id) || null })) as Entry[]);
   }, [era, monday]);
 

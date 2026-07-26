@@ -16,7 +16,7 @@ export function AccountCenter() {
 
   useEffect(() => {
     const supabase = createSupabaseBrowserClient();
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(({ data }: { data: { user: User | null } }) => {
       setUser(data.user);
       const nextState = !data.user
         ? "signed-out"
