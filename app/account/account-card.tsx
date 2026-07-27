@@ -154,7 +154,8 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     try{
       setShareStatus("CREATING CARD...");
       const card=style==="profile"?createProfileShareCard({displayName,username:profile?.username||"player",drafts,record,winRate,titles,bestScore,achievements:achievementCount,leaderboard:leaderboardPlaces,favoritePlayer,favoriteCoach}):createLifetimeShareCard({displayName,drafts,record,winRate,titles,bestScore,favoriteEra,favoritePlayer,favoriteCoach,eraRows});
-      openShareCard(card,`football-arcade-${profile?.username||"player"}-${style}.png`,`${displayName} · Football Arcade`);setShareStatus("CARD READY");setShareMenu(false);
+      const safeDisplayName=(displayName||"player").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"player";
+      openShareCard(card,style==="profile"?`footballarcade-profile-${safeDisplayName}.png`:"footballarcade-erastats.png",`${displayName} · Football Arcade`);setShareStatus("CARD READY");setShareMenu(false);
     }catch(error){if(error instanceof DOMException&&error.name==="AbortError")return;setShareStatus("SHARE UNAVAILABLE");}
     window.setTimeout(()=>setShareStatus(""),3000);
   }
