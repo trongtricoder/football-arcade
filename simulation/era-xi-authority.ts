@@ -47,6 +47,22 @@ type LeagueSeason = {
 };
 type Pick = Player & { slot: string };
 
+const verifiedFormations: Record<string, string[]> = {
+  "4-3-3 · HOLDING": ["GK", "LB", "CB1", "CB2", "RB", "CM1", "DM", "CM2", "LW", "ST", "RW"],
+  "4-3-3 · FLAT": ["GK", "LB", "CB1", "CB2", "RB", "CM1", "CM2", "CM3", "LW", "ST", "RW"],
+  "4-2-1-3": ["GK", "LB", "CB1", "CB2", "RB", "DM1", "DM2", "AM", "LW", "ST", "RW"],
+  "3-4-3": ["GK", "CB1", "CB2", "CB3", "LM", "CM1", "CM2", "RM", "LW", "ST", "RW"],
+  "4-4-2": ["GK", "LB", "CB1", "CB2", "RB", "LM", "CM1", "CM2", "RM", "ST1", "ST2"],
+  "3-5-2": ["GK", "CB1", "CB2", "CB3", "LM", "CM1", "DM", "CM2", "RM", "ST1", "ST2"],
+  "4-1-4-1": ["GK", "LB", "CB1", "CB2", "RB", "LM", "CM1", "DM", "CM2", "RM", "ST"],
+  "3-4-2-1": ["GK", "CB1", "CB2", "CB3", "LM", "CM1", "CM2", "RM", "AM1", "AM2", "ST"],
+  "5-3-2": ["GK", "LB", "CB1", "CB2", "CB3", "RB", "CM1", "CM2", "CM3", "ST1", "ST2"],
+  "4-3-2-1": ["GK", "LB", "CB1", "CB2", "RB", "CM1", "CM2", "CM3", "AM1", "AM2", "ST"],
+  "4-2-2-2": ["GK", "LB", "CB1", "CB2", "RB", "DM1", "DM2", "AM1", "AM2", "ST1", "ST2"],
+  "3-4-1-2": ["GK", "CB1", "CB2", "CB3", "LM", "CM1", "CM2", "RM", "AM", "ST1", "ST2"],
+  "5-2-3": ["GK", "LB", "CB1", "CB2", "CB3", "RB", "CM1", "CM2", "LW", "ST", "RW"],
+};
+
 export type EraXiRunRequest = {
   seed: string;
   era: string;
@@ -365,13 +381,24 @@ function grade(score: number) {
 export function simulateAuthoritativeEraXi(
   request: EraXiRunRequest,
 ): AuthoritativeEraXiResult {
-  if (!request.seed || request.seed.length > 200) throw new Error("Invalid seed.");
+  if (!request || typeof request !== "object") throw new Error("Invalid simulation request.");
+  if (typeof request.seed !== "string" || !request.seed.trim() || request.seed.length > 200) throw new Error("Invalid seed.");
+  if (!Object.prototype.hasOwnProperty.call(verifiedFormations, request.formation)) throw new Error("Unknown formation.");
+  if (!Array.isArray(request.selections)) throw new Error("Invalid player selections.");
   if (request.selections.length !== 11) throw new Error("Era XI requires exactly 11 players.");
+  if (request.selections.some((selection) => !selection || typeof selection.playerId !== "string" || typeof selection.slot !== "string")) {
+    throw new Error("Malformed player selection.");
+  }
   if (new Set(request.selections.map((selection) => selection.playerId)).size !== 11) {
     throw new Error("Duplicate player selection.");
   }
   if (new Set(request.selections.map((selection) => selection.slot)).size !== 11) {
     throw new Error("Duplicate formation slot.");
+  }
+  const submittedSlots = [...request.selections.map((selection) => selection.slot)].sort();
+  const requiredSlots = [...verifiedFormations[request.formation]].sort();
+  if (submittedSlots.some((slot, index) => slot !== requiredSlots[index])) {
+    throw new Error("Selections do not match the chosen formation.");
   }
 
   const coach = (managerData as Coach[]).find((item) => item.name === request.managerName);

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import playerData from "@/data/players.json";
 import playerExpansion from "@/data/player-expansion.json";
@@ -36,6 +36,9 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
   const [editing,setEditing]=useState(false);
   const [nameDraft,setNameDraft]=useState("");
   const [nameStatus,setNameStatus]=useState("");
+  const [shareStatus,setShareStatus]=useState("");
+  const [deleteArmed,setDeleteArmed]=useState(false);
+  const [dataStatus,setDataStatus]=useState("");
 
   const loadRecord=useCallback(async(userId:string)=>{
     const supabase=createSupabaseBrowserClient();
@@ -141,7 +144,55 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     finally{setAuthBusy(false);}
   }
 
-  const totals=useMemo(()=>runs.reduce((sum,run)=>({wins:sum.wins+(run.wins||0),draws:sum.draws+(run.draws||0),losses:sum.losses+(run.losses||0)}),{wins:0,draws:0,losses:0}),[runs]);
+  async function shareAccountStats(){
+    const displayName=profile?.display_name||"Football Arcade Player";
+    const text=[
+      `${displayName} · @${profile?.username||"player"}`,
+      `Football Arcade lifetime record: ${totals.wins}-${totals.draws}-${totals.losses} (${winRate}% wins)`,
+      `${stats?.verified_runs||runs.length} drafts · ${stats?.league_titles||0} championships · best score ${bestRun?.score||stats?.best_score||0}`,
+      `${achievementCount} achievements · favorite era ${favoriteEra.toUpperCase()}`,
+    ].join("\n");
+    try{
+      if(navigator.share){await navigator.share({title:`${displayName} · Football Arcade`,text,url:window.location.origin});setShareStatus("SHARED");}
+      else{await navigator.clipboard.writeText(`${text}\n${window.location.origin}`);setShareStatus("STATS COPIED");}
+    }catch(error){if(error instanceof DOMException&&error.name==="AbortError")return;setShareStatus("SHARE UNAVAILABLE");}
+    window.setTimeout(()=>setShareStatus(""),3000);
+  }
+
+  async function exportAccountData(){
+    setDataStatus("PREPARING EXPORT...");
+    try{
+      const supabase=createSupabaseBrowserClient(),{data:{user:currentUser}}=await supabase.auth.getUser();
+      if(!currentUser)throw new Error("Sign in before exporting data.");
+      const [profileData,statisticsData,runsData,achievementsData,leaderboardData]=await Promise.all([
+        supabase.from("profiles").select("*").eq("id",currentUser.id).maybeSingle(),
+        supabase.from("user_statistics").select("*").eq("user_id",currentUser.id).maybeSingle(),
+        supabase.from("game_runs").select("*").eq("user_id",currentUser.id),
+        supabase.from("user_achievements").select("*").eq("user_id",currentUser.id),
+        supabase.from("weekly_leaderboard_entries").select("*").eq("user_id",currentUser.id),
+      ]);
+      const failure=[profileData,statisticsData,runsData,achievementsData,leaderboardData].find(result=>result.error)?.error;
+      if(failure)throw failure;
+      const payload={exportedAt:new Date().toISOString(),accountId:currentUser.id,email:currentUser.email||null,profile:profileData.data,statistics:statisticsData.data,runs:runsData.data,achievements:achievementsData.data,leaderboardEntries:leaderboardData.data};
+      const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}));
+      const link=document.createElement("a");link.href=url;link.download=`football-arcade-${profile?.username||"player"}.json`;link.click();URL.revokeObjectURL(url);setDataStatus("EXPORT DOWNLOADED");
+    }catch(error){setDataStatus(error instanceof Error?error.message:"EXPORT FAILED");}
+  }
+
+  async function deleteAccount(){
+    if(!deleteArmed){setDeleteArmed(true);setDataStatus("CLICK CONFIRM DELETE TO REMOVE THIS ACCOUNT AND ALL SAVED DATA.");return;}
+    setAuthBusy(true);setDataStatus("DELETING ACCOUNT...");
+    try{
+      const supabase=createSupabaseBrowserClient(),{data:{session}}=await supabase.auth.getSession();
+      if(!session?.access_token)throw new Error("Your session expired. Sign in again before deleting the account.");
+      const response=await fetch("/api/account",{method:"DELETE",headers:{Authorization:`Bearer ${session.access_token}`}}),payload=await response.json();
+      if(!response.ok)throw new Error(payload.error||"Account deletion failed.");
+      await supabase.auth.signOut();setUser(null);setProfile(null);setStats(null);setRuns([]);setAchievementCount(0);setLeaderboardCount(0);setAccountState("signed-out");setStatus("ACCOUNT AND SAVED DATA DELETED.");setDataStatus("");setDeleteArmed(false);
+    }catch(error){setDataStatus(error instanceof Error?error.message:"ACCOUNT DELETION FAILED.");}
+    finally{setAuthBusy(false);}
+  }
+
+  const totals=runs.reduce((sum,run)=>({wins:sum.wins+(run.wins||0),draws:sum.draws+(run.draws||0),losses:sum.losses+(run.losses||0)}),{wins:0,draws:0,losses:0});
   const matches=totals.wins+totals.draws+totals.losses,winRate=matches?Math.round(totals.wins/matches*100):0,bestRun=[...runs].sort((a,b)=>b.score-a.score)[0];
   const [favoriteEra,favoriteEraCount]=favorite(runs.map(run=>run.era)),[favoriteLeague,favoriteLeagueCount]=favorite(runs.map(run=>run.league_id)),[favoriteCoach,favoriteCoachCount]=favorite(runs.map(run=>run.manager_id)),[favoritePlayerId,favoritePlayerCount]=favorite(runs.flatMap(run=>(run.selections||[]).map(selection=>selection.playerId||""))),favoritePlayer=favoritePlayerId.startsWith("p")?playerNames[Number(favoritePlayerId.slice(1))]||favoritePlayerId:favoritePlayerId;
   const eraRows=eras.map(era=>{const eraRuns=runs.filter(run=>run.era===era),record=eraRuns.reduce((sum,run)=>({w:sum.w+run.wins,d:sum.d+run.draws,l:sum.l+run.losses,titles:sum.titles+(run.league_position===1?1:0)}),{w:0,d:0,l:0,titles:0}),eraMatches=record.w+record.d+record.l;return {era,...record,played:eraRuns.length,winRate:eraMatches?Math.round(record.w/eraMatches*100):0};});
@@ -156,8 +207,8 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
           <label>DISPLAY NAME<input maxLength={40} value={nameDraft} onChange={event=>setNameDraft(event.target.value)} autoFocus/></label>
           <div className="locked-username"><small>PLAYER ID</small><strong>@{profile?.username||"anonymous"}</strong></div>
           <button onClick={saveDisplayName}>SAVE NAME</button><button onClick={()=>setEditing(false)}>CANCEL</button>
-        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<div className="account-identity-actions"><button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button><button className="account-sign-out" disabled={authBusy} onClick={signOut}>LOG OUT</button></div>}</>}
-        <p>@{profile?.username||"anonymous"}{nameStatus&&` · ${nameStatus}`}</p>
+        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<div className="account-identity-actions"><button className="account-share" onClick={shareAccountStats}>SHARE STATS</button><button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button><button className="account-sign-out" disabled={authBusy} onClick={signOut}>LOG OUT</button></div>}</>}
+        <p>@{profile?.username||"anonymous"}{nameStatus&&` · ${nameStatus}`}{shareStatus&&` · ${shareStatus}`}</p>
       </header>
 
       {accountState==="loading"?<div className="account-loading">{status}</div>:showAccess?<section className="account-access">
@@ -172,6 +223,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
         </div>
         <section className="account-favorites"><article><small>MOST DRAFTED PLAYER</small><b>{favoritePlayer}</b><em>{favoritePlayerCount}× selected</em></article><article><small>MOST SELECTED COACH</small><b>{favoriteCoach}</b><em>{favoriteCoachCount}× appointed</em></article><article><small>MOST PLAYED LEAGUE</small><b>{favoriteLeague}</b><em>{favoriteLeagueCount}× entered</em></article><article><small>MOST PLAYED ERA</small><b>{favoriteEra.toUpperCase()}</b><em>{favoriteEraCount}× entered</em></article></section>
         <section className="era-records"><span>RECORD BY ERA</span>{eraRows.map(row=><article key={row.era}><b>{row.era.toUpperCase()}</b><div><strong>{row.w}-{row.d}-{row.l} <i>({row.winRate}%)</i></strong><small>{row.played} verified draft{row.played===1?"":"s"}</small></div><em>CHAMPIONSHIPS {row.titles}×</em></article>)}</section>
+        <section className="account-data-controls"><div><span>YOUR DATA</span><p>Download your Football Arcade record or permanently remove this identity and every saved run.</p>{dataStatus&&<strong>{dataStatus}</strong>}</div><div><button disabled={authBusy} onClick={exportAccountData}>EXPORT DATA</button><button className={deleteArmed?"confirm-delete":""} disabled={authBusy} onClick={deleteAccount}>{deleteArmed?"CONFIRM DELETE":"DELETE ACCOUNT"}</button>{deleteArmed&&<button disabled={authBusy} onClick={()=>{setDeleteArmed(false);setDataStatus("");}}>CANCEL</button>}</div></section>
       </>}
     </section>
   </div>;

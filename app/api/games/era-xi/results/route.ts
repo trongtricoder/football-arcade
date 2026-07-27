@@ -45,7 +45,28 @@ export async function POST(request: Request) {
       await supabase.from("security_events").insert({ user_id: user.id, event_type: "era_xi_rate_limit", severity: "warning", details: { recentRuns } });
       return Response.json({ error: "Too many simulations. Wait one minute and try again." }, { status: 429 });
     }
-    const authoritative = simulateAuthoritativeEraXi(body);
+    const oneDayAgo = new Date(Date.now() - 86_400_000).toISOString();
+    const { count: dailyRuns } = await supabase
+      .from("game_runs")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .gte("created_at", oneDayAgo);
+    if ((dailyRuns || 0) >= 100) {
+      await supabase.from("security_events").insert({ user_id: user.id, event_type: "era_xi_daily_limit", severity: "warning", details: { dailyRuns } });
+      return Response.json({ error: "Daily verified-run limit reached. Try again tomorrow." }, { status: 429 });
+    }
+    let authoritative;
+    try {
+      authoritative = simulateAuthoritativeEraXi(body);
+    } catch (validationError) {
+      await supabase.from("security_events").insert({
+        user_id: user.id,
+        event_type: "era_xi_invalid_payload",
+        severity: "warning",
+        details: { reason: validationError instanceof Error ? validationError.message : "Invalid payload" },
+      });
+      throw validationError;
+    }
     const now = new Date().toISOString();
     const { data: profile } = await supabase
       .from("profiles")

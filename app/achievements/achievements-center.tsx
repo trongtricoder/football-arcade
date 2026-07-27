@@ -9,6 +9,7 @@ type Definition = {
   name: string;
   description: string;
   tier: Rarity;
+  category: string;
   is_secret: boolean;
 };
 type Unlock = { achievement_id: string; unlocked_at: string };
@@ -19,6 +20,7 @@ export function AchievementsCenter({ onClose }: { onClose?: () => void } = {}) {
   const [definitions, setDefinitions] = useState<Definition[]>([]);
   const [unlocks, setUnlocks] = useState<Unlock[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     (async () => {
@@ -26,7 +28,7 @@ export function AchievementsCenter({ onClose }: { onClose?: () => void } = {}) {
       const { data: { user } } = await supabase.auth.getUser();
       const definitionsRequest = await supabase
         .from("achievement_definitions")
-        .select("id,name,description,tier,is_secret")
+        .select("id,name,description,tier,category,is_secret")
         .eq("is_active", true);
       let unlockRequest: { data: Unlock[] | null } = { data: [] };
       if (user) {
@@ -43,6 +45,8 @@ export function AchievementsCenter({ onClose }: { onClose?: () => void } = {}) {
 
   const earned = useMemo(() => new Map(unlocks.map((item) => [item.achievement_id, item])), [unlocks]);
   const ordered = useMemo(() => [...definitions].sort((a, b) => rarityOrder[a.tier] - rarityOrder[b.tier] || a.name.localeCompare(b.name)), [definitions]);
+  const categories = useMemo(() => ["all", ...new Set(definitions.map((item) => item.category).filter(Boolean))], [definitions]);
+  const visible = useMemo(() => filter === "all" ? ordered : ordered.filter((item) => item.category === filter), [filter, ordered]);
 
   const content = (
     <main className={`achievements-page ${onClose ? "modal-panel" : ""}`}>
@@ -53,9 +57,10 @@ export function AchievementsCenter({ onClose }: { onClose?: () => void } = {}) {
         <p>{earned.size} / {definitions.length} unlocked</p>
         <i><b style={{ width: `${definitions.length ? earned.size / definitions.length * 100 : 0}%` }} /></i>
       </header>
+      {!loading && <nav className="achievement-filters" aria-label="Achievement categories">{categories.map((category) => <button type="button" className={filter === category ? "active" : ""} onClick={() => setFilter(category)} key={category}><span>{category === "all" ? "ALL" : category.toUpperCase()}</span><small>{category === "all" ? definitions.length : definitions.filter((item) => item.category === category).length}</small></button>)}</nav>}
       {loading ? <p>LOADING CABINET...</p> : (
         <section className="achievement-catalog">
-          {ordered.map((item) => {
+          {visible.map((item) => {
             const unlocked = earned.get(item.id);
             return (
               <article key={item.id} className={`${item.tier} ${unlocked ? "unlocked" : "locked"}`}>
