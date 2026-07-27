@@ -5,6 +5,7 @@ import type { User } from "@supabase/supabase-js";
 import playerData from "@/data/players.json";
 import playerExpansion from "@/data/player-expansion.json";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createLifetimeShareCard, createProfileShareCard, deliverShareCard } from "@/lib/share-cards";
 
 type Selection = { playerId?: string };
 type Run = { era:string; league_id:string; manager_id:string; score:number; wins:number; draws:number; losses:number; league_position:number; selections:Selection[] };
@@ -37,6 +38,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
   const [nameDraft,setNameDraft]=useState("");
   const [nameStatus,setNameStatus]=useState("");
   const [shareStatus,setShareStatus]=useState("");
+  const [shareMenu,setShareMenu]=useState(false);
   const [deleteArmed,setDeleteArmed]=useState(false);
   const [dataStatus,setDataStatus]=useState("");
 
@@ -144,17 +146,12 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     finally{setAuthBusy(false);}
   }
 
-  async function shareAccountStats(){
-    const displayName=profile?.display_name||"Football Arcade Player";
-    const text=[
-      `${displayName} · @${profile?.username||"player"}`,
-      `Football Arcade lifetime record: ${totals.wins}-${totals.draws}-${totals.losses} (${winRate}% wins)`,
-      `${stats?.verified_runs||runs.length} drafts · ${stats?.league_titles||0} championships · best score ${bestRun?.score||stats?.best_score||0}`,
-      `${achievementCount} achievements · favorite era ${favoriteEra.toUpperCase()}`,
-    ].join("\n");
+  async function shareAccountStats(style:"profile"|"lifetime"){
+    const displayName=profile?.display_name||"Football Arcade Player",drafts=stats?.verified_runs||runs.length,record=`${totals.wins}-${totals.draws}-${totals.losses}`,titles=stats?.league_titles||0,bestScore=bestRun?.score||stats?.best_score||0;
     try{
-      if(navigator.share){await navigator.share({title:`${displayName} · Football Arcade`,text,url:window.location.origin});setShareStatus("SHARED");}
-      else{await navigator.clipboard.writeText(`${text}\n${window.location.origin}`);setShareStatus("STATS COPIED");}
+      setShareStatus("CREATING CARD...");
+      const card=style==="profile"?createProfileShareCard({displayName,username:profile?.username||"player",drafts,record,winRate,titles,bestScore,achievements:achievementCount,topEntries:leaderboardCount,favoritePlayer,favoriteCoach}):createLifetimeShareCard({displayName,drafts,record,winRate,titles,bestScore,favoriteEra,favoritePlayer,favoriteCoach,eraRows});
+      setShareStatus(await deliverShareCard(card,`football-arcade-${profile?.username||"player"}-${style}.png`,`${displayName} · Football Arcade`));setShareMenu(false);
     }catch(error){if(error instanceof DOMException&&error.name==="AbortError")return;setShareStatus("SHARE UNAVAILABLE");}
     window.setTimeout(()=>setShareStatus(""),3000);
   }
@@ -207,7 +204,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
           <label>DISPLAY NAME<input maxLength={40} value={nameDraft} onChange={event=>setNameDraft(event.target.value)} autoFocus/></label>
           <div className="locked-username"><small>PLAYER ID</small><strong>@{profile?.username||"anonymous"}</strong></div>
           <button onClick={saveDisplayName}>SAVE NAME</button><button onClick={()=>setEditing(false)}>CANCEL</button>
-        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<div className="account-identity-actions"><button className="account-share" onClick={shareAccountStats}>SHARE STATS</button><button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button><button className="account-sign-out" disabled={authBusy} onClick={signOut}>LOG OUT</button></div>}</>}
+        </div>:<><h1>{profile?.display_name||"FOOTBALL ARCADE PLAYER"}</h1>{accountState==="ready"&&<div className="account-identity-actions"><button className="account-share" onClick={()=>setShareMenu(current=>!current)}>SHARE STATS</button><button className="edit-player-name" onClick={()=>setEditing(true)}>EDIT DISPLAY NAME</button><button className="account-sign-out" disabled={authBusy} onClick={signOut}>LOG OUT</button></div>}{shareMenu&&<div className="account-share-menu"><button onClick={()=>shareAccountStats("profile")}>PROFILE CARD<small>Compact player identity</small></button><button onClick={()=>shareAccountStats("lifetime")}>LIFETIME CARD<small>Full records by era</small></button></div>}</>}
         <p>@{profile?.username||"anonymous"}{nameStatus&&` · ${nameStatus}`}{shareStatus&&` · ${shareStatus}`}</p>
       </header>
 

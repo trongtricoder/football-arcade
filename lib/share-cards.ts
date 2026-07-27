@@ -1,0 +1,46 @@
+"use client";
+
+type EraRecord = { era:string; w:number; d:number; l:number; titles:number; played:number; winRate:number };
+type SquadPlayer = { name:string; slot:string; club:string; rating:number };
+
+const GOLD="#e3bd3d", LIME="#c8ff3d", PAPER="#eef2e8", MUTED="#8c958f", PANEL="#111512", LINE="#303830";
+
+function canvas(width:number,height:number){const value=document.createElement("canvas");value.width=width;value.height=height;const context=value.getContext("2d");if(!context)throw new Error("Image rendering is unavailable.");context.fillStyle="#050806";context.fillRect(0,0,width,height);return {value,context};}
+function text(ctx:CanvasRenderingContext2D,value:string,x:number,y:number,size:number,color=PAPER,weight="700",align:CanvasTextAlign="left"){ctx.fillStyle=color;ctx.font=`${weight} ${size}px Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(value,x,y);}
+function label(ctx:CanvasRenderingContext2D,value:string,x:number,y:number,color=MUTED){text(ctx,value.toUpperCase(),x,y,15,color,"800");}
+function box(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number){ctx.fillStyle=PANEL;ctx.fillRect(x,y,w,h);ctx.strokeStyle=LINE;ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);}
+function line(ctx:CanvasRenderingContext2D,x1:number,y1:number,x2:number,y2:number,color=LINE,width=2){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
+function initials(name:string){return name.split(/\s+/).map(part=>part[0]).join("").slice(0,2).toUpperCase();}
+function slotRole(slot:string){return slot.replace(/\d+$/,"");}
+function pitchLine(slot:string){const role=slotRole(slot);if(role==="GK")return 4;if(["LB","CB","RB"].includes(role))return 3;if(["DM","CM","LM","RM"].includes(role))return 2;if(role==="AM")return 1;return 0;}
+function preferredX(slot:string){const role=slotRole(slot),base:Record<string,number>={LW:12,LM:12,LB:12,AM:50,CM:50,DM:50,CB:50,CF:50,ST:50,RB:88,RM:88,RW:88,GK:50};const n=Number(slot.match(/\d+$/)?.[0]||0);if(n&&["CB","CM","DM","AM","ST"].includes(role))return n===1?32:n===2?68:50;return base[role]??50;}
+function playerPoint(players:SquadPlayer[],index:number){const row=pitchLine(players[index].slot),members=players.map((player,i)=>({player,i})).filter(item=>pitchLine(item.player.slot)===row).sort((a,b)=>preferredX(a.player.slot)-preferredX(b.player.slot)||a.i-b.i),rank=members.findIndex(item=>item.i===index),xs=members.length===1?[50]:members.length===2?[32,68]:members.length===3?[17,50,83]:members.length===4?[10,37,63,90]:[8,29,50,71,92];return [xs[rank]??50,[13,31,50,71,89][row]] as const;}
+async function blobFrom(canvas:HTMLCanvasElement){return await new Promise<Blob>((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("Could not create image.")),"image/png"));}
+export async function deliverShareCard(card:HTMLCanvasElement,filename:string,title:string){const blob=await blobFrom(card),file=new File([blob],filename,{type:"image/png"});if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({title,files:[file]});return "SHARED";}const url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download=filename;link.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000);return "IMAGE DOWNLOADED";}
+
+export function createProfileShareCard(input:{displayName:string;username:string;drafts:number;record:string;winRate:number;titles:number;bestScore:number;achievements:number;topEntries:number;favoritePlayer:string;favoriteCoach:string}){
+  const {value,context:c}=canvas(760,1120);c.strokeStyle=GOLD;c.lineWidth=3;c.strokeRect(2,2,756,1116);text(c,String(input.bestScore),28,52,43,LIME,"900");label(c,"OVR",90,49,GOLD);label(c,`#${input.username.toUpperCase()}`,730,45,"#444b46");
+  c.fillStyle="#0a0e0b";c.fillRect(0,72,760,300);c.strokeStyle="#282d29";c.beginPath();c.arc(380,340,300,Math.PI,Math.PI*2);c.stroke();c.fillStyle="#df5d0d";c.beginPath();c.arc(380,218,78,0,Math.PI*2);c.fill();text(c,initials(input.displayName),380,244,68,"#fff","800","center");
+  c.fillStyle="#211a03";c.fillRect(0,372,760,145);text(c,input.displayName.toUpperCase(),380,445,42,"#fff","900","center");label(c,"FOOTBALL ARCADE PLAYER",380,482,GOLD);c.textAlign="left";
+  const metrics=[["DRAFTS",String(input.drafts)],["RECORD",input.record],["WIN%",`${input.winRate}%`],["TITLES",String(input.titles)]];metrics.forEach(([key,val],i)=>{const x=i*190;box(c,x,518,190,105);label(c,key,x+20,550);text(c,val,x+20,598,28,i>1?GOLD:PAPER,"900")});
+  label(c,"LEADERBOARD RECORD",28,665);[["#1",0],["TOP 3",0],["TOP 10",0],["TOP 100",input.topEntries]].forEach(([name,val],i)=>{const x=95+i*185;text(c,String(val),x,722,35,i===3?GOLD:PAPER,"900","center");label(c,String(name),x,750)});
+  box(c,28,790,342,105);label(c,"MOST DRAFTED",48,822);text(c,input.favoritePlayer||"—",48,867,24,GOLD,"900");box(c,390,790,342,105);label(c,"TOP COACH",410,822);text(c,input.favoriteCoach||"—",410,867,24,GOLD,"900");
+  box(c,28,915,342,105);label(c,"ACHIEVEMENTS",48,947);text(c,String(input.achievements),48,994,38,"#a970ff","900");box(c,390,915,342,105);label(c,"BEST TEAM SCORE",410,947);text(c,String(input.bestScore),410,994,38,LIME,"900");label(c,"FOOTBALL-ARCADE.VERCEL.APP",380,1080,"#4b534e");return value;
+}
+
+export function createLifetimeShareCard(input:{displayName:string;drafts:number;record:string;winRate:number;titles:number;bestScore:number;favoriteEra:string;favoritePlayer:string;favoriteCoach:string;eraRows:EraRecord[]}){
+  const {value,context:c}=canvas(1200,1500);text(c,"FOOTBALL",62,112,55,GOLD,"900");text(c,"ARCADE",62,167,55,LIME,"900");label(c,`${input.displayName} · ERA XI LIFETIME STATS`,1138,142);line(c,62,190,1138,190,GOLD,3);
+  const top=[["DRAFTS",input.drafts],["RECORD",input.record],["CHAMPIONSHIPS",input.titles]];top.forEach(([key,val],i)=>{const x=62+i*365;box(c,x,230,345,155);label(c,String(key),x+25,275);text(c,String(val),x+25,350,42,GOLD,"900")});
+  [["WIN RATE",`${input.winRate}%`],["BEST SCORE",input.bestScore],["FAVORITE ERA",input.favoriteEra.toUpperCase()]].forEach(([key,val],i)=>{const x=62+i*365;box(c,x,410,345,140);label(c,String(key),x+25,452);text(c,String(val),x+25,520,36,GOLD,"900")});
+  box(c,62,575,520,120);label(c,"MOST DRAFTED PLAYER",87,615);text(c,input.favoritePlayer||"—",87,665,30,GOLD,"900");box(c,603,575,535,120);label(c,"MOST SELECTED COACH",628,615);text(c,input.favoriteCoach||"—",628,665,30,GOLD,"900");
+  box(c,62,720,1076,625);label(c,"RECORD BY ERA",88,760);input.eraRows.forEach((row,i)=>{const y=812+i*104;if(i)line(c,82,y-43,1118,y-43);text(c,row.era.toUpperCase(),88,y,28,GOLD,"900");text(c,`${row.w}-${row.d}-${row.l}`,225,y,25,PAPER,"800");text(c,`(${row.winRate}%)`,410,y,20,MUTED,"700");text(c,`${row.played} DRAFTS`,610,y,17,MUTED,"800");text(c,`${row.titles} TITLES`,1080,y,22,GOLD,"900","right")});label(c,"FOOTBALL-ARCADE.VERCEL.APP",600,1435,"#555d58");return value;
+}
+
+export function createSquadShareCard(input:{teamName:string;era:string;formation:string;manager:string;league:string;season:string;score:number;record:string;points:string;finish:string;players:SquadPlayer[];awards:string[]}){
+  const {value,context:c}=canvas(1200,1200);line(c,0,3,1200,3,GOLD,5);text(c,"FOOTBALL",55,93,43,GOLD,"900");text(c,"ARCADE",55,137,43,LIME,"900");label(c,`${input.era.toUpperCase()} ERA · ${input.league} ${input.season}`,1145,88);text(c,input.record,1145,140,55,PAPER,"900","right");line(c,55,165,1145,165);
+  text(c,input.teamName.toUpperCase(),55,220,43,PAPER,"900");label(c,`${input.formation} · ${input.manager}`,55,250);text(c,input.finish,1145,222,35,LIME,"900","right");
+  const stats=[["TEAM SCORE",input.score],["POINTS",input.points]];stats.forEach(([key,val],i)=>{box(c,55+i*250,280,230,88);label(c,String(key),75+i*250,312);text(c,String(val),75+i*250,352,29,GOLD,"900")});
+  c.fillStyle="#126335";c.fillRect(55,395,780,705);for(let i=0;i<10;i++){c.fillStyle=i%2?"rgba(0,0,0,.06)":"rgba(255,255,255,.025)";c.fillRect(55+i*78,395,78,705)}c.strokeStyle="rgba(255,255,255,.55)";c.lineWidth=2;c.strokeRect(80,420,730,655);line(c,80,747,810,747,"rgba(255,255,255,.5)");c.beginPath();c.arc(445,747,80,0,Math.PI*2);c.stroke();
+  input.players.forEach((player,i)=>{const [px,py]=playerPoint(input.players,i),x=55+px/100*780,y=395+py/100*705;c.fillStyle="#f0f3e9";c.strokeStyle="#07110c";c.lineWidth=3;c.fillRect(x-58,y-34,116,68);c.strokeRect(x-58,y-34,116,68);text(c,String(player.rating),x,y-5,25,"#07110c","900","center");text(c,player.name.length>16?`${player.name.slice(0,15)}…`:player.name,x,y+16,11,"#07110c","800","center");text(c,player.slot,x,y+30,9,"#485047","800","center")});
+  box(c,865,395,280,235);label(c,"CAMPAIGN",890,430,LIME);text(c,input.league,890,475,27,PAPER,"900");text(c,`${input.season} · finished ${input.finish}`,890,510,16,MUTED,"700");label(c,"MANAGER",890,558,LIME);text(c,input.manager,890,600,25,PAPER,"900");box(c,865,650,280,450);label(c,"SEASON HONOURS",890,687,LIME);input.awards.slice(0,6).forEach((award,i)=>text(c,`◆ ${award}`,890,735+i*58,15,i===0?GOLD:PAPER,"700"));label(c,"FOOTBALL-ARCADE.VERCEL.APP",600,1160,"#58605b");return value;
+}

@@ -16,6 +16,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { AchievementsCenter } from "@/app/achievements/achievements-center";
 import { WeeklyLeaderboard } from "@/app/leaderboard/weekly-leaderboard";
 import { AccountCard } from "@/app/account/account-card";
+import { createSquadShareCard, deliverShareCard } from "@/lib/share-cards";
 
 type Mode = "home" | "era" | "perfect" | "player" | "about";
 type Game = Exclude<Mode, "home" | "about">;
@@ -327,7 +328,8 @@ function GameView({game,go,onOpenLeaderboard}:{game:Game;go:(m:Mode)=>void;onOpe
     },2400);
   }
 
-  async function share(){const url=new URL(location.href);url.searchParams.set("result",btoa(unescape(encodeURIComponent(JSON.stringify({game,result,picks:picks.map(p=>p.name)})))));history.replaceState({},"",url);const data={title:result?.title,text:`I scored ${result?.score} in ${game==="era"?"Era XI":game==="perfect"?"Five-a-Side":"Build a Player"}. Beat that.`,url:url.href};if(navigator.share)await navigator.share(data);else await navigator.clipboard.writeText(url.href)}
+  async function downloadSquadCard(){if(!result||game!=="era"||!formation||!coach||!season)return;const row=result.table?.find(item=>item.highlight),finish=result.table?result.table.findIndex(item=>item.highlight)+1:0,ratings=new Map((result.playerStats||[]).map(player=>[player.name,player.realOverall])),card=createSquadShareCard({teamName:rankingName.trim()||"ERA XI",era:selectedEra,formation:formation.name,manager:coach.name,league:season.league,season:String(season.year),score:result.score,record:row?`${row.wins}-${row.draws}-${row.losses}`:"—",points:String(row?.points||"—"),finish:finish?`#${finish}`:"—",players:picks.map(player=>({name:player.name,slot:player.slot||player.pos,club:player.club,rating:ratings.get(player.name)||overall(player)})),awards:result.awards||[]});await deliverShareCard(card,`football-arcade-${selectedEra}-era-xi.png`,`${rankingName.trim()||"Era XI"} · Football Arcade`)}
+  async function share(){await downloadSquadCard()}
   const title=game==="era"?"ERA XI":game==="perfect"?"FIVE-A-SIDE":"BUILD A PLAYER"; const copy=game==="era"?"Eleven picks. One manager. A historic league rewritten.":game==="perfect"?"Draft five roles. Survive the small-sided world tour.":"Borrow six gifts. Create one superstar.";
   return <main className="game-page"><section className="game-head"><button className="back" onClick={()=>go("home")}>← ALL GAMES</button><div><span>FOOTBALL ARCADE / {title}</span><h1>{title}</h1><p>{copy}</p></div></section>
   {game==="era"&&!selectedEra&&!result&&<section className="era-select"><span className="section-label">STEP 01 · CHOOSE THE WORLD</span><h2>WHAT KIND OF<br/>FOOTBALL WINS?</h2><div className="era-options">{ERAS.map(era=><button key={era.id} onClick={()=>setSelectedEra(era.id)}><span>{era.years}</span><strong>{era.label}</strong><h3>{era.title}</h3><p>{era.copy}</p><div>{era.traits.map(t=><i key={t}>{t}</i>)}</div></button>)}</div></section>}
