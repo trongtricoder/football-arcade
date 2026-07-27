@@ -16,7 +16,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { AchievementsCenter } from "@/app/achievements/achievements-center";
 import { WeeklyLeaderboard } from "@/app/leaderboard/weekly-leaderboard";
 import { AccountCard } from "@/app/account/account-card";
-import { createSquadShareCard, deliverShareCard } from "@/lib/share-cards";
+import { createSquadShareCard, openShareCard } from "@/lib/share-cards";
 
 type Mode = "home" | "era" | "perfect" | "player" | "about";
 type Game = Exclude<Mode, "home" | "about">;
@@ -255,7 +255,7 @@ function DraftRerolls({leagueUsed,eraUsed,fullUsed,busy,onLeague,onEra,onFull}:{
 function GameView({game,go,onOpenLeaderboard}:{game:Game;go:(m:Mode)=>void;onOpenLeaderboard:(era:string)=>void}){
   const [nonce,setNonce]=useState(()=>Date.now()),[picks,setPicks]=useState<Pick[]>([]),[result,setResult]=useState<Result|null>(null),[league,setLeague]=useState(leagues[0]),[position,setPosition]=useState<Pos>("ATT"),[formation,setFormation]=useState<typeof FORMATIONS[number]|null>(null),[fiveFormation,setFiveFormation]=useState<typeof FIVE_FORMATIONS[number]|null>(null),[selectedEra,setSelectedEra]=useState(""),[rerollUsed,setRerollUsed]=useState(false),[rerollNonce,setRerollNonce]=useState(0),[spinning,setSpinning]=useState(false),[coach,setCoach]=useState<Coach|null>(null),[,setPendingCoach]=useState<Coach|null>(null),[coachDisplay,setCoachDisplay]=useState(""),[leagueDisplay,setLeagueDisplay]=useState(""),[yearDisplay,setYearDisplay]=useState(""),[season,setSeason]=useState<LeagueSeason|null>(null),[phaseSpin,setPhaseSpin]=useState<"coach"|"league"|"year"|null>(null),[,setPendingSeason]=useState<LeagueSeason|null>(null),[revealFinal,setRevealFinal]=useState(true),[pendingPickId,setPendingPickId]=useState<string|null>(null),[squadConfirmed,setSquadConfirmed]=useState(false),[drawPhase,setDrawPhase]=useState<"league"|"league-only"|"era"|"players">("league");
   const [leagueRerollUsed,setLeagueRerollUsed]=useState(false),[eraRerollUsed,setEraRerollUsed]=useState(false),[leagueRerollNonce,setLeagueRerollNonce]=useState(0),[eraRerollNonce,setEraRerollNonce]=useState(0),[playerRerollNonce,setPlayerRerollNonce]=useState(0),[playerRerollUsed,setPlayerRerollUsed]=useState(false),[previousRosterKey,setPreviousRosterKey]=useState(""),[worldRerollUsed,setWorldRerollUsed]=useState(false),[worldRerollNonce,setWorldRerollNonce]=useState(0);
-  const [lockedDrawLeague,setLockedDrawLeague]=useState<string|null>(null),[lockedDrawEra,setLockedDrawEra]=useState<string|null>(null),[excludedDrawLeague,setExcludedDrawLeague]=useState<string|null>(null),[excludedDrawEra,setExcludedDrawEra]=useState<string|null>(null),[profilePlayer,setProfilePlayer]=useState<Pick|null>(null),[swapSourceId,setSwapSourceId]=useState<string|null>(null),[saveStatus,setSaveStatus]=useState<"idle"|"saving"|"saved"|"error">("idle"),[savedRunId,setSavedRunId]=useState<string|null>(null),[rankingOpen,setRankingOpen]=useState(false),[rankingName,setRankingName]=useState("Era XI"),[rankingStatus,setRankingStatus]=useState<"idle"|"sending"|"done"|"error">("idle"),[rankingRank,setRankingRank]=useState<number|null>(null),[rankingScore,setRankingScore]=useState<number|null>(null);
+  const [lockedDrawLeague,setLockedDrawLeague]=useState<string|null>(null),[lockedDrawEra,setLockedDrawEra]=useState<string|null>(null),[excludedDrawLeague,setExcludedDrawLeague]=useState<string|null>(null),[excludedDrawEra,setExcludedDrawEra]=useState<string|null>(null),[profilePlayer,setProfilePlayer]=useState<Pick|null>(null),[swapSourceId,setSwapSourceId]=useState<string|null>(null),[saveStatus,setSaveStatus]=useState<"idle"|"saving"|"saved"|"error">("idle"),[saveMessage,setSaveMessage]=useState(""),[savedRunId,setSavedRunId]=useState<string|null>(null),[rankingOpen,setRankingOpen]=useState(false),[rankingName,setRankingName]=useState("Era XI"),[rankingStatus,setRankingStatus]=useState<"idle"|"sending"|"done"|"error">("idle"),[rankingRank,setRankingRank]=useState<number|null>(null),[rankingScore,setRankingScore]=useState<number|null>(null);
   const [achievementUnlocks,setAchievementUnlocks]=useState<AchievementUnlock[]>([]);
   // The event bridge lets every pitch instance open profiles and complete touch swaps.
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -274,6 +274,7 @@ function GameView({game,go,onOpenLeaderboard}:{game:Game;go:(m:Mode)=>void;onOpe
   async function saveEraXiRun(){
     if(game!=="era"||!formation||!coach||!season)return;
     setSaveStatus("saving");
+    setSaveMessage("");
     setSavedRunId(null);
     setRankingOpen(false);
     setRankingStatus("idle");
@@ -290,6 +291,9 @@ function GameView({game,go,onOpenLeaderboard}:{game:Game;go:(m:Mode)=>void;onOpe
       setSaveStatus("saved");
     }catch(error){
       console.error("Era XI verification failed",error);
+      const message=error instanceof Error?error.message:"The result could not be verified. Please retry.";
+      setSaveMessage(message);
+      window.dispatchEvent(new CustomEvent("football-save-error",{detail:{message,retry:saveEraXiRun}}));
       setSaveStatus("error");
     }
   }
@@ -328,8 +332,9 @@ function GameView({game,go,onOpenLeaderboard}:{game:Game;go:(m:Mode)=>void;onOpe
     },2400);
   }
 
-  async function downloadSquadCard(){if(!result||game!=="era"||!formation||!coach||!season)return;const row=result.table?.find(item=>item.highlight),finish=result.table?result.table.findIndex(item=>item.highlight)+1:0,ratings=new Map((result.playerStats||[]).map(player=>[player.name,player.realOverall])),card=createSquadShareCard({teamName:rankingName.trim()||"ERA XI",era:selectedEra,formation:formation.name,manager:coach.name,league:season.league,season:String(season.year),score:result.score,record:row?`${row.wins}-${row.draws}-${row.losses}`:"—",points:String(row?.points||"—"),finish:finish?`#${finish}`:"—",players:picks.map(player=>({name:player.name,slot:player.slot||player.pos,club:player.club,rating:ratings.get(player.name)||overall(player)})),awards:result.awards||[]});await deliverShareCard(card,`football-arcade-${selectedEra}-era-xi.png`,`${rankingName.trim()||"Era XI"} · Football Arcade`)}
+  async function downloadSquadCard(){if(!result||game!=="era"||!formation||!coach||!season)return;const row=result.table?.find(item=>item.highlight),finish=result.table?result.table.findIndex(item=>item.highlight)+1:0,ratings=new Map((result.playerStats||[]).map(player=>[player.name,player.realOverall])),card=createSquadShareCard({teamName:rankingName.trim()||"ERA XI",era:selectedEra,formation:formation.name,manager:coach.name,league:season.league,season:String(season.year),score:result.score,record:row?`${row.wins}-${row.draws}-${row.losses}`:"—",points:String(row?.points||"—"),finish:finish?`#${finish}`:"—",players:picks.map(player=>({name:player.name,slot:player.slot||player.pos,club:player.club,rating:ratings.get(player.name)||overall(player)})),awards:result.awards||[]});openShareCard(card,`football-arcade-${selectedEra}-era-xi.png`,`${rankingName.trim()||"Era XI"} · Football Arcade`)}
   async function share(){await downloadSquadCard()}
+  void saveMessage;
   const title=game==="era"?"ERA XI":game==="perfect"?"FIVE-A-SIDE":"BUILD A PLAYER"; const copy=game==="era"?"Eleven picks. One manager. A historic league rewritten.":game==="perfect"?"Draft five roles. Survive the small-sided world tour.":"Borrow six gifts. Create one superstar.";
   return <main className="game-page"><section className="game-head"><button className="back" onClick={()=>go("home")}>← ALL GAMES</button><div><span>FOOTBALL ARCADE / {title}</span><h1>{title}</h1><p>{copy}</p></div></section>
   {game==="era"&&!selectedEra&&!result&&<section className="era-select"><span className="section-label">STEP 01 · CHOOSE THE WORLD</span><h2>WHAT KIND OF<br/>FOOTBALL WINS?</h2><div className="era-options">{ERAS.map(era=><button key={era.id} onClick={()=>setSelectedEra(era.id)}><span>{era.years}</span><strong>{era.label}</strong><h3>{era.title}</h3><p>{era.copy}</p><div>{era.traits.map(t=><i key={t}>{t}</i>)}</div></button>)}</div></section>}

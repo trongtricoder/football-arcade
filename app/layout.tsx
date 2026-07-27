@@ -7,6 +7,7 @@ import "./modal-fixes.css";
 import "./ranking-form-fixes.css";
 import "./account/account-card.css";
 import "./achievement-reveal.css";
+import "./share-card-modal.css";
 import "./account/account-grid-fix.css";
 
 export const metadata: Metadata = {

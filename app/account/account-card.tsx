@@ -5,12 +5,13 @@ import type { User } from "@supabase/supabase-js";
 import playerData from "@/data/players.json";
 import playerExpansion from "@/data/player-expansion.json";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { createLifetimeShareCard, createProfileShareCard, deliverShareCard } from "@/lib/share-cards";
+import { createLifetimeShareCard, createProfileShareCard, openShareCard } from "@/lib/share-cards";
 
 type Selection = { playerId?: string };
 type Run = { era:string; league_id:string; manager_id:string; score:number; wins:number; draws:number; losses:number; league_position:number; selections:Selection[] };
 type Profile = { username:string; display_name:string };
 type Stats = { verified_runs:number; league_titles:number; best_score:number; total_wins:number; invincible_seasons:number };
+type BoardEntry = { id:string; user_id:string; week_start:string; era:string; score:number; league_points:number; goal_difference:number; submitted_at:string };
 type AccountState = "loading" | "signed-out" | "ready" | "error";
 
 const eras=["80s","90s","00s","10s","20s"];
@@ -30,6 +31,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
   const [runs,setRuns]=useState<Run[]>([]);
   const [achievementCount,setAchievementCount]=useState(0);
   const [leaderboardCount,setLeaderboardCount]=useState(0);
+  const [leaderboardPlaces,setLeaderboardPlaces]=useState({first:0,top5:0,top10:0,top100:0});
   const [status,setStatus]=useState("LOADING PLAYER RECORD...");
   const [email,setEmail]=useState("");
   const [authBusy,setAuthBusy]=useState(false);
@@ -49,7 +51,7 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
       supabase.from("user_statistics").select("verified_runs,league_titles,best_score,total_wins,invincible_seasons").eq("user_id",userId).maybeSingle(),
       supabase.from("game_runs").select("era,league_id,manager_id,score,wins,draws,losses,league_position,selections").eq("user_id",userId).eq("verification_status","verified"),
       supabase.from("user_achievements").select("achievement_id",{count:"exact",head:true}).eq("user_id",userId),
-      supabase.from("weekly_leaderboard_entries").select("id",{count:"exact",head:true}).eq("user_id",userId),
+      supabase.from("weekly_leaderboard_entries").select("id,user_id,week_start,era,score,league_points,goal_difference,submitted_at").limit(10000),
     ]);
     const timeout=new Promise<never>((_,reject)=>window.setTimeout(()=>reject(new Error("Account data timed out. Please try again.")),12000));
     const [p,s,r,a,l]=await Promise.race([request,timeout]);
@@ -60,7 +62,8 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     setStats(s.data as Stats|null);
     setRuns((r.data||[]) as Run[]);
     setAchievementCount(a.count||0);
-    setLeaderboardCount(l.count||0);
+    const board=(l.data||[]) as BoardEntry[],own=board.filter(entry=>entry.user_id===userId),ranks=own.map(entry=>board.filter(candidate=>candidate.week_start===entry.week_start&&candidate.era===entry.era).sort((a,b)=>b.score-a.score||b.league_points-a.league_points||b.goal_difference-a.goal_difference||a.submitted_at.localeCompare(b.submitted_at)).findIndex(candidate=>candidate.id===entry.id)+1).filter(rank=>rank>0);
+    setLeaderboardCount(own.length);setLeaderboardPlaces({first:ranks.filter(rank=>rank===1).length,top5:ranks.filter(rank=>rank<=5).length,top10:ranks.filter(rank=>rank<=10).length,top100:ranks.filter(rank=>rank<=100).length});
     setStatus("");
     setAccountState("ready");
   },[]);
@@ -150,8 +153,8 @@ export function AccountCard({onClose}:{onClose:()=>void}) {
     const displayName=profile?.display_name||"Football Arcade Player",drafts=stats?.verified_runs||runs.length,record=`${totals.wins}-${totals.draws}-${totals.losses}`,titles=stats?.league_titles||0,bestScore=bestRun?.score||stats?.best_score||0;
     try{
       setShareStatus("CREATING CARD...");
-      const card=style==="profile"?createProfileShareCard({displayName,username:profile?.username||"player",drafts,record,winRate,titles,bestScore,achievements:achievementCount,topEntries:leaderboardCount,favoritePlayer,favoriteCoach}):createLifetimeShareCard({displayName,drafts,record,winRate,titles,bestScore,favoriteEra,favoritePlayer,favoriteCoach,eraRows});
-      setShareStatus(await deliverShareCard(card,`football-arcade-${profile?.username||"player"}-${style}.png`,`${displayName} · Football Arcade`));setShareMenu(false);
+      const card=style==="profile"?createProfileShareCard({displayName,username:profile?.username||"player",drafts,record,winRate,titles,bestScore,achievements:achievementCount,leaderboard:leaderboardPlaces,favoritePlayer,favoriteCoach}):createLifetimeShareCard({displayName,drafts,record,winRate,titles,bestScore,favoriteEra,favoritePlayer,favoriteCoach,eraRows});
+      openShareCard(card,`football-arcade-${profile?.username||"player"}-${style}.png`,`${displayName} · Football Arcade`);setShareStatus("CARD READY");setShareMenu(false);
     }catch(error){if(error instanceof DOMException&&error.name==="AbortError")return;setShareStatus("SHARE UNAVAILABLE");}
     window.setTimeout(()=>setShareStatus(""),3000);
   }
