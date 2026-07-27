@@ -5,7 +5,7 @@ type SquadPlayer = { name:string; slot:string; club:string; rating:number };
 
 const GOLD="#e3bd3d", LIME="#c8ff3d", PAPER="#eef2e8", MUTED="#8c958f", PANEL="#111512", LINE="#303830";
 
-function canvas(width:number,height:number){const value=document.createElement("canvas");value.width=width;value.height=height;const context=value.getContext("2d");if(!context)throw new Error("Image rendering is unavailable.");context.fillStyle="#050806";context.fillRect(0,0,width,height);return {value,context};}
+function canvas(width:number,height:number){const scale=2,value=document.createElement("canvas");value.width=width*scale;value.height=height*scale;const context=value.getContext("2d");if(!context)throw new Error("Image rendering is unavailable.");context.scale(scale,scale);context.fillStyle="#050806";context.fillRect(0,0,width,height);return {value,context};}
 function text(ctx:CanvasRenderingContext2D,value:string,x:number,y:number,size:number,color=PAPER,weight="700",align:CanvasTextAlign="left"){ctx.fillStyle=color;ctx.font=`${weight} ${size}px Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(value,x,y);}
 function label(ctx:CanvasRenderingContext2D,value:string,x:number,y:number,color=MUTED){text(ctx,value.toUpperCase(),x,y,15,color,"800");}
 function box(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number){ctx.fillStyle=PANEL;ctx.fillRect(x,y,w,h);ctx.strokeStyle=LINE;ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);}
