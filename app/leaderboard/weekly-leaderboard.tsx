@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const eras = ["80s", "90s", "00s", "10s", "20s"];
+const leaderboardEpoch = "2026-07-20";
 type Person = { id: string; username: string; display_name: string };
 type Entry = {
   id: string;
@@ -26,6 +27,23 @@ type RosterDetail = {
 };
 
 function slotRole(slot: string) { return slot.replace(/\d+$/, ""); }
+
+function mondayStart(date = new Date()) {
+  const monday = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const weekday = (monday.getUTCDay() + 6) % 7;
+  monday.setUTCDate(monday.getUTCDate() - weekday);
+  return monday.toISOString().slice(0, 10);
+}
+
+function addUtcDays(date: string, days: number) {
+  const value = new Date(`${date}T00:00:00.000Z`);
+  value.setUTCDate(value.getUTCDate() + days);
+  return value.toISOString().slice(0, 10);
+}
+
+function shortDate(date: string) {
+  return new Intl.DateTimeFormat("en", { month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(`${date}T00:00:00.000Z`));
+}
 
 function pitchLine(slot: string) {
   const role = slotRole(slot);
@@ -64,24 +82,31 @@ function formationPoint(roster: RosterDetail["roster"], playerIndex: number): [n
 
 export function WeeklyLeaderboard({ onClose, initialEra = "20s" }: { onClose?: () => void; initialEra?: string } = {}) {
   const [era, setEra] = useState(initialEra);
+  const currentMonday = useMemo(() => mondayStart(), []);
+  const [selectedWeek, setSelectedWeek] = useState(currentMonday);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [message, setMessage] = useState("");
   const [detail, setDetail] = useState<RosterDetail | null>(null);
   const [detailMessage, setDetailMessage] = useState("");
   const detailCache = useRef(new Map<string, RosterDetail>());
-  const monday = useMemo(() => {
-    const date = new Date();
-    const weekday = (date.getDay() + 6) % 7;
-    date.setDate(date.getDate() - weekday);
-    return date.toISOString().slice(0, 10);
-  }, []);
+  const weeks = useMemo(() => {
+    const first = new Date(`${leaderboardEpoch}T00:00:00.000Z`).getTime();
+    const current = new Date(`${currentMonday}T00:00:00.000Z`).getTime();
+    const currentIndex = Math.max(0, Math.floor((current - first) / 604_800_000));
+    return Array.from({ length: currentIndex + 1 }, (_, offset) => {
+      const index = currentIndex - offset;
+      const start = addUtcDays(leaderboardEpoch, index * 7);
+      return { index, start, end: addUtcDays(start, 6), current: start === currentMonday };
+    });
+  }, [currentMonday]);
+  const activeWeek = weeks.find((week) => week.start === selectedWeek) || weeks[0];
 
   const load = useCallback(async () => {
     const supabase = createSupabaseBrowserClient();
     const { data, error } = await supabase
       .from("weekly_leaderboard_entries")
       .select("id,user_id,team_name,manager_name,league_position,score,raw_team_score,league_points,goal_difference")
-      .eq("week_start", monday)
+      .eq("week_start", selectedWeek)
       .eq("era", era)
       .order("score", { ascending: false })
       .order("league_points", { ascending: false })
@@ -99,7 +124,7 @@ export function WeeklyLeaderboard({ onClose, initialEra = "20s" }: { onClose?: (
     const peopleRows = (people || []) as Person[];
     const names = new Map(peopleRows.map((person) => [person.id, person]));
     setEntries(rows.map((row) => ({ ...row, profile: names.get(row.user_id) || null })) as Entry[]);
-  }, [era, monday]);
+  }, [era, selectedWeek]);
 
   useEffect(() => { const frame = window.requestAnimationFrame(() => { void load(); }); return () => window.cancelAnimationFrame(frame); }, [load]);
 
@@ -125,10 +150,14 @@ export function WeeklyLeaderboard({ onClose, initialEra = "20s" }: { onClose?: (
       {onClose && <button className="modal-close" onClick={onClose}>CLOSE ×</button>}
       <header>
         <div><span>ERA XI COMPETITION</span><h1>WEEKLY<br />LEADERBOARD</h1></div>
-        <p>Every verified campaign you submit earns its own place. Enter as many different XIs as you want before the board resets Monday.</p>
+        <p>{activeWeek.current ? "The live board closes Sunday night. Every verified XI you choose to submit earns its own place." : `Week ${activeWeek.index} is sealed. Revisit its classic teams, managers and verified campaigns.`}</p>
       </header>
       <div className="score-key"><b>SCORING MODEL</b><span>TEAM ×8</span><span>LEAGUE PTS ×5</span><span>WINS ×4</span><span>GD ×3</span><span>CLEAN SHEETS ×3</span><span>TROPHIES +200</span><span>UNBEATEN +100</span><span>PERFECT +250</span></div>
       <div className="era-tabs">{eras.map((value) => <button type="button" className={era === value ? "active" : ""} onClick={() => setEra(value)} key={value}>{value}</button>)}</div>
+      <section className="week-archive" aria-label="Weekly leaderboard archive">
+        <header><span>WEEKLY RECAP</span><small>{activeWeek.current ? "LIVE BOARD" : "ARCHIVED BOARD"}</small></header>
+        <div>{weeks.map((week) => <button type="button" className={selectedWeek === week.start ? "active" : ""} onClick={() => { setSelectedWeek(week.start); setDetail(null); setDetailMessage(""); }} key={week.start}><strong>WEEK {week.index}</strong><small>{week.current ? "CURRENT" : `${shortDate(week.start)}–${shortDate(week.end)}`}</small></button>)}</div>
+      </section>
       <section className="weekly-board">
         <header><span>RANK</span><span>TEAM / COACH</span><span>SCORE</span><span>OVR</span><span>PTS</span><span>GD</span><span>FINISH</span></header>
         {message && <p>{message}</p>}
@@ -142,7 +171,7 @@ export function WeeklyLeaderboard({ onClose, initialEra = "20s" }: { onClose?: (
             <span>{entry.goal_difference > 0 ? "+" : ""}{entry.goal_difference}</span>
             <span>#{entry.league_position}</span>
           </article>
-        )) : !message && <p>NO VERIFIED {era.toUpperCase()} SUBMISSIONS THIS WEEK YET.</p>}
+        )) : !message && <p>NO VERIFIED {era.toUpperCase()} SUBMISSIONS IN WEEK {activeWeek.index}.</p>}
       </section>
       {(detail || detailMessage) && <section className="roster-inspector" aria-live="polite">
         <button type="button" className="roster-close" aria-label="Close squad details" onClick={() => { setDetail(null); setDetailMessage(""); }}>×</button>
