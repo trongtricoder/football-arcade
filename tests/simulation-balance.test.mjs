@@ -22,6 +22,14 @@ function cohort(profile, count, prefix) {
   return Object.fromEntries(Object.entries(total).map(([key, value]) => [key, ["perfect", "unbeaten"].includes(key) ? value : value / count]));
 }
 
+test("identical seeds and inputs always produce identical campaigns", () => {
+  const first = simulateCampaign(strong, { seed:"deterministic-release-seed", opponents });
+  const second = simulateCampaign(strong, { seed:"deterministic-release-seed", opponents });
+  const different = simulateCampaign(strong, { seed:"another-release-seed", opponents });
+  assert.deepEqual(second, first);
+  assert.notDeepEqual(different, first);
+});
+
 test("100,000 seasons separate squad quality and preserve meaningful modifiers", () => {
   const ordinaryRun = cohort(ordinary, 20_000, "ordinary");
   const strongRun = cohort(strong, 20_000, "strong");
@@ -63,6 +71,15 @@ test("full league simulation conserves every fixture, goal and point", () => {
   const draws=result.table.reduce((sum,row)=>sum+row.draws,0)/2,decided=380-draws;
   assert.equal(result.table.reduce((sum,row)=>sum+row.points,0),decided*3+draws*2);
   assert.ok(result.table[0].points<100&&result.table.at(-1).points<50,result.table);
+});
+
+test("identical full-league inputs produce identical tables and timelines", () => {
+  const teams=["Era XI",...Array.from({length:19},(_,index)=>`Deterministic Club ${index+1}`)];
+  const schedule=createLeagueSchedule(teams);
+  const strengths=Object.fromEntries(teams.slice(1).map((club,index)=>[club,86-index*.6]));
+  const userScores=schedule.map((_,index)=>({goalsFor:index%3,goalsAgainst:index%2}));
+  const input={schedule,userTeam:"Era XI",userScores,strengths,seed:"deterministic-league"};
+  assert.deepEqual(simulateFullLeague(input),simulateFullLeague(input));
 });
 
 test("five-a-side tour rewards quality, chemistry and positional discipline", () => {

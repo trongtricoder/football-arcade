@@ -7,8 +7,17 @@ const root = new URL("../", import.meta.url);
 test("ships all three playable game modes", async () => {
   const source = await readFile(new URL("app/football-arcade.tsx", root), "utf8");
   const careerSource = await readFile(new URL("features/build-player/build-player-career.tsx", root), "utf8");
+  const shareModalSource = await readFile(new URL("app/share-card-modal.tsx", root), "utf8");
+  const shareCardSource = await readFile(new URL("lib/share-cards.ts", root), "utf8");
+  const awardSource = await readFile(new URL("simulation/season-awards.ts", root), "utf8");
   assert.match(source, /ERA XI/);
   assert.match(source, /FIVE-A-SIDE/);
+  assert.match(source, /className="mobile-menu"/);
+  assert.match(source, /Open navigation menu/);
+  assert.match(source, /HOW TO PLAY/);
+  assert.match(source, /ACHIEVEMENTS/);
+  assert.match(source, /LEADERBOARD/);
+  assert.match(source, /ACCOUNT/);
   assert.match(source, /const FIVE_FORMATIONS/);
   assert.match(source, /DIAMOND/);
   assert.match(source, /TWIN ATTACK/);
@@ -83,7 +92,12 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /POSITION FIT/);
   assert.match(source, /SQUAD POWER/);
   assert.doesNotMatch(source, /dailySeed|DAILY CHALLENGE|RANDOM RUN|NEW DAILY SEED|WEEKLY CHALLENGE/);
-  assert.match(source, /navigator\.share/);
+  assert.match(source, /createSquadShareCard/);
+  assert.match(source, /openShareCard/);
+  assert.match(shareCardSource, /football-share-card/);
+  assert.match(shareCardSource, /toDataURL\("image\/png"\)/);
+  assert.match(shareModalSource, /Share card preview/);
+  assert.match(shareModalSource, /DOWNLOAD PNG/);
   assert.match(source, /const FORMATIONS/);
   assert.match(source, /4-3-3 · HOLDING",slots:\["GK","LB","CB1","CB2","RB","CM1","DM","CM2","LW","ST","RW"\]/);
   assert.match(source, /4-2-1-3/);
@@ -100,7 +114,8 @@ test("ships all three playable game modes", async () => {
   assert.match(source, /const SEASONS/);
   assert.match(source, /function SeasonReplay/);
   assert.match(source, /function TeamReview/);
-  assert.match(source, /Golden Glove/);
+  assert.match(awardSource, /Golden Glove/);
+  assert.match(awardSource, /European Qualification/);
   assert.match(source, /function positionFit/);
   assert.match(source, /function playableRoles/);
   assert.match(source, /playableRoles\(p\)\.includes\(target\)/);
@@ -171,4 +186,21 @@ test("removes starter preview metadata and presents the finished brand", async (
   ]);
   assert.doesNotMatch(page + layout, /codex-preview|Starter Project|SkeletonPreview/);
   assert.match(layout, /Football Arcade/);
+});
+
+test("preserves the deployed mobile canvas while adding an isolated touch menu", async () => {
+  const layout = await readFile(new URL("app/layout.tsx", root), "utf8");
+  const source = await readFile(new URL("app/football-arcade.tsx", root), "utf8");
+  const globalStyles = await readFile(new URL("app/globals.css", root), "utf8");
+  const revealStyles = await readFile(new URL("app/achievement-reveal.css", root), "utf8");
+  assert.doesNotMatch(layout, /width:\s*["']device-width["']/);
+  assert.match(source, /<details className="mobile-menu">/);
+  assert.match(source, /<summary aria-label="Open navigation menu">/);
+  assert.match(globalStyles, /Compact mobile navigation/);
+  assert.match(globalStyles, /header>\.mobile-menu/);
+  assert.doesNotMatch(source, />MENU</);
+  assert.match(source, /function AchievementReveal/);
+  assert.match(source, /ACHIEVEMENT\{items\.length>1\?["']S["']:["']["']\} UNLOCKED/);
+  assert.match(revealStyles, /\.achievement-reveal\{position:fixed/);
+  assert.match(revealStyles, /z-index:1200/);
 });

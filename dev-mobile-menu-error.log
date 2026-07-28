@@ -1,0 +1,6 @@
+[2m5:00:39 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled rejection] [1mTypeError[22m: Importing a module script failed.
+[39m
+[2m5:04:05 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mEra XI verification failed TypeError: Load failed
+[2m5:04:09 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mEra XI verification failed TypeError: Load failed
+[2m5:06:29 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mWebCrypto API is not supported. Code challenge method will default to use plain instead of sha256.
+[2m5:07:18 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mWebCrypto API is not supported. Code challenge method will default to use plain instead of sha256.

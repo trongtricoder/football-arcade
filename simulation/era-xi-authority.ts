@@ -8,6 +8,7 @@ import playerRoles from "@/data/player-roles.json";
 import { simulateCampaign } from "./engine";
 import { createLeagueSchedule, simulateFullLeague } from "./league";
 import { buildPlayerSeasonStats, getSeasonLeaders, type VerifiedPlayerSeasonStat } from "./player-season-stats";
+import { validateEraXiRunRequest } from "./era-xi-rules";
 
 type PositionGroup = "GK" | "DEF" | "MID" | "ATT";
 type Role =
@@ -381,6 +382,7 @@ function grade(score: number) {
 export function simulateAuthoritativeEraXi(
   request: EraXiRunRequest,
 ): AuthoritativeEraXiResult {
+  validateEraXiRunRequest(request);
   if (!request || typeof request !== "object") throw new Error("Invalid simulation request.");
   if (typeof request.seed !== "string" || !request.seed.trim() || request.seed.length > 200) throw new Error("Invalid seed.");
   if (!Object.prototype.hasOwnProperty.call(verifiedFormations, request.formation)) throw new Error("Unknown formation.");

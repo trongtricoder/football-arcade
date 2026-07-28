@@ -1,5 +1,6 @@
 import {createSupabaseAdminClient} from "@/lib/supabase/admin";
 import {simulateAuthoritativeEraXi, type EraXiRunRequest} from "@/simulation/era-xi-authority";
+import {calculateLeaderboardScore,leaderboardRank,utcWeekStart} from "@/lib/leaderboard-rules";
 export const dynamic="force-dynamic";
 function token(request:Request){const value=request.headers.get("authorization");return value?.startsWith("Bearer ")?value.slice(7):null}
 export async function POST(request:Request){try{
@@ -13,13 +14,11 @@ export async function POST(request:Request){try{
  const replay=simulateAuthoritativeEraXi({seed:run.seed,formation:run.formation,era:run.era,selections:run.selections,managerName:run.manager_id,league:run.league_id,seasonYear:Number(run.season_id)} as EraXiRunRequest);
  const checks=[replay.score===run.score,replay.leaguePosition===run.league_position,replay.leaguePoints===run.league_points,replay.wins===run.wins,replay.draws===run.draws,replay.losses===run.losses,replay.goalsFor===run.goals_for,replay.goalsAgainst===run.goals_against,replay.cleanSheets===run.clean_sheets,replay.trophyCount===run.trophy_count];
  if(checks.some(check=>!check)){await supabase.from("security_events").insert({user_id:user.id,event_type:"leaderboard_replay_mismatch",severity:"critical",details:{runId}});return Response.json({error:"This campaign did not pass replay verification."},{status:422})}
- const gd=(run.goals_for||0)-(run.goals_against||0),breakdown={team:run.score*8,points:(run.league_points||0)*5,wins:(run.wins||0)*4,goalDifference:gd*3,cleanSheets:(run.clean_sheets||0)*3,trophies:(run.trophy_count||0)*200,invincible:run.losses===0?100:0,perfect:run.losses===0&&run.draws===0?250:0};
- const rankingScore=Object.values(breakdown).reduce((sum,value)=>sum+value,0),week=new Date(),weekday=(week.getUTCDay()+6)%7;week.setUTCDate(week.getUTCDate()-weekday);const weekStart=week.toISOString().slice(0,10);
+ const {goalDifference:gd,breakdown,rankingScore}=calculateLeaderboardScore({score:run.score,leaguePoints:run.league_points||0,wins:run.wins||0,draws:run.draws||0,losses:run.losses||0,goalsFor:run.goals_for||0,goalsAgainst:run.goals_against||0,cleanSheets:run.clean_sheets||0,trophyCount:run.trophy_count||0}),weekStart=utcWeekStart();
  const payload={week_start:weekStart,era:run.era,user_id:user.id,run_id:run.id,team_name:clean,manager_name:run.manager_id||"Unknown Coach",league_position:run.league_position||1,score:rankingScore,raw_team_score:run.score,score_breakdown:breakdown,league_points:run.league_points,goal_difference:gd,trophy_count:run.trophy_count};
  const {error:rankError}=await supabase.from("weekly_leaderboard_entries").insert(payload);if(rankError&&rankError.code!=="23505")throw rankError;
  await supabase.from("game_runs").update({team_name:clean}).eq("id",run.id);
  const {data:ranked,error:rankingError}=await supabase.from("weekly_leaderboard_entries").select("run_id").eq("week_start",weekStart).eq("era",run.era).order("score",{ascending:false}).order("league_points",{ascending:false}).order("goal_difference",{ascending:false}).order("submitted_at",{ascending:true});
- const rankedPosition=(ranked||[]).findIndex(entry=>entry.run_id===run.id);
- const rank=!rankingError&&rankedPosition>=0?rankedPosition+1:Math.max(1,(ranked||[]).length);
+ const rank=!rankingError?leaderboardRank(ranked||[],run.id):Math.max(1,(ranked||[]).length);
  return Response.json({submitted:true,weekStart,era:run.era,rank,rankingScore,breakdown});
 }catch(error){return Response.json({error:error instanceof Error?error.message:"Unable to submit this run."},{status:400})}}
