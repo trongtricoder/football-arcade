@@ -2,6 +2,12 @@
 
 Football Arcade is a browser-based collection of fast football “what-if” games.
 
+## Early Access
+
+Era XI is available in Early Access. The release is intentionally focused: Five-a-Side and Build-a-Player remain visible but locked while their simulation models are rebuilt.
+
+Players can use a guest profile or link Google/email to keep verified runs, achievements, weekly leaderboard entries, and lifetime statistics across devices. Early Access feedback can be submitted through the in-game Methodology & Rights panel.
+
 ## Era XI
 
 Era XI is the live game.
@@ -37,3 +43,5 @@ Ratings are created for Football Arcade and are not copied from EA Sports FC, Fo
 ## Product status
 
 Football Arcade is an independent entertainment project. It is not affiliated with or endorsed by FIFA, UEFA, any league, club, player, or game publisher.
+
+Guest play creates an anonymous account. Linked accounts store profile details, verified game results, achievements, and leaderboard entries. Football Arcade does not receive or store Google or email passwords.

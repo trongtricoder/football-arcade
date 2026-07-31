@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabasePublicConfig } from "@/lib/supabase/config";
+import { getSupabasePublicConfig } from "@/lib/supabase/public-config";
 
 function safeNext(value:string|null){return value?.startsWith("/")&&!value.startsWith("//")?value:"/";}
 
@@ -24,8 +24,8 @@ export async function GET(request:NextRequest){
     }
     return NextResponse.redirect(new URL(`/auth/complete?status=success&next=${encodeURIComponent(next)}`,requestUrl.origin));
   }catch(error){
-    const reason=error instanceof Error?error.message:"The account could not be confirmed.";
+    console.error("Authentication callback failed",error);
+    const reason="The sign-in link could not be completed. It may have expired or already been used.";
     return NextResponse.redirect(new URL(`/auth/complete?status=error&reason=${encodeURIComponent(reason)}`,requestUrl.origin));
   }
 }
-

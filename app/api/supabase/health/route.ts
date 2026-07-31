@@ -1,4 +1,4 @@
-import { getSupabasePublicConfig } from "@/lib/supabase/config";
+import { getSupabasePublicConfig } from "@/lib/supabase/public-config";
 
 export const dynamic = "force-dynamic";
 

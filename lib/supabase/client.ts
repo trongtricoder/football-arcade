@@ -1,7 +1,7 @@
 "use client";
 
 import { createBrowserClient } from "@supabase/ssr";
-import { getSupabasePublicConfig } from "./config";
+import { getSupabasePublicConfig } from "./public-config";
 
 let browserClient: ReturnType<typeof createBrowserClient> | undefined;
 
@@ -14,4 +14,3 @@ export const createSupabaseBrowserClient = () => {
   browserClient = createBrowserClient(url, publishableKey);
   return browserClient;
 };
-
