@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { simulateCampaign } from "../simulation/engine.ts";
 
 const load = async (name) => JSON.parse(await readFile(new URL(`../data/${name}`, import.meta.url), "utf8"));
 const [basePlayers, expansionPlayers, overrides, config] = await Promise.all([load("players.json"), load("player-expansion.json"), load("player-overrides.json"), load("balance-config.json")]);
@@ -20,9 +21,33 @@ for (const player of players) {
 }
 
 const average = values => values.reduce((sum, value) => sum + value, 0) / values.length;
+const opponents = Array.from({ length: 19 }, (_, index) => `Historical rival ${index + 1}`);
+const seasonProfiles = {
+  ordinary: { attack:77, defence:77, control:77, eraFit:88, positionFit:92, chemistry:0, managerAttack:0, managerDefence:0, cleanSheetBoost:0 },
+  strong: { attack:86, defence:85, control:86, eraFit:95, positionFit:98, chemistry:4, managerAttack:.05, managerDefence:.05, cleanSheetBoost:.07 },
+  elite: { attack:91, defence:90, control:91, eraFit:98, positionFit:99, chemistry:7, managerAttack:.08, managerDefence:.07, cleanSheetBoost:.1 },
+  "95-99": { attack:97, defence:96, control:97, eraFit:100, positionFit:100, chemistry:10, managerAttack:.1, managerDefence:.1, cleanSheetBoost:.15 },
+};
+function seasonDistribution(profile, name, count = 10_000) {
+  const seasons = [];
+  let points = 0, losses = 0, unbeaten = 0, perfect = 0;
+  for (let index = 0; index < count; index++) {
+    const season = simulateCampaign(profile, { seed:`audit-${name}-${index}`, opponents });
+    seasons.push(season.points); points += season.points; losses += season.losses;
+    if (season.losses === 0) unbeaten++;
+    if (season.wins === 38) perfect++;
+  }
+  seasons.sort((a, b) => a - b);
+  return { points:points/count, losses:losses/count, p10:seasons[Math.floor(count*.1)], p50:seasons[Math.floor(count*.5)], p90:seasons[Math.floor(count*.9)], unbeaten:unbeaten/count, perfect:perfect/count };
+}
 console.log("ERA XI BALANCE AUDIT");
 console.log(`Dataset version: ${overrides.version} / balance ${config.version}`);
 console.log(`Player versions: ${players.length}`);
+console.log("\nSeason distributions (10,000 seasons per squad)");
+const distributions = Object.fromEntries(Object.entries(seasonProfiles).map(([name, profile]) => [name, seasonDistribution(profile, name)]));
+for (const [name, result] of Object.entries(distributions)) {
+  console.log(`${name.padEnd(9)} ${result.points.toFixed(1)} pts · ${result.losses.toFixed(2)} losses · P10/P50/P90 ${result.p10}/${result.p50}/${result.p90} · unbeaten ${(result.unbeaten*100).toFixed(2)}% · 38-0 ${(result.perfect*100).toFixed(3)}%`);
+}
 console.log("\nRarity distribution");
 for (const [name, count] of Object.entries(tiers)) console.log(`${name.padEnd(10)} ${String(count).padStart(3)}  ${(count / players.length * 100).toFixed(1)}%`);
 console.log("\nPosition averages");
@@ -36,6 +61,9 @@ if (eliteShare < 0.08 || eliteShare > 0.45) failures.push(`Elite share ${(eliteS
 if (config.positionFit.goalkeeperPenalty > 65) failures.push("Goalkeeper out-of-position penalty is too forgiving.");
 if (config.positionFit.outfieldPenalty > 85) failures.push("Outfield position penalty is too forgiving.");
 if (Math.max(...players.flatMap(player => player.attrs)) > config.ratingRange.maximum) failures.push("An attribute exceeds the configured maximum.");
+if (distributions.strong.losses < distributions.elite.losses + 2) failures.push("Elite squads do not lose materially fewer matches than strong squads.");
+if (distributions.elite.losses < distributions["95-99"].losses + .7) failures.push("95-99 squads are not distinct from elite squads.");
+if (distributions["95-99"].perfect === 0 || distributions["95-99"].perfect >= .01) failures.push("38-0 must remain possible but occur in fewer than 1% of 95-99 seasons.");
 if (failures.length) {
   failures.forEach(message => console.error(`FAIL: ${message}`));
   process.exitCode = 1;
