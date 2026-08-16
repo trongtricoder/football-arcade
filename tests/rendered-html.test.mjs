@@ -204,3 +204,40 @@ test("preserves the deployed mobile canvas while adding an isolated touch menu",
   assert.match(revealStyles, /\.achievement-reveal\{position:fixed/);
   assert.match(revealStyles, /z-index:1200/);
 });
+
+test("the five-player refresh preserves the Era XI draft and replaces all eligible offers", async () => {
+  const source = await readFile(new URL("app/football-arcade.tsx", root), "utf8");
+  const callback = source.slice(source.indexOf("function rerollPlayers()"), source.indexOf("function rerollWorld()"));
+
+  assert.match(callback, /if\(playerRerollUsed\|\|spinning\)return/);
+  assert.match(callback, /setPlayerRerollUsed\(true\)/);
+  assert.match(callback, /setPreviousRosterKey\(options\.map\(player=>player\.id\)\.sort\(\)\.join\("\|"\)\)/);
+  assert.match(callback, /setPlayerRerollNonce\(n=>n\+1\)/);
+  assert.doesNotMatch(callback, /set(?:Locked|Excluded)Draw(?:League|Era)/);
+  assert.doesNotMatch(callback, /set(?:Picks|Formation|SelectedEra|Nonce|RerollNonce)\(/);
+
+  assert.match(source, /fresh=preferred\.filter\(player=>!previousIds\.has\(player\.id\)\)/);
+  assert.match(source, /roster=fresh\.length>=5\?fresh:preferred/);
+  assert.match(source, /preferred=available\.filter\(p=>p\.league===drawLeague&&playerDecade\(p\)===targetDecade\)/);
+
+  const before = {
+    league: "Premier League",
+    era: "00s",
+    formation: "4-2-1-3",
+    picks: ["drafted-player"],
+    round: 1,
+    offers: ["a", "b", "c", "d", "e"],
+  };
+  const eligible = [...before.offers, "f", "g", "h", "i", "j"];
+  const previousIds = new Set(before.offers);
+  const refreshed = eligible.filter(player => !previousIds.has(player)).slice(0, 5);
+  const after = { ...before, offers: refreshed };
+
+  assert.deepEqual(after.offers, ["f", "g", "h", "i", "j"]);
+  assert.equal(new Set(after.offers).size, 5);
+  assert.equal(after.league, before.league);
+  assert.equal(after.era, before.era);
+  assert.equal(after.formation, before.formation);
+  assert.deepEqual(after.picks, before.picks);
+  assert.equal(after.round, before.round);
+});
