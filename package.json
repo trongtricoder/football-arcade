@@ -9,7 +9,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "npm run data:validate && npm run balance:audit && npm run typecheck:worker && npm run build && node --experimental-strip-types --test tests/rendered-html.test.mjs tests/football-data.test.mjs tests/simulation-balance.test.mjs tests/era-xi-validation.test.mjs tests/leaderboard-rules.test.mjs tests/release-security.test.mjs tests/season-awards.test.mjs",
+    "test": "npm run data:validate && npm run balance:audit && npm run typecheck:worker && npm run build && node --experimental-strip-types --test tests/rendered-html.test.mjs tests/football-data.test.mjs tests/simulation-balance.test.mjs tests/era-xi-validation.test.mjs tests/leaderboard-rules.test.mjs tests/release-security.test.mjs tests/season-awards.test.mjs tests/whats-new.test.mjs",
     "typecheck:worker": "tsc --noEmit --strict --skipLibCheck --target ES2022 --module ESNext --moduleResolution Bundler --lib DOM,ESNext worker/index.ts",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern work --ignore-pattern outputs",
     "data:validate": "node scripts/validate-football-data.mjs",

@@ -4,7 +4,7 @@
     "pos": "GK",
     "era": "2000–04",
     "nation": "Italy",
-    "club": "Turin",
+    "club": "Juventus",
     "league": "Serie A",
     "attrs": [
       55,
@@ -15,8 +15,8 @@
       91
     ],
     "activeYears": [
-      1995,
-      2023
+      2001,
+      2004
     ]
   },
   {
@@ -24,7 +24,7 @@
     "pos": "GK",
     "era": "2010–14",
     "nation": "Germany",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       78,
@@ -44,7 +44,7 @@
     "pos": "GK",
     "era": "1995–99",
     "nation": "Denmark",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       58,
@@ -64,7 +64,7 @@
     "pos": "GK",
     "era": "2005–09",
     "nation": "Spain",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       68,
@@ -84,7 +84,7 @@
     "pos": "GK",
     "era": "2005–09",
     "nation": "Netherlands",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       52,
@@ -104,7 +104,7 @@
     "pos": "GK",
     "era": "2000–04",
     "nation": "Germany",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       52,
@@ -144,7 +144,7 @@
     "pos": "DEF",
     "era": "Legacy",
     "nation": "Germany",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       80,
@@ -184,7 +184,7 @@
     "pos": "DEF",
     "era": "2010–14",
     "nation": "Spain",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       82,
@@ -195,8 +195,8 @@
       92
     ],
     "activeYears": [
-      2004,
-      2023
+      2010,
+      2014
     ]
   },
   {
@@ -204,7 +204,7 @@
     "pos": "DEF",
     "era": "2005–09",
     "nation": "Spain",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       86,
@@ -215,8 +215,8 @@
       88
     ],
     "activeYears": [
-      2004,
-      2023
+      2005,
+      2009
     ]
   },
   {
@@ -224,7 +224,7 @@
     "pos": "DEF",
     "era": "2000–04",
     "nation": "Brazil",
-    "club": "Rome",
+    "club": "Roma",
     "league": "Serie A",
     "attrs": [
       94,
@@ -244,7 +244,7 @@
     "pos": "DEF",
     "era": "1995–99",
     "nation": "Brazil",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       97,
@@ -264,7 +264,7 @@
     "pos": "DEF",
     "era": "2010–14",
     "nation": "Germany",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       85,
@@ -284,7 +284,7 @@
     "pos": "DEF",
     "era": "2005–09",
     "nation": "England",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       83,
@@ -324,7 +324,7 @@
     "pos": "MID",
     "era": "2000–04",
     "nation": "France",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       80,
@@ -335,8 +335,8 @@
       86
     ],
     "activeYears": [
-      1989,
-      2006
+      2001,
+      2004
     ]
   },
   {
@@ -384,7 +384,7 @@
     "pos": "MID",
     "era": "2015–19",
     "nation": "Croatia",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       78,
@@ -395,8 +395,8 @@
       79
     ],
     "activeYears": [
-      2003,
-      2026
+      2015,
+      2019
     ]
   },
   {
@@ -404,7 +404,7 @@
     "pos": "MID",
     "era": "2000–04",
     "nation": "France",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       84,
@@ -444,7 +444,7 @@
     "pos": "MID",
     "era": "2020–24",
     "nation": "Belgium",
-    "club": "Manchester",
+    "club": "Manchester City",
     "league": "Premier League",
     "attrs": [
       77,
@@ -455,8 +455,8 @@
       86
     ],
     "activeYears": [
-      2017,
-      2025
+      2020,
+      2024
     ]
   },
   {
@@ -484,7 +484,7 @@
     "pos": "MID",
     "era": "2000–04",
     "nation": "France",
-    "club": "London",
+    "club": "Chelsea",
     "league": "Premier League",
     "attrs": [
       76,
@@ -504,7 +504,7 @@
     "pos": "MID",
     "era": "2020–24",
     "nation": "England",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       88,
@@ -535,8 +535,8 @@
       78
     ],
     "activeYears": [
-      2004,
-      2026
+      2010,
+      2014
     ]
   },
   {
@@ -555,8 +555,8 @@
       72
     ],
     "activeYears": [
-      2004,
-      2026
+      2005,
+      2009
     ]
   },
   {
@@ -564,7 +564,7 @@
     "pos": "ATT",
     "era": "2010–14",
     "nation": "Portugal",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       97,
@@ -575,8 +575,8 @@
       97
     ],
     "activeYears": [
-      2002,
-      2026
+      2010,
+      2014
     ]
   },
   {
@@ -584,7 +584,7 @@
     "pos": "ATT",
     "era": "2005–09",
     "nation": "Portugal",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       98,
@@ -595,8 +595,8 @@
       91
     ],
     "activeYears": [
-      2002,
-      2026
+      2005,
+      2009
     ]
   },
   {
@@ -604,7 +604,7 @@
     "pos": "ATT",
     "era": "2000–04",
     "nation": "France",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       98,
@@ -615,8 +615,8 @@
       86
     ],
     "activeYears": [
-      1994,
-      2014
+      2000,
+      2004
     ]
   },
   {
@@ -635,8 +635,8 @@
       92
     ],
     "activeYears": [
-      1992,
-      2000
+      1997,
+      1999
     ]
   },
   {
@@ -655,8 +655,8 @@
       80
     ],
     "activeYears": [
-      2002,
-      2010
+      2005,
+      2008
     ]
   },
   {
@@ -664,7 +664,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "Poland",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       84,
@@ -684,7 +684,7 @@
     "pos": "ATT",
     "era": "2020–24",
     "nation": "France",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       99,
@@ -695,8 +695,8 @@
       88
     ],
     "activeYears": [
-      2015,
-      2026
+      2020,
+      2024
     ]
   },
   {
@@ -715,8 +715,8 @@
       84
     ],
     "activeYears": [
-      2012,
-      2020
+      2017,
+      2019
     ]
   },
   {
@@ -724,7 +724,7 @@
     "pos": "ATT",
     "era": "1995–99",
     "nation": "Netherlands",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       81,
@@ -744,7 +744,7 @@
     "pos": "ATT",
     "era": "2020–24",
     "nation": "France",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       82,
@@ -755,8 +755,8 @@
       89
     ],
     "activeYears": [
-      2017,
-      2025
+      2020,
+      2023
     ]
   },
   {
@@ -764,7 +764,7 @@
     "pos": "GK",
     "era": "2020–24",
     "nation": "England",
-    "club": "Newcastle",
+    "club": "Newcastle United",
     "league": "Premier League",
     "attrs": [
       49,
@@ -784,7 +784,7 @@
     "pos": "GK",
     "era": "2020–24",
     "nation": "Spain",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       62,
@@ -824,7 +824,7 @@
     "pos": "DEF",
     "era": "2020–24",
     "nation": "England",
-    "club": "Newcastle",
+    "club": "Newcastle United",
     "league": "Premier League",
     "attrs": [
       54,
@@ -844,7 +844,7 @@
     "pos": "DEF",
     "era": "2015–24",
     "nation": "England",
-    "club": "Liverpool",
+    "club": "Everton",
     "league": "Premier League",
     "attrs": [
       82,
@@ -884,7 +884,7 @@
     "pos": "DEF",
     "era": "2015–19",
     "nation": "Spain",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       72,
@@ -904,7 +904,7 @@
     "pos": "DEF",
     "era": "2015–19",
     "nation": "Jamaica",
-    "club": "Leicester",
+    "club": "Leicester City",
     "league": "Premier League",
     "attrs": [
       55,
@@ -935,8 +935,8 @@
       83
     ],
     "activeYears": [
-      2002,
-      2010
+      2005,
+      2009
     ]
   },
   {
@@ -944,7 +944,7 @@
     "pos": "MID",
     "era": "2020–24",
     "nation": "Germany",
-    "club": "Brighton",
+    "club": "Brighton & Hove Albion",
     "league": "Premier League",
     "attrs": [
       59,
@@ -984,7 +984,7 @@
     "pos": "MID",
     "era": "2015–19",
     "nation": "Belgium",
-    "club": "London",
+    "club": "Tottenham Hotspur",
     "league": "Premier League",
     "attrs": [
       78,
@@ -1004,7 +1004,7 @@
     "pos": "MID",
     "era": "2010–14",
     "nation": "England",
-    "club": "London",
+    "club": "West Ham United",
     "league": "Premier League",
     "attrs": [
       62,
@@ -1044,7 +1044,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "Australia",
-    "club": "Liverpool",
+    "club": "Everton",
     "league": "Premier League",
     "attrs": [
       72,
@@ -1055,8 +1055,8 @@
       94
     ],
     "activeYears": [
-      2002,
-      2010
+      2005,
+      2009
     ]
   },
   {
@@ -1064,7 +1064,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "France",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       66,
@@ -1104,7 +1104,7 @@
     "pos": "ATT",
     "era": "2010–14",
     "nation": "Spain",
-    "club": "Swansea",
+    "club": "Swansea City",
     "league": "Premier League",
     "attrs": [
       72,
@@ -1124,7 +1124,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "England",
-    "club": "Leicester",
+    "club": "Leicester City",
     "league": "Premier League",
     "attrs": [
       94,
@@ -1144,7 +1144,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "Spain",
-    "club": "Bilbao",
+    "club": "Athletic Club",
     "league": "La Liga",
     "attrs": [
       61,
@@ -1164,7 +1164,7 @@
     "pos": "ATT",
     "era": "2010–14",
     "nation": "Senegal",
-    "club": "Newcastle",
+    "club": "Newcastle United",
     "league": "Premier League",
     "attrs": [
       79,
@@ -1184,7 +1184,7 @@
     "pos": "GK",
     "era": "2015–19",
     "nation": "Costa Rica",
-    "club": "Madrid",
+    "club": "Real Madrid",
     "league": "La Liga",
     "attrs": [
       64,
@@ -1204,7 +1204,7 @@
     "pos": "GK",
     "era": "2005–09",
     "nation": "USA",
-    "club": "Blackburn",
+    "club": "Blackburn Rovers",
     "league": "Premier League",
     "attrs": [
       48,
@@ -1224,7 +1224,7 @@
     "pos": "GK",
     "era": "2015–19",
     "nation": "Switzerland",
-    "club": "Gladbach",
+    "club": "Borussia Monchengladbach",
     "league": "Bundesliga",
     "attrs": [
       61,
@@ -1264,7 +1264,7 @@
     "pos": "DEF",
     "era": "2010–14",
     "nation": "Serbia",
-    "club": "London",
+    "club": "Chelsea",
     "league": "Premier League",
     "attrs": [
       70,
@@ -1284,7 +1284,7 @@
     "pos": "DEF",
     "era": "2010–14",
     "nation": "Uruguay",
-    "club": "Madrid",
+    "club": "Atletico Madrid",
     "league": "La Liga",
     "attrs": [
       66,
@@ -1324,7 +1324,7 @@
     "pos": "DEF",
     "era": "2015–19",
     "nation": "England",
-    "club": "London",
+    "club": "Chelsea",
     "league": "Premier League",
     "attrs": [
       67,
@@ -1344,7 +1344,7 @@
     "pos": "DEF",
     "era": "2000–04",
     "nation": "France",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       80,
@@ -1364,7 +1364,7 @@
     "pos": "DEF",
     "era": "2020–24",
     "nation": "England",
-    "club": "Newcastle",
+    "club": "Newcastle United",
     "league": "Premier League",
     "attrs": [
       72,
@@ -1384,7 +1384,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "England",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       63,
@@ -1424,7 +1424,7 @@
     "pos": "MID",
     "era": "2015–19",
     "nation": "France",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       83,
@@ -1484,7 +1484,7 @@
     "pos": "MID",
     "era": "2005–09",
     "nation": "Czechia",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       81,
@@ -1515,8 +1515,8 @@
       72
     ],
     "activeYears": [
-      2009,
-      2026
+      2015,
+      2017
     ]
   },
   {
@@ -1524,7 +1524,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "Brazil",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       94,
@@ -1535,8 +1535,8 @@
       74
     ],
     "activeYears": [
-      2009,
-      2026
+      2017,
+      2019
     ]
   },
   {
@@ -1544,7 +1544,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "France",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       98,
@@ -1555,8 +1555,8 @@
       82
     ],
     "activeYears": [
-      2015,
-      2026
+      2017,
+      2019
     ]
   },
   {
@@ -1584,7 +1584,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "Uruguay",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       84,
@@ -1604,7 +1604,7 @@
     "pos": "DEF",
     "era": "2015–19",
     "nation": "Brazil",
-    "club": "Paris",
+    "club": "Paris Saint-Germain",
     "league": "Ligue 1",
     "attrs": [
       72,
@@ -1644,7 +1644,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "Croatia",
-    "club": "Turin",
+    "club": "Juventus",
     "league": "Serie A",
     "attrs": [
       72,
@@ -1664,7 +1664,7 @@
     "pos": "ATT",
     "era": "2005–09",
     "nation": "Bulgaria",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       72,
@@ -1675,8 +1675,8 @@
       82
     ],
     "activeYears": [
-      2002,
-      2010
+      2008,
+      2009
     ]
   },
   {
@@ -1684,7 +1684,7 @@
     "pos": "ATT",
     "era": "2015–19",
     "nation": "France",
-    "club": "Madrid",
+    "club": "Atletico Madrid",
     "league": "La Liga",
     "attrs": [
       86,
@@ -1704,7 +1704,7 @@
     "pos": "ATT",
     "era": "2005–09",
     "nation": "Italy",
-    "club": "Munich",
+    "club": "Bayern Munich",
     "league": "Bundesliga",
     "attrs": [
       60,
@@ -1764,7 +1764,7 @@
     "pos": "GK",
     "era": "1995–99",
     "nation": "England",
-    "club": "London",
+    "club": "Arsenal",
     "league": "Premier League",
     "attrs": [
       47,
@@ -1824,7 +1824,7 @@
     "pos": "DEF",
     "era": "2000–04",
     "nation": "France",
-    "club": "Turin",
+    "club": "Juventus",
     "league": "Serie A",
     "attrs": [
       88,
@@ -1844,7 +1844,7 @@
     "pos": "DEF",
     "era": "2005–09",
     "nation": "Serbia",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       67,
@@ -1864,7 +1864,7 @@
     "pos": "MID",
     "era": "2010–14",
     "nation": "Ivory Coast",
-    "club": "Manchester",
+    "club": "Manchester City",
     "league": "Premier League",
     "attrs": [
       83,
@@ -1884,7 +1884,7 @@
     "pos": "MID",
     "era": "2010–14",
     "nation": "Spain",
-    "club": "Manchester",
+    "club": "Manchester City",
     "league": "Premier League",
     "attrs": [
       76,
@@ -1935,8 +1935,8 @@
       94
     ],
     "activeYears": [
-      1992,
-      2000
+      1995,
+      1999
     ]
   },
   {
@@ -1964,7 +1964,7 @@
     "pos": "ATT",
     "era": "2005–09",
     "nation": "Ivory Coast",
-    "club": "London",
+    "club": "Chelsea",
     "league": "Premier League",
     "attrs": [
       84,
@@ -1984,7 +1984,7 @@
     "pos": "ATT",
     "era": "2000–04",
     "nation": "Netherlands",
-    "club": "Manchester",
+    "club": "Manchester United",
     "league": "Premier League",
     "attrs": [
       76,
@@ -2004,7 +2004,7 @@
     "attrs": [78,55,94,88,99,91], "activeYears": [1977,1997]
   },
   {
-    "name": "Lothar Matthaus", "pos": "MID", "era": "1985–89", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "name": "Lothar Matthaus", "pos": "MID", "era": "1985–89", "nation": "Germany", "club": "Bayern Munich", "league": "Bundesliga",
     "attrs": [91,89,94,91,94,98], "activeYears": [1979,2000]
   },
   {
@@ -2012,43 +2012,43 @@
     "attrs": [91,99,88,95,41,91], "activeYears": [1981,1995]
   },
   {
-    "name": "Michel Platini", "pos": "MID", "era": "1980–84", "nation": "France", "club": "Turin", "league": "Serie A",
+    "name": "Michel Platini", "pos": "MID", "era": "1980–84", "nation": "France", "club": "Juventus", "league": "Serie A",
     "attrs": [82,96,99,96,61,80], "activeYears": [1972,1987]
   },
   {
-    "name": "Diego Maradona", "pos": "ATT", "era": "1985–89", "nation": "Argentina", "club": "Naples", "league": "Serie A",
+    "name": "Diego Maradona", "pos": "ATT", "era": "1985–89", "nation": "Argentina", "club": "Napoli", "league": "Serie A",
     "attrs": [94,96,98,101,48,88], "activeYears": [1976,1997]
   },
   {
-    "name": "Rudi Voller", "pos": "ATT", "era": "1985–89", "nation": "Germany", "club": "Bremen", "league": "Bundesliga",
+    "name": "Rudi Voller", "pos": "ATT", "era": "1985–89", "nation": "Germany", "club": "Werder Bremen", "league": "Bundesliga",
     "attrs": [88,95,82,87,46,91], "activeYears": [1977,1996]
   },
   {
-    "name": "Eric Cantona", "pos": "ATT", "era": "1990–94", "nation": "France", "club": "Manchester", "league": "Premier League",
+    "name": "Eric Cantona", "pos": "ATT", "era": "1990–94", "nation": "France", "club": "Manchester United", "league": "Premier League",
     "attrs": [84,94,93,95,55,94], "activeYears": [1983,1997]
   },
   {
-    "name": "Alan Shearer", "pos": "ATT", "era": "1995–99", "nation": "England", "club": "Newcastle", "league": "Premier League",
+    "name": "Alan Shearer", "pos": "ATT", "era": "1995–99", "nation": "England", "club": "Newcastle United", "league": "Premier League",
     "attrs": [86,99,80,85,50,98], "activeYears": [1988,2006]
   },
   {
-    "name": "Roy Keane", "pos": "MID", "era": "1995–99", "nation": "Ireland", "club": "Manchester", "league": "Premier League",
+    "name": "Roy Keane", "pos": "MID", "era": "1995–99", "nation": "Ireland", "club": "Manchester United", "league": "Premier League",
     "attrs": [84,78,91,86,96,99], "activeYears": [1989,2006]
   },
   {
-    "name": "David Beckham", "pos": "MID", "era": "1995–99", "nation": "England", "club": "Manchester", "league": "Premier League",
+    "name": "David Beckham", "pos": "MID", "era": "1995–99", "nation": "England", "club": "Manchester United", "league": "Premier League",
     "attrs": [78,88,99,89,72,86], "activeYears": [1992,2013]
   },
   {
-    "name": "Pavel Nedved", "pos": "MID", "era": "2000–04", "nation": "Czech Republic", "club": "Turin", "league": "Serie A",
+    "name": "Pavel Nedved", "pos": "MID", "era": "2000–04", "nation": "Czech Republic", "club": "Juventus", "league": "Serie A",
     "attrs": [89,91,94,93,82,97], "activeYears": [1991,2009]
   },
   {
-    "name": "N'Golo Kante", "pos": "MID", "era": "2015–19", "nation": "France", "club": "London", "league": "Premier League",
+    "name": "N'Golo Kante", "pos": "MID", "era": "2015–19", "nation": "France", "club": "Chelsea", "league": "Premier League",
     "attrs": [91,72,89,91,98,96], "activeYears": [2012,2026]
   },
   {
-    "name": "Eden Hazard", "pos": "ATT", "era": "2015–19", "nation": "Belgium", "club": "London", "league": "Premier League",
+    "name": "Eden Hazard", "pos": "ATT", "era": "2015–19", "nation": "Belgium", "club": "Chelsea", "league": "Premier League",
     "attrs": [94,91,92,98,43,84], "activeYears": [2007,2023]
   },
   {
@@ -2056,27 +2056,27 @@
     "attrs": [97,94,86,93,55,91], "activeYears": [2011,2026]
   },
   {
-    "name": "Joshua Kimmich", "pos": "MID", "era": "2015–19", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "name": "Joshua Kimmich", "pos": "MID", "era": "2015–19", "nation": "Germany", "club": "Bayern Munich", "league": "Bundesliga",
     "attrs": [82,80,96,90,92,88], "activeYears": [2013,2026]
   },
   {
-    "name": "Thomas Muller", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Munich", "league": "Bundesliga",
+    "name": "Thomas Muller", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Bayern Munich", "league": "Bundesliga",
     "attrs": [84,94,92,88,61,91], "activeYears": [2008,2025]
   },
   {
-    "name": "Marco Reus", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Dortmund", "league": "Bundesliga",
+    "name": "Marco Reus", "pos": "ATT", "era": "2010–14", "nation": "Germany", "club": "Borussia Dortmund", "league": "Bundesliga",
     "attrs": [94,93,91,94,48,81], "activeYears": [2009,2026]
   },
   {
-    "name": "Franck Ribery", "pos": "ATT", "era": "2005–09", "nation": "France", "club": "Munich", "league": "Bundesliga",
-    "attrs": [96,89,93,98,52,83], "activeYears": [2000,2022]
+    "name": "Franck Ribery", "pos": "ATT", "era": "2005–09", "nation": "France", "club": "Bayern Munich", "league": "Bundesliga",
+    "attrs": [96,89,93,98,52,83], "activeYears": [2007,2009]
   },
   {
-    "name": "Arjen Robben", "pos": "ATT", "era": "2010–14", "nation": "Netherlands", "club": "Munich", "league": "Bundesliga",
-    "attrs": [97,95,88,96,44,82], "activeYears": [2000,2021]
+    "name": "Arjen Robben", "pos": "ATT", "era": "2010–14", "nation": "Netherlands", "club": "Bayern Munich", "league": "Bundesliga",
+    "attrs": [97,95,88,96,44,82], "activeYears": [2010,2014]
   },
   {
-    "name": "Zlatan Ibrahimovic", "pos": "ATT", "era": "2010–14", "nation": "Sweden", "club": "Paris", "league": "Ligue 1",
+    "name": "Zlatan Ibrahimovic", "pos": "ATT", "era": "2010–14", "nation": "Sweden", "club": "Paris Saint-Germain", "league": "Ligue 1",
     "attrs": [82,98,91,94,45,99], "activeYears": [1999,2023]
   },
   {
@@ -2084,47 +2084,47 @@
     "attrs": [78,35,82,70,93,94], "activeYears": [1995,2000]
   },
   {
-    "name": "Gianluigi Buffon", "pos": "GK", "era": "2010–14", "nation": "Italy", "club": "Turin", "league": "Serie A",
-    "attrs": [69,30,89,67,97,94], "activeYears": [2010,2019]
+    "name": "Gianluigi Buffon", "pos": "GK", "era": "2010–14", "nation": "Italy", "club": "Juventus", "league": "Serie A",
+    "attrs": [69,30,89,67,97,94], "activeYears": [2010,2014]
   },
   {
     "name": "Gianluigi Buffon", "pos": "GK", "era": "2020–24", "nation": "Italy", "club": "Parma", "league": "Serie A",
     "attrs": [48,25,82,55,87,82], "activeYears": [2020,2023]
   },
   {
-    "name": "Arjen Robben", "pos": "ATT", "era": "2005–09", "nation": "Netherlands", "club": "London", "league": "Premier League",
-    "attrs": [95,89,86,94,43,78], "activeYears": [2004,2007]
+    "name": "Arjen Robben", "pos": "ATT", "era": "2005–09", "nation": "Netherlands", "club": "Chelsea", "league": "Premier League",
+    "attrs": [95,89,86,94,43,78], "activeYears": [2005,2007]
   },
   {
-    "name": "Franck Ribery", "pos": "ATT", "era": "2010–14", "nation": "France", "club": "Munich", "league": "Bundesliga",
+    "name": "Franck Ribery", "pos": "ATT", "era": "2010–14", "nation": "France", "club": "Bayern Munich", "league": "Bundesliga",
     "attrs": [95,91,95,98,53,84], "activeYears": [2010,2014]
   },
   {
-    "name": "Luka Modrić", "pos": "MID", "era": "2005–09", "nation": "Croatia", "club": "London", "league": "Premier League",
-    "attrs": [82,78,91,92,72,74], "activeYears": [2008,2012]
+    "name": "Luka Modrić", "pos": "MID", "era": "2005–09", "nation": "Croatia", "club": "Tottenham Hotspur", "league": "Premier League",
+    "attrs": [82,78,91,92,72,74], "activeYears": [2008,2009]
   },
   {
-    "name": "Zinedine Zidane", "pos": "MID", "era": "1995–99", "nation": "France", "club": "Turin", "league": "Serie A",
-    "attrs": [82,91,97,98,67,86], "activeYears": [1996,2001]
+    "name": "Zinedine Zidane", "pos": "MID", "era": "1995–99", "nation": "France", "club": "Juventus", "league": "Serie A",
+    "attrs": [82,91,97,98,67,86], "activeYears": [1996,1999]
   },
   {
-    "name": "Ronaldo Nazário", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Madrid", "league": "La Liga",
-    "attrs": [95,98,84,96,38,88], "activeYears": [2002,2007]
+    "name": "Ronaldo Nazário", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Real Madrid", "league": "La Liga",
+    "attrs": [95,98,84,96,38,88], "activeYears": [2002,2004]
   },
   {
-    "name": "Ronaldinho", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Paris", "league": "Ligue 1",
+    "name": "Ronaldinho", "pos": "ATT", "era": "2000–04", "nation": "Brazil", "club": "Paris Saint-Germain", "league": "Ligue 1",
     "attrs": [90,88,92,97,42,78], "activeYears": [2001,2003]
   },
   {
     "name": "Thierry Henry", "pos": "ATT", "era": "1995–99", "nation": "France", "club": "Monaco", "league": "Ligue 1",
-    "attrs": [96,86,82,91,45,82], "activeYears": [1994,1999]
+    "attrs": [96,86,82,91,45,82], "activeYears": [1995,1999]
   },
   {
     "name": "Karim Benzema", "pos": "ATT", "era": "2005–09", "nation": "France", "club": "Lyon", "league": "Ligue 1",
     "attrs": [88,93,87,91,42,86], "activeYears": [2005,2009]
   },
   {
-    "name": "Sergio Ramos", "pos": "DEF", "era": "2015–19", "nation": "Spain", "club": "Madrid", "league": "La Liga",
+    "name": "Sergio Ramos", "pos": "DEF", "era": "2015–19", "nation": "Spain", "club": "Real Madrid", "league": "La Liga",
     "attrs": [84,82,88,82,98,97], "activeYears": [2015,2019]
   },
   {

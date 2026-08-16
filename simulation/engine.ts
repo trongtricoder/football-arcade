@@ -32,6 +32,7 @@ export type CampaignResult = {
 export type CampaignOptions = {
   seed: string;
   opponents: string[];
+  opponentStrengths?: Record<string, number>;
   format?: "league" | "five";
 };
 
@@ -81,9 +82,10 @@ export function simulateCampaign(profile: CampaignProfile, options: CampaignOpti
 
   fixtures.forEach((opponent, index) => {
     const rank = index % Math.max(1, options.opponents.length);
-    const opponentStrength = format === "five"
+    const rankedStrength = format === "five"
       ? 80 + (1 - rank / Math.max(1, options.opponents.length - 1)) * 9
       : 72 + (1 - rank / Math.max(1, options.opponents.length - 1)) * 19;
+    const opponentStrength = options.opponentStrengths?.[opponent] ?? rankedStrength;
     const chemistryLift = profile.chemistry * .03;
     const eraDrag = Math.max(0, 94 - profile.eraFit) * .012;
     const positionDrag = Math.max(0, 96 - profile.positionFit) * .018;

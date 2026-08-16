@@ -25,7 +25,21 @@ test("football data remains versioned and covers every league-era combination", 
   assert.ok(Object.keys(roles.feet).every(key => playerNames.has(key.split("|")[0])), "a preferred-foot profile references an unknown player");
   assert.equal(players.filter(player => ["Juninho", "Juninho Pernambucano"].includes(player.name)).length, 1, "Juninho Pernambucano is duplicated under an alias");
   assert.ok(players.every(player => player.club !== "Milan" && player.club !== "Inter"), "Milan clubs must be explicitly named AC Milan or Inter Milan");
+  const clubNames = await load("club-names.json");
+  assert.equal(clubNames.aliases["Munich"], "Bayern Munich");
+  assert.equal(clubNames.aliases["Bayern München"], "Bayern Munich");
+  assert.equal(clubNames.aliases["A.C. Milan"], "AC Milan");
+  assert.notEqual(clubNames.aliases["A.C. Milan"], "Inter Milan", "Milan rivals must not share a canonical identity");
+  assert.ok(players.every(player => clubNames.clubs[player.club] === player.league), "every player club must match its registered league");
+  assert.ok(players.every(player => !["London","Madrid","Manchester","Milan","Munich","Paris","Rome","Turin"].includes(player.club)), "generic city placeholders must not be stored as clubs");
+  assert.ok(players.some(player => player.name === "Luka Modrić" && player.league === "Premier League" && player.club === "Tottenham Hotspur"), "Modrić's Premier League version must be Tottenham Hotspur");
+  assert.ok(players.some(player => player.name === "Arjen Robben" && player.league === "Premier League" && player.club === "Chelsea"), "Robben's Premier League version must be Chelsea");
+  assert.ok(players.some(player => player.name === "Jurgen Kohler" && player.era === "1990-94" && player.league === "Bundesliga" && player.club === "Bayern Munich"), "Kohler's 1990-94 Bundesliga version must predate his Dortmund transfer");
   assert.ok(players.some(player => player.name === "Mikel Arteta" && player.club === "Everton"), "Mikel Arteta must be assigned to Everton in his 2005-09 version");
+  assert.ok(players.some(player => player.name === "Tim Cahill" && player.club === "Everton"), "Tim Cahill's 2005-09 version must be Everton, never Liverpool");
+  assert.ok(overrides.timeless.includes("Lionel Messi|2010–14") && !overrides.timeless.includes("Lionel Messi"), "Era Proof must be scoped to Messi's adaptable peak version");
+  assert.ok(overrides.tags["Kevin De Bruyne|2010-14"].includes("WIDE CREATOR"), "young Chelsea De Bruyne needs a period-specific tag profile");
+  assert.ok(roles.roles["Sergio Ramos|2005–09"][0] === "RB", "young Ramos must be represented primarily as a right-back");
   assert.ok(roles.roles["Arjen Robben"].includes("RM"), "Robben must be available at RM");
   assert.ok(roles.roles["Javier Zanetti"].includes("RM"), "Zanetti must be available at RM");
   for (const era of ["80s", "90s", "00s", "10s", "20s"]) {

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "releases": [
+    {
+      "version": "0.1.0",
+      "releaseDate": "2026-07-31",
+      "title": "Early Access is live",
+      "summary": "Football Arcade opens with Era XI, persistent player profiles, competitive weekly boards, and more ways to share every impossible season.",
+      "label": "latest",
+      "changes": {
+        "New": [
+          "Play Era XI from the first draw through a full historical league season and final team review.",
+          "Continue as a guest or link a Google or email account to keep verified runs and progress.",
+          "Send feedback from inside Football Arcade to help shape Early Access."
+        ],
+        "Improved": ["Phone and tablet layouts now make the full Early Access experience easier to navigate."],
+        "Fixed": ["Saved results, leaderboard entries, and account progress are more reliable."]
+      }
+    },
+    {
+      "version": "0.0.9",
+      "releaseDate": "2026-07-27",
+      "title": "Make your run count",
+      "summary": "Your best Era XI stories can now live beyond the final whistle through achievements, weekly competition, and downloadable cards.",
+      "label": "major update",
+      "changes": {
+        "New": [
+          "Unlock achievements and build lifetime statistics from verified Era XI campaigns.",
+          "Enter weekly era leaderboards and revisit results from previous weeks.",
+          "Download share cards for squads and account milestones."
+        ],
+        "Improved": ["Guest progress can be linked to an account without losing the runs already played."],
+        "Fixed": ["Achievement saves, authentication callbacks, and leaderboard records are more reliable."]
+      }
+    },
+    {
+      "version": "0.0.8",
+      "releaseDate": "2026-07-25",
+      "title": "Era XI finds its rhythm",
+      "summary": "The live mode received a deeper football world, clearer squad building, and a more balanced journey from draft to season review.",
+      "changes": {
+        "New": [
+          "Build an XI across five football eras, then pair it with a manager and historical league season.",
+          "Inspect player profiles, position fit, playstyle tags, partnerships, and club-core chemistry before committing."
+        ],
+        "Improved": ["Era fit, positional ratings, rerolls, formations, match replays, and season awards were rebalanced for clearer choices."],
+        "Data": ["The player pool and historical season database expanded, with club and career details corrected along the way."]
+      }
+    }
+  ]
+}

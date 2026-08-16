@@ -6,13 +6,16 @@ import { createLeagueSchedule, simulateFullLeague } from "../simulation/league.t
 const opponents = Array.from({ length: 19 }, (_, index) => `Historical rival ${index + 1}`);
 const ordinary = { attack:77, defence:77, control:77, eraFit:88, positionFit:92, chemistry:0, managerAttack:0, managerDefence:0, cleanSheetBoost:0 };
 const strong = { attack:86, defence:85, control:86, eraFit:95, positionFit:98, chemistry:4, managerAttack:.05, managerDefence:.05, cleanSheetBoost:.07 };
-const superteam = { attack:94, defence:93, control:94, eraFit:100, positionFit:100, chemistry:9, managerAttack:.09, managerDefence:.08, cleanSheetBoost:.12 };
+const elite = { attack:91, defence:90, control:91, eraFit:98, positionFit:99, chemistry:7, managerAttack:.08, managerDefence:.07, cleanSheetBoost:.1 };
+const superteam = { attack:97, defence:96, control:97, eraFit:100, positionFit:100, chemistry:10, managerAttack:.1, managerDefence:.1, cleanSheetBoost:.15 };
 
-function cohort(profile, count, prefix) {
-  const total = { points:0, gf:0, ga:0, cleanSheets:0, perfect:0, unbeaten:0 };
+function cohort(profile, count, prefix, options = {}) {
+  const total = { points:0, wins:0, losses:0, gf:0, ga:0, cleanSheets:0, perfect:0, unbeaten:0 };
   for (let index = 0; index < count; index++) {
-    const result = simulateCampaign(profile, { seed:`${prefix}-${index}`, opponents });
+    const result = simulateCampaign(profile, { seed:`${prefix}-${index}`, opponents, ...options });
     total.points += result.points;
+    total.wins += result.wins;
+    total.losses += result.losses;
     total.gf += result.goalsFor;
     total.ga += result.goalsAgainst;
     total.cleanSheets += result.cleanSheets;
@@ -28,33 +31,56 @@ test("identical seeds and inputs always produce identical campaigns", () => {
   const different = simulateCampaign(strong, { seed:"another-release-seed", opponents });
   assert.deepEqual(second, first);
   assert.notDeepEqual(different, first);
+  assert.deepEqual(
+    { wins:first.wins, draws:first.draws, losses:first.losses, goalsFor:first.goalsFor, goalsAgainst:first.goalsAgainst, cleanSheets:first.cleanSheets, points:first.points },
+    { wins:24, draws:6, losses:8, goalsFor:66, goalsAgainst:34, cleanSheets:15, points:78 },
+  );
 });
 
-test("100,000 seasons separate squad quality and preserve meaningful modifiers", () => {
+test("Monte Carlo seasons separate ordinary, strong, elite and 95-99 squads", () => {
   const ordinaryRun = cohort(ordinary, 20_000, "ordinary");
   const strongRun = cohort(strong, 20_000, "strong");
+  const eliteRun = cohort(elite, 20_000, "elite");
   const superRun = cohort(superteam, 20_000, "super");
+
+  assert.ok(ordinaryRun.points > 36 && ordinaryRun.points < 48, ordinaryRun);
+  assert.ok(strongRun.points > 76 && strongRun.points < 90, strongRun);
+  assert.ok(eliteRun.points > 91 && eliteRun.points < 101, eliteRun);
+  assert.ok(superRun.points > 98 && superRun.points < 108, superRun);
+  assert.ok(ordinaryRun.losses > strongRun.losses + 9, { ordinaryRun, strongRun });
+  assert.ok(strongRun.losses > eliteRun.losses + 2, { strongRun, eliteRun });
+  assert.ok(eliteRun.losses > superRun.losses + .7, { eliteRun, superRun });
+  assert.equal(ordinaryRun.perfect, 0);
+  assert.ok(superRun.perfect > 0 && superRun.perfect / 20_000 < .01, superRun);
+  assert.ok(superRun.unbeaten / 20_000 > .08 && superRun.unbeaten / 20_000 < .3, superRun);
+  assert.ok(ordinaryRun.gf < strongRun.gf && strongRun.gf < eliteRun.gf && eliteRun.gf < superRun.gf);
+  assert.ok(ordinaryRun.ga > strongRun.ga && strongRun.ga > eliteRun.ga && eliteRun.ga > superRun.ga);
+});
+
+test("chemistry, manager, positional fit and era fit remain material", () => {
   const baseline = cohort(strong, 8_000, "modifier");
   const chemistry = cohort({ ...strong, chemistry:10 }, 8_000, "modifier");
   const wrongEra = cohort({ ...strong, eraFit:75 }, 8_000, "modifier");
   const wrongPositions = cohort({ ...strong, positionFit:80 }, 8_000, "modifier");
   const defensiveCoach = cohort({ ...strong, managerDefence:.1, cleanSheetBoost:.18 }, 8_000, "modifier");
 
-  assert.ok(ordinaryRun.points > 36 && ordinaryRun.points < 48, ordinaryRun);
-  assert.ok(strongRun.points > 76 && strongRun.points < 90, strongRun);
-  assert.ok(superRun.points > 94 && superRun.points < 106, superRun);
-  assert.ok(ordinaryRun.points + 30 < strongRun.points);
-  assert.ok(strongRun.points + 10 < superRun.points);
-  assert.ok(ordinaryRun.gf < strongRun.gf && strongRun.gf < superRun.gf);
-  assert.ok(ordinaryRun.ga > strongRun.ga && strongRun.ga > superRun.ga);
-  assert.equal(ordinaryRun.perfect, 0);
-  assert.ok(superRun.perfect > 0 && superRun.perfect / 20_000 < .004, superRun);
   assert.ok(chemistry.points > baseline.points + 4, { baseline, chemistry });
   assert.ok(wrongEra.points < baseline.points - 3, { baseline, wrongEra });
   assert.ok(wrongPositions.points < baseline.points - 6, { baseline, wrongPositions });
   assert.ok(defensiveCoach.cleanSheets > baseline.cleanSheets + 1, { baseline, defensiveCoach });
-  assert.ok(strongRun.gf > 65 && strongRun.gf < 90);
-  assert.ok(strongRun.cleanSheets > 13 && strongRun.cleanSheets < 22);
+  assert.ok(baseline.gf > 65 && baseline.gf < 90, baseline);
+  assert.ok(baseline.cleanSheets > 13 && baseline.cleanSheets < 22, baseline);
+});
+
+test("opponent strength is deterministic and materially changes results", () => {
+  const weak = Object.fromEntries(opponents.map(name => [name, 73]));
+  const difficult = Object.fromEntries(opponents.map(name => [name, 89]));
+  const weakRun = cohort(elite, 8_000, "strength", { opponentStrengths:weak });
+  const difficultRun = cohort(elite, 8_000, "strength", { opponentStrengths:difficult });
+  assert.ok(weakRun.points > difficultRun.points + 16, { weakRun, difficultRun });
+  assert.ok(weakRun.losses + 3 < difficultRun.losses, { weakRun, difficultRun });
+  const input = { seed:"mapped-strength", opponents, opponentStrengths:difficult };
+  assert.deepEqual(simulateCampaign(elite, input), simulateCampaign(elite, input));
 });
 
 test("full league simulation conserves every fixture, goal and point", () => {

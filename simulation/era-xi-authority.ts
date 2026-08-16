@@ -9,6 +9,7 @@ import { simulateCampaign } from "./engine";
 import { createLeagueSchedule, simulateFullLeague } from "./league";
 import { buildPlayerSeasonStats, getSeasonLeaders, type VerifiedPlayerSeasonStat } from "./player-season-stats";
 import { validateEraXiRunRequest } from "./era-xi-rules";
+import { canonicalClub } from "@/lib/club-names";
 
 type PositionGroup = "GK" | "DEF" | "MID" | "ATT";
 type Role =
@@ -170,6 +171,10 @@ function lookup<T>(source: Record<string, T>, name: string, era: string) {
   return source[`${name}|${era}`] || source[name];
 }
 
+function isTimeless(name: string, era: string) {
+  return timeless.has(`${name}|${era}`) || timeless.has(name);
+}
+
 function inferRoles(name: string, position: PositionGroup, era: string): Role[] {
   const explicit = lookup(roleOverrides, name, era);
   if (explicit) return explicit.slice(0, 3);
@@ -187,8 +192,8 @@ function inferTags(player: RawPlayer) {
   if (player.attrs[3] >= 94) tags.push("PRESS RESISTANT");
   if (player.attrs[4] >= 90) tags.push(player.pos === "GK" ? "SHOT STOPPER" : "DEFENSIVE WALL");
   if (player.attrs[5] >= 92) tags.push("PHYSICAL FORCE");
-  if (timeless.has(player.name)) tags.unshift("ERA PROOF");
-  return [...(specialTags[player.name] || []), ...tags].filter(
+  if (isTimeless(player.name, player.era)) tags.unshift("ERA PROOF");
+  return [...(lookup(specialTags, player.name, player.era) || []), ...tags].filter(
     (tag, index, all) => all.indexOf(tag) === index,
   );
 }
@@ -197,7 +202,7 @@ const players: Player[] = rawPlayers.map((player, index) => ({
   ...player,
   id: `p${index}`,
   tags: inferTags(player),
-  timeless: timeless.has(player.name),
+  timeless: isTimeless(player.name, player.era),
   roles: inferRoles(player.name, player.pos, player.era),
 }));
 
@@ -285,15 +290,6 @@ function tagLineBoost(player: Player, line: "attack" | "control" | "defence") {
       ? [.05, .05, .35, .25, .15, .15]
       : [.1, 0, .1, .05, .45, .3];
   return boosts.reduce((sum, value, index) => sum + value * weights[index], 0);
-}
-
-function canonicalClub(club: string) {
-  const key = club.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
-  if (["munich", "munchen", "bayernmunich", "bayernmunchen", "fcbayernmunich", "fcbayernmunchen"].includes(key)) return "Bayern Munich";
-  if (["madrid", "realmadrid"].includes(key)) return "Real Madrid";
-  if (["bayernmunchen", "bayernmünchen", "fcbayernmunchen", "fcbayernmünchen"].includes(key)) return "FC Bayern München";
-  if (["milan", "acmilan"].includes(key)) return "AC Milan";
-  return club;
 }
 
 function chemistry(picks: Pick[], coach: Coach) {
@@ -470,6 +466,22 @@ export function simulateAuthoritativeEraXi(
   );
 
   const rivals = season.teams.filter((club) => club !== season.replaceClub);
+  const leagueSpread: Record<string, number> = {
+    "Premier League": 13,
+    "La Liga": 17,
+    "Serie A": 15,
+    Bundesliga: 16,
+    "Ligue 1": 18,
+  };
+  const strengths = Object.fromEntries(
+    rivals.map((club) => {
+      const rank = season.teams.indexOf(club);
+      const spread = Math.max(1, season.teams.length - 1);
+      const curve = Math.pow(rank / spread, .78);
+      const elite = rank === 0 ? 2.5 : rank < 4 ? 1.2 : rank >= season.teams.length - 3 ? -1.2 : 0;
+      return [club, 89 - curve * (leagueSpread[season.league] ?? 15) + elite];
+    }),
+  );
   const schedule = createLeagueSchedule(["Era XI", ...rivals]);
   const firstLegOpponents = schedule.slice(0, rivals.length).map((round) => {
     const fixture = round.find((match) => match.home === "Era XI" || match.away === "Era XI");
@@ -491,24 +503,8 @@ export function simulateAuthoritativeEraXi(
     {
       seed: request.seed + picks.map((pick) => pick.id + pick.slot).join(""),
       opponents: firstLegOpponents,
+      opponentStrengths: strengths,
     },
-  );
-
-  const leagueSpread: Record<string, number> = {
-    "Premier League": 13,
-    "La Liga": 17,
-    "Serie A": 15,
-    Bundesliga: 16,
-    "Ligue 1": 18,
-  };
-  const strengths = Object.fromEntries(
-    rivals.map((club) => {
-      const rank = season.teams.indexOf(club);
-      const spread = Math.max(1, season.teams.length - 1);
-      const curve = Math.pow(rank / spread, .78);
-      const elite = rank === 0 ? 2.5 : rank < 4 ? 1.2 : rank >= season.teams.length - 3 ? -1.2 : 0;
-      return [club, 89 - curve * (leagueSpread[season.league] ?? 15) + elite];
-    }),
   );
   const fullLeague = simulateFullLeague({
     schedule,
